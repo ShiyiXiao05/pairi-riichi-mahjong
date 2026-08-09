@@ -337,43 +337,37 @@ function yakuRestriction(name: string, han: string, closed: string) {
   return "副露可 · 不食下";
 }
 
-type ScoreCell = { ron: string; tsumo: string };
+type ScoreCell = { ron: string; tsumo: string; kiriage?: boolean };
+type ScoreRow = { han: string; cells: ScoreCell[]; mangan?: ScoreCell };
 
-const scoreCell = (ron: string, tsumo: string): ScoreCell => ({ ron, tsumo });
+const scoreCell = (ron: string, tsumo: string, kiriage = false): ScoreCell => ({ ron, tsumo, kiriage });
 
-const scoringTables: Array<{ title: string; english: string; note: string; all: boolean; rows: Array<[string, ScoreCell, ScoreCell, ScoreCell, ScoreCell]> }> = [
+const scoreFuHeaders = [
+  ["20符", "平和自摸"], ["25符", "七对子"], ["30符", ""], ["40符", ""], ["50符", ""], ["60符", ""],
+  ["70符", ""], ["80符", ""], ["90符", ""], ["100符", ""], ["110符", ""],
+];
+
+const scoringTables: Array<{ title: string; english: string; note: string; all: boolean; rows: ScoreRow[]; limits: Array<[string, string, string, string]> }> = [
   {
     title: "子家点数表", english: "NON-DEALER", note: "上：荣和｜下：自摸（子家 / 亲家）", all: false,
     rows: [
-      ["20符", scoreCell("—", "—"), scoreCell("—", "400 / 700"), scoreCell("—", "700 / 1300"), scoreCell("—", "1300 / 2600")],
-      ["25符", scoreCell("—", "—"), scoreCell("1600", "—"), scoreCell("3200", "800 / 1600"), scoreCell("6400", "1600 / 3200")],
-      ["30符", scoreCell("1000", "300 / 500"), scoreCell("2000", "500 / 1000"), scoreCell("3900", "1000 / 2000"), scoreCell("8000", "2000 / 4000")],
-      ["40符", scoreCell("1300", "400 / 700"), scoreCell("2600", "700 / 1300"), scoreCell("5200", "1300 / 2600"), scoreCell("8000", "2000 / 4000")],
-      ["50符", scoreCell("1600", "400 / 800"), scoreCell("3200", "800 / 1600"), scoreCell("6400", "1600 / 3200"), scoreCell("8000", "2000 / 4000")],
-      ["60符", scoreCell("2000", "500 / 1000"), scoreCell("3900", "1000 / 2000"), scoreCell("8000", "2000 / 4000"), scoreCell("8000", "2000 / 4000")],
-      ["70符", scoreCell("2300", "600 / 1200"), scoreCell("4500", "1200 / 2300"), scoreCell("8000", "2000 / 4000"), scoreCell("8000", "2000 / 4000")],
+      { han: "1翻", cells: [scoreCell("—", "—"), scoreCell("—", "—"), scoreCell("1000", "300 / 500"), scoreCell("1300", "400 / 700"), scoreCell("1600", "400 / 800"), scoreCell("2000", "500 / 1000"), scoreCell("2300", "600 / 1200"), scoreCell("2600", "700 / 1300"), scoreCell("2900", "800 / 1500"), scoreCell("3200", "800 / 1600"), scoreCell("3600", "—")] },
+      { han: "2翻", cells: [scoreCell("—", "400 / 700"), scoreCell("1600", "—"), scoreCell("2000", "500 / 1000"), scoreCell("2600", "700 / 1300"), scoreCell("3200", "800 / 1600"), scoreCell("3900", "1000 / 2000"), scoreCell("4500", "1200 / 2300"), scoreCell("5200", "1300 / 2600"), scoreCell("5800", "1500 / 2900"), scoreCell("6400", "1600 / 3200"), scoreCell("7100", "1800 / 3600")] },
+      { han: "3翻", cells: [scoreCell("—", "700 / 1300"), scoreCell("3200", "800 / 1600"), scoreCell("3900", "1000 / 2000"), scoreCell("5200", "1300 / 2600"), scoreCell("6400", "1600 / 3200"), scoreCell("7700", "2000 / 3900", true)], mangan: scoreCell("8000", "2000 / 4000") },
+      { han: "4翻", cells: [scoreCell("—", "1300 / 2600"), scoreCell("6400", "1600 / 3200"), scoreCell("7700", "2000 / 3900", true)], mangan: scoreCell("8000", "2000 / 4000") },
     ],
+    limits: [["5翻", "满贯", "8000", "2000 / 4000"], ["6—7翻", "跳满", "12000", "3000 / 6000"], ["8—10翻", "倍满", "16000", "4000 / 8000"], ["11—12翻", "三倍满", "24000", "6000 / 12000"], ["13翻以上", "累计役满 / 役满", "32000", "8000 / 16000"]],
   },
   {
     title: "亲家点数表", english: "DEALER", note: "上：荣和｜下：自摸（每家支付）", all: true,
     rows: [
-      ["20符", scoreCell("—", "—"), scoreCell("—", "700"), scoreCell("—", "1300"), scoreCell("—", "2600")],
-      ["25符", scoreCell("—", "—"), scoreCell("2400", "—"), scoreCell("4800", "1600"), scoreCell("9600", "3200")],
-      ["30符", scoreCell("1500", "500"), scoreCell("2900", "1000"), scoreCell("5800", "2000"), scoreCell("12000", "4000")],
-      ["40符", scoreCell("2000", "700"), scoreCell("3900", "1300"), scoreCell("7700", "2600"), scoreCell("12000", "4000")],
-      ["50符", scoreCell("2400", "800"), scoreCell("4800", "1600"), scoreCell("9600", "3200"), scoreCell("12000", "4000")],
-      ["60符", scoreCell("2900", "1000"), scoreCell("5800", "2000"), scoreCell("12000", "4000"), scoreCell("12000", "4000")],
-      ["70符", scoreCell("3400", "1200"), scoreCell("6800", "2300"), scoreCell("12000", "4000"), scoreCell("12000", "4000")],
+      { han: "1翻", cells: [scoreCell("—", "—"), scoreCell("—", "—"), scoreCell("1500", "500"), scoreCell("2000", "700"), scoreCell("2400", "800"), scoreCell("2900", "1000"), scoreCell("3400", "1200"), scoreCell("3900", "1300"), scoreCell("4400", "1500"), scoreCell("4800", "1600"), scoreCell("5300", "—")] },
+      { han: "2翻", cells: [scoreCell("—", "700"), scoreCell("2400", "—"), scoreCell("2900", "1000"), scoreCell("3900", "1300"), scoreCell("4800", "1600"), scoreCell("5800", "2000"), scoreCell("6800", "2300"), scoreCell("7700", "2600"), scoreCell("8700", "2900"), scoreCell("9600", "3200"), scoreCell("10600", "3600")] },
+      { han: "3翻", cells: [scoreCell("—", "1300"), scoreCell("4800", "1600"), scoreCell("5800", "2000"), scoreCell("7700", "2600"), scoreCell("9600", "3200"), scoreCell("11600", "3900", true)], mangan: scoreCell("12000", "4000") },
+      { han: "4翻", cells: [scoreCell("—", "2600"), scoreCell("9600", "3200"), scoreCell("11600", "3900", true)], mangan: scoreCell("12000", "4000") },
     ],
+    limits: [["5翻", "满贯", "12000", "4000"], ["6—7翻", "跳满", "18000", "6000"], ["8—10翻", "倍满", "24000", "8000"], ["11—12翻", "三倍满", "36000", "12000"], ["13翻以上", "累计役满 / 役满", "48000", "16000"]],
   },
-];
-
-const limitPayments = [
-  ["满贯", "8000", "2000 / 4000", "12000", "4000"],
-  ["跳满", "12000", "3000 / 6000", "18000", "6000"],
-  ["倍满", "16000", "4000 / 8000", "24000", "8000"],
-  ["三倍满", "24000", "6000 / 12000", "36000", "12000"],
-  ["役满", "32000", "8000 / 16000", "48000", "16000"],
 ];
 
 const mleagueTeams = [
@@ -935,26 +929,31 @@ export default function Home() {
         </article>}
 
         {resourceTopic === "scoring" && <article className="resource-panel">
-          <div className="resource-panel-head"><span>SCORING / 算点速查</span><strong>M.LEAGUE 规则口径 · 采用切上满贯</strong></div>
-          <p className="scoring-table-note">20 符只用于平和自摸，不能荣和；25 符固定为七对子。下表按 M.LEAGUE 的切上满贯规则：30 符 4 翻与 60 符 3 翻均按满贯结算。</p>
+          <div className="resource-panel-head"><span>SCORING / 算点速查</span><strong>默认不采用切上满贯</strong></div>
+          <p className="scoring-table-note">横向选择符数，纵向选择翻数；格内上方为荣和点数，下方为自摸支付。20 符仅用于平和自摸，25 符固定用于七对子。累计役满是否采用仍以对局规则为准。资料结构参考<a href="https://zh.wikibooks.org/zh-hans/日本麻將/點數計算規則" target="_blank" rel="noreferrer">日本麻将点数计算规则 ↗</a>。</p>
           <div className="score-table-grid">
             {scoringTables.map((table) => <section className="score-table-card" key={table.title}>
               <header><div><span>{table.english}</span><h2>{table.title}</h2></div><p>{table.note}</p></header>
-              <div className="score-table-scroll"><table>
-                <thead><tr><th>符数</th><th>1翻</th><th>2翻</th><th>3翻</th><th>4翻</th></tr></thead>
-                <tbody>{table.rows.map(([fu, ...cells]) => <tr key={`${table.title}-${fu}`}><th>{fu}</th>{cells.map((cell, index) => <td key={`${fu}-${index}`}>
-                  <span className="score-cell"><strong>{cell.ron}</strong><small>自摸 {cell.tsumo}{table.all && cell.tsumo !== "—" ? " all" : ""}</small></span>
-                </td>)}</tr>)}</tbody>
+              <div className="score-table-scroll"><table className="score-matrix">
+                <thead><tr><th>翻数</th>{scoreFuHeaders.map(([fu, note]) => <th key={fu}><strong>{fu}</strong>{note && <small>{note}</small>}</th>)}</tr></thead>
+                <tbody>
+                  {table.rows.map((row) => <tr key={`${table.title}-${row.han}`}><th>{row.han}</th>{row.cells.map((cell, index) => <td className={cell.kiriage ? "kiriage-candidate" : ""} key={`${row.han}-${index}`}>
+                    <span className="score-cell"><strong>{cell.ron}</strong><small>自摸 {cell.tsumo}{table.all && cell.tsumo !== "—" ? " all" : ""}</small></span>
+                  </td>)}{row.mangan && <td className="matrix-limit-cell" colSpan={scoreFuHeaders.length - row.cells.length}>
+                    <span><b>满贯</b><strong>{row.mangan.ron}</strong><small>自摸 {row.mangan.tsumo}{table.all ? " all" : ""}</small></span>
+                  </td>}</tr>)}
+                  {table.limits.map(([han, name, ron, tsumo]) => <tr className="matrix-limit-row" key={`${table.title}-${han}`}><th>{han}</th><td colSpan={scoreFuHeaders.length}>
+                    <span><b>{name}</b><strong>{ron}</strong><small>自摸 {tsumo}{table.all ? " all" : ""}</small></span>
+                  </td></tr>)}
+                </tbody>
               </table></div>
             </section>)}
           </div>
-          <section className="score-table-card limit-score-table">
-            <header><div><span>LIMIT HANDS</span><h2>满贯以上点数</h2></div><p>子家自摸显示「子家 / 亲家」，亲家自摸为每家支付</p></header>
-            <div className="score-table-scroll"><table>
-              <thead><tr><th>等级</th><th>子家荣和</th><th>子家自摸</th><th>亲家荣和</th><th>亲家自摸</th></tr></thead>
-              <tbody>{limitPayments.map((row) => <tr key={row[0]}>{row.map((cell, index) => index === 0 ? <th key={cell}>{cell}</th> : <td key={`${row[0]}-${index}`}>{cell}</td>)}</tr>)}</tbody>
-            </table></div>
-          </section>
+          <aside className="kiriage-note">
+            <div><span>OPTIONAL RULE</span><h2>切上满贯如何处理？</h2><p>上方两张表默认不切上，因此黄色格保留 7700 / 11600。若采用切上满贯，只改动以下两种牌值。</p></div>
+            <div className="kiriage-change"><strong>子家 · 30符4翻 / 60符3翻</strong><span>7700（自摸 2000 / 3900）</span><b>→ 8000（自摸 2000 / 4000）</b></div>
+            <div className="kiriage-change"><strong>亲家 · 30符4翻 / 60符3翻</strong><span>11600（自摸 3900 all）</span><b>→ 12000（自摸 4000 all）</b></div>
+          </aside>
           <a className="resource-practice-link" href="#scoring">进入自动算点练习 <span>→</span></a>
         </article>}
       </section>
