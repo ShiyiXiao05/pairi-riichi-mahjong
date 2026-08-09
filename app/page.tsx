@@ -144,6 +144,60 @@ const whatCutQuestions: WhatCutQuestion[] = [
     answer: "Pin3", questionPage: 14, answerPage: 18,
     explanation: "书中推荐切三筒。两个中膨形的横向靠张都能形成两面，因此应固定雀头；切二筒也能固定，但在没有特殊条件时，切三筒更利于平和。",
   },
+  {
+    id: 19, round: "东一局", seat: "东家", turn: 8, doraIndicator: "Shaa",
+    tiles: ["Man3", "Man4", "Man5-Dora", "Man6", "Man8", "Man8", "Pin5-Dora", "Pin6", "Pin6", "Pin7", "Sou4", "Sou5-Dora", "Sou6", "Sou6"],
+    answer: "Sou6", questionPage: 19, answerPage: 23,
+    explanation: "把八万视作雀头后，3456万是四连形，5667筒是中膨形，4566索是亚两面。三组复合形都能做出至少两组面子，迷茫时优先拆掉最难同时做出两面的亚两面。",
+  },
+  {
+    id: 20, round: "东一局", seat: "东家", turn: 7, doraIndicator: "Shaa",
+    tiles: ["Man3", "Man4", "Man4", "Man5-Dora", "Pin2", "Pin2", "Pin3", "Pin5-Dora", "Pin6", "Pin8", "Sou5-Dora", "Sou6", "Sou7", "Haku"],
+    answer: "Pin8", questionPage: 19, answerPage: 23,
+    explanation: "保留容易断开的万子中膨形时，应比较筒子与索子两侧的四连形。筒子一侧没有雀头干涉、进张更宽；即使最终都形成三面听，筒子还包含平和，因此切八筒更有利。",
+  },
+  {
+    id: 21, round: "东一局", seat: "东家", turn: 7, doraIndicator: "Shaa",
+    tiles: ["Man3", "Man4", "Man4", "Man5-Dora", "Pin2", "Pin2", "Pin3", "Pin5-Dora", "Pin6", "Pin8", "Sou2", "Sou3", "Sou4", "Sou5-Dora"],
+    answer: "Sou2", questionPage: 19, answerPage: 24,
+    explanation: "345 三色很容易看漏。固定索子的 345 顺子，继续等待万子中膨形的靠张与筒子的 3、4 筒变化，能同时保留进张和打点。",
+  },
+  {
+    id: 22, round: "东一局", seat: "西家", turn: 7, doraIndicator: "Shaa",
+    tiles: ["Man3", "Man4", "Man5-Dora", "Man5", "Man9", "Man9", "Man9", "Pin5-Dora", "Pin5", "Pin6", "Sou5-Dora", "Sou6", "Sou7", "Haku"],
+    answer: "Man5", questionPage: 20, answerPage: 24,
+    explanation: "四连形有四种牌能做出两面，同时还有两种牌能形成雀头；556 筒也兼具雀头与面子变化。两边都很强时，拆掉亚两面，切五万最平衡。",
+  },
+  {
+    id: 23, round: "东一局", seat: "西家", turn: 7, doraIndicator: "Shaa",
+    tiles: ["Man4", "Man4", "Man7", "Man8", "Man9", "Pin5-Dora", "Pin6", "Pin7", "Pin8", "Sou2", "Sou5-Dora", "Sou6", "Sou6", "Man5-Dora"],
+    answer: "Sou6", questionPage: 20, answerPage: 24,
+    explanation: "序盘为了完全利用三枚赤牌而拆四万，会明显损失进张。综合最终形、和率与期望值，先切六索固定其余复合形最为均衡。",
+  },
+  {
+    id: 24, round: "东一局", seat: "西家", turn: 7, doraIndicator: "Shaa",
+    tiles: ["Man3", "Man4", "Man4", "Man5-Dora", "Man6", "Man7", "Pin2", "Pin4", "Pin5-Dora", "Pin6", "Sou3", "Sou5-Dora", "Sou6", "Sou2"],
+    answer: "Sou6", questionPage: 20, answerPage: 25,
+    explanation: "切三万的进张最多，但和率与 36 筒、36 索相比并没有明显优势。固定雀头并保留更有三色潜力的一侧后，切六索的综合期待值最高。",
+  },
+  {
+    id: 25, round: "东一局", seat: "东家", turn: 7, doraIndicator: "Shaa",
+    tiles: ["Man5-Dora", "Man6", "Man7", "Man8", "Pin3", "Pin4", "Pin5-Dora", "Pin6", "Sou6", "Haku", "Haku", "Sou5-Dora", "Sou5", "Sou5"],
+    answer: "Haku", questionPage: 21, answerPage: 25,
+    explanation: "切白的进张最多，也更容易形成平和。靠边的一杯口即使做成，最终形与和率也不理想；除非局面必须追求打点，否则不要为了它牺牲宽广进张。",
+  },
+  {
+    id: 26, round: "东一局", seat: "东家", turn: 7, doraIndicator: "Shaa",
+    tiles: ["Man5-Dora", "Man6", "Man7", "Man8", "Pin1", "Pin2", "Pin3", "Pin4", "Sou6", "Sou5-Dora", "Sou5", "Haku", "Haku", "Haku"],
+    answer: "Pin1", questionPage: 21, answerPage: 25,
+    explanation: "靠边的 1234 筒虽然看似四连形，实际功能与单独浮牌四筒相近；摸二筒也只会形成边张三筒。切一筒能保留更有效的进张。",
+  },
+  {
+    id: 27, round: "东一局", seat: "东家", turn: 7, doraIndicator: "Shaa",
+    tiles: ["Man5-Dora", "Man6", "Man7", "Man8", "Pin2", "Pin3", "Pin4", "Pin5-Dora", "Sou5-Dora", "Sou6", "Sou6", "Sou7", "Sou7", "Sou7"],
+    answer: "Man8", questionPage: 21, answerPage: 26,
+    explanation: "566777 索可以拆成两面，或两面加雀头；切五万、八万、二筒、五筒的听牌率差异很小。保留五万后，摸六七筒还有 567 三色，因此切八万。",
+  },
 ];
 
 const tileGroups = {
@@ -156,27 +210,63 @@ const tileGroups = {
   ],
 };
 
-const searchItems = [
-  { title: "立直", type: "役种", detail: "门清限定 · 1翻" },
-  { title: "平和", type: "役种", detail: "门清限定 · 1翻" },
-  { title: "振听", type: "规则", detail: "入门课程 04" },
-  { title: "满贯怎么算？", type: "算点", detail: "5翻或基本点达到2000" },
-  { title: "牌效率：两面与嵌张", type: "课程", detail: "进阶课 · 8分钟" },
-  { title: "南二局的押引选择", type: "何切", detail: "1842 人已作答" },
+type ResourceTopic = "tiles" | "flow" | "yaku" | "rules" | "scoring";
+
+const resourceTopics: Array<{ key: ResourceTopic; label: string; english: string; count: string }> = [
+  { key: "tiles", label: "牌面", english: "TILES", count: "34 + 赤牌" },
+  { key: "flow", label: "流程", english: "FLOW", count: "8 节点" },
+  { key: "yaku", label: "役种", english: "YAKU", count: "43 条" },
+  { key: "rules", label: "规则", english: "RULES", count: "10 主题" },
+  { key: "scoring", label: "算点", english: "SCORING", count: "公式与表" },
 ];
 
-const knowledgeCards = [
-  { index: "01", title: "牌面速查", subtitle: "TILES", count: "34 种基础牌 · 3 种赤牌", description: "万、筒、索、字牌与常用牌姿标记。", href: "#resources" },
-  { index: "02", title: "对局流程", subtitle: "FLOW", count: "18 个关键节点", description: "从配牌、摸切到连庄与终局的完整流程。", href: "#resources" },
-  { index: "03", title: "役种辞典", subtitle: "YAKU", count: "36 种常见役", description: "成立条件、门清限制、复合关系与牌例。", href: "#resources" },
-  { index: "04", title: "规则查阅", subtitle: "RULES", count: "52 条规则索引", description: "振听、鸣牌、流局、包牌与常见规则差异。", href: "#resources" },
+const flowEntries = [
+  ["01", "配牌与起家", "每家 13 张，庄家先摸第 14 张。场风、自风与座次共同决定役牌。"],
+  ["02", "摸牌与打牌", "每巡先摸一张再打一张；副露后不再摸牌，直接打出一张。"],
+  ["03", "吃、碰与杠", "吃仅限上家打出的牌；碰、明杠优先于吃。副露会使手牌失去门清。"],
+  ["04", "立直", "门清、听牌且持有至少 1000 点时宣言；横置宣言牌并供托一根立直棒。"],
+  ["05", "和了", "自摸由三家支付，荣和由放铳者支付；必须至少具备一个役。"],
+  ["06", "流局", "牌山耗尽无人和牌时进入荒牌流局；听牌者与未听牌者结算不听罚符。"],
+  ["07", "连庄与本场", "庄家和牌或按规则流局听牌时连庄；每一本场增加荣和 300 点或自摸每家 100 点。"],
+  ["08", "终局", "通常在南四局满足结束条件后终局；西入、击飞与供托归属以采用规则为准。"],
+];
+
+const ruleEntries = [
+  { title: "振听", tag: "和牌限制", summary: "自己的舍牌中包含任何一张当前听牌时，不能荣和；自摸仍然有效。", detail: "立直后见逃为永久振听；未立直时见逃通常持续到自己下一次摸牌。" },
+  { title: "无役与宝牌", tag: "和牌条件", summary: "宝牌、赤宝牌与里宝牌只增加翻数，本身不能充当役。", detail: "先确认至少一个役，再计算宝牌数量。" },
+  { title: "鸣牌优先级", tag: "副露", summary: "同一张牌发生多个宣言时，荣和优先；碰和杠通常优先于吃。", detail: "多家荣和是否允许，以雀庄或平台规则为准。" },
+  { title: "立直条件", tag: "立直", summary: "必须门清、已经听牌、持有 1000 点，并且牌山通常还需至少剩四张。", detail: "立直后原则上只能摸切，只有不改变听牌的暗杠可能被允许。" },
+  { title: "杠与新宝牌", tag: "杠", summary: "开杠后翻开新宝牌指示并补一张岭上牌；四杠相关规则存在差异。", detail: "加杠可能被抢杠，暗杠通常只有国士无双可抢。" },
+  { title: "途中流局", tag: "流局", summary: "九种九牌、四风连打、四家立直、四杠散了等可能提前流局。", detail: "具体采用哪些途中流局，以对局规则为准。" },
+  { title: "荒牌流局", tag: "流局", summary: "牌山摸尽无人和牌，通常由未听牌者向听牌者支付合计 3000 点。", detail: "流局满贯、庄家是否听牌连庄等需同时查看赛事规则。" },
+  { title: "包牌", tag: "责任支付", summary: "使他人完成大三元或大四喜关键副露时，可能承担包牌责任。", detail: "自摸多为责任者全付；荣和常由责任者与放铳者分担。" },
+  { title: "头跳与多家和", tag: "荣和", summary: "头跳只承认离放铳者最近的和牌者；双响、三响规则则允许多人和牌。", detail: "M.LEAGUE 采用头跳，其他平台可能不同。" },
+  { title: "食替", tag: "打牌限制", summary: "吃牌后不能立即打出与吃入牌完全相同，或构成同一组替代关系的牌。", detail: "筋食替的具体范围因规则而异。" },
 ];
 
 const yakuCards = [
-  { name: "立直", kana: "リーチ", han: "1翻", level: "入门必学", tiles: ["Man1", "Man2", "Man3", "Pin2", "Pin3", "Pin4", "Sou1", "Sou2", "Sou3"] },
-  { name: "断幺九", kana: "タンヤオ", han: "1翻", level: "高频役种", tiles: ["Man2", "Man3", "Man4", "Pin4", "Pin5-Dora", "Pin6", "Sou3", "Sou4", "Sou5"] },
-  { name: "平和", kana: "ピンフ", han: "1翻", level: "容易混淆", tiles: ["Man5", "Man6", "Man7", "Pin3", "Pin4", "Pin5", "Sou2", "Sou3", "Sou4"] },
-  { name: "一气通贯", kana: "イッツー", han: "2翻", level: "顺子系", tiles: ["Man1", "Man2", "Man3", "Man4", "Man5", "Man6", "Man7", "Man8", "Man9"] },
+  ["立直", "リーチ", "1翻", "门清", "宣言听牌并支付 1000 点"], ["一发", "イッパツ", "1翻", "门清", "立直后无鸣牌打断的一巡内和牌"],
+  ["门前清自摸和", "メンゼンツモ", "1翻", "门清", "门清状态下自摸"], ["断幺九", "タンヤオ", "1翻", "可副露", "全手仅由二至八数牌组成"],
+  ["平和", "ピンフ", "1翻", "门清", "全顺子、非役牌雀头、两面听"], ["一杯口", "イーペーコー", "1翻", "门清", "同色同数字的两组顺子"],
+  ["役牌", "ヤクハイ", "1翻", "可副露", "三元牌、场风或自风的刻子"], ["岭上开花", "リンシャン", "1翻", "可副露", "开杠后的岭上牌自摸"],
+  ["抢杠", "チャンカン", "1翻", "可副露", "他家加杠牌正好是自己的和牌"], ["海底摸月", "ハイテイ", "1翻", "可副露", "牌山最后一张自摸"],
+  ["河底捞鱼", "ホウテイ", "1翻", "可副露", "最后一张舍牌荣和"], ["双立直", "ダブルリーチ", "2翻", "门清", "第一巡且无人鸣牌时立直"],
+  ["七对子", "チートイツ", "2翻", "门清", "七组不同对子"], ["对对和", "トイトイ", "2翻", "可副露", "四组刻子或杠子"],
+  ["三暗刻", "サンアンコウ", "2翻", "可副露", "三组暗刻或暗杠"], ["三色同顺", "サンショク", "2翻 / 1翻", "可副露", "三种花色同数字顺子"],
+  ["一气通贯", "イッツー", "2翻 / 1翻", "可副露", "同色 123、456、789"], ["混全带幺九", "チャンタ", "2翻 / 1翻", "可副露", "每组都含幺九牌且至少一组顺子"],
+  ["三色同刻", "サンショクドウコウ", "2翻", "可副露", "三种花色同数字刻子"], ["三杠子", "サンカンツ", "2翻", "可副露", "一人完成三组杠子"],
+  ["小三元", "ショウサンゲン", "2翻", "可副露", "三元牌两刻一对"], ["混老头", "ホンロウトウ", "2翻", "可副露", "全手仅由幺九牌组成"],
+  ["混一色", "ホンイツ", "3翻 / 2翻", "可副露", "一种数牌加字牌"], ["纯全带幺九", "ジュンチャン", "3翻 / 2翻", "可副露", "每组均含数牌一或九"],
+  ["二杯口", "リャンペーコー", "3翻", "门清", "两组一杯口"], ["清一色", "チンイツ", "6翻 / 5翻", "可副露", "全手仅一种数牌"],
+  ["国士无双", "コクシムソウ", "役满", "门清", "十三种幺九牌各一张并成一对"], ["四暗刻", "スーアンコウ", "役满", "门清", "四组暗刻或暗杠"],
+  ["大三元", "ダイサンゲン", "役满", "可副露", "白发中各成刻子或杠子"], ["小四喜", "ショウスーシー", "役满", "可副露", "三组风牌刻子加一对风牌"],
+  ["大四喜", "ダイスーシー", "役满", "可副露", "四种风牌全部成刻子"], ["字一色", "ツーイーソー", "役满", "可副露", "全手仅由字牌组成"],
+  ["绿一色", "リューイーソー", "役满", "可副露", "全手仅由绿色牌组成"], ["清老头", "チンロウトウ", "役满", "可副露", "全手仅由一九数牌组成"],
+  ["九莲宝灯", "チューレン", "役满", "门清", "同色 1112345678999 加任意同色牌"], ["四杠子", "スーカンツ", "役满", "可副露", "一人完成四组杠子"],
+  ["天和", "テンホウ", "役满", "门清", "庄家配牌即和"], ["地和", "チーホウ", "役满", "门清", "闲家第一巡且无人鸣牌前自摸"],
+  ["流局满贯", "ナガシマンガン", "满贯", "特殊", "流局时舍牌全为幺九且未被他家鸣取"], ["宝牌", "ドラ", "加翻", "非役", "宝牌、赤宝牌和里宝牌只加翻，不提供役"],
+  ["场风牌", "バカゼ", "1翻", "可副露", "场风的刻子或杠子"], ["自风牌", "ジカゼ", "1翻", "可副露", "自风的刻子或杠子"],
+  ["发与中", "ハツ・チュン", "1翻", "可副露", "发或中的刻子、杠子；白同理"],
 ];
 
 const mleagueTeams = [
@@ -391,6 +481,12 @@ function createScoreQuestion(): ScoreQuestion {
 type PageKey = "home" | "resources" | "whatcut" | "scoring" | "mleague" | "archive";
 type MLeagueTab = "matches" | "ranking" | "teams";
 
+function publicReplayUrl(entry: (typeof haifuArchive)[number]) {
+  const match = entry.id.match(/_(\d{2})([AB])$/);
+  const date = entry.date.split(".").slice(1).join("-");
+  return `https://m-league.konoui.dev/seasons/2025-26/regular/${date}/${match?.[2] ?? "A"}-${Number(match?.[1] ?? 1)}/`;
+}
+
 function pageFromHash(hash: string): PageKey {
   const page = hash.replace("#", "") as PageKey;
   return ["resources", "whatcut", "scoring", "mleague", "archive"].includes(page) ? page : "home";
@@ -403,7 +499,7 @@ export default function Home() {
   const [spoilers, setSpoilers] = useState(false);
   const [mleagueTab, setMleagueTab] = useState<MLeagueTab>("matches");
   const [selectedTeam, setSelectedTeam] = useState(0);
-  const [search, setSearch] = useState("");
+  const [resourceTopic, setResourceTopic] = useState<ResourceTopic>("tiles");
   const [tileGroup, setTileGroup] = useState<keyof typeof tileGroups>("万子");
   const [scoreQuestion, setScoreQuestion] = useState<ScoreQuestion>(createScoreQuestion);
   const [scoreInputs, setScoreInputs] = useState(["", ""]);
@@ -423,14 +519,6 @@ export default function Home() {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "auto" });
   }, [page]);
-
-  const searchResults = useMemo(() => {
-    const keyword = search.trim().toLowerCase();
-    if (!keyword) return [];
-    return searchItems.filter((item) =>
-      `${item.title}${item.type}${item.detail}`.toLowerCase().includes(keyword),
-    );
-  }, [search]);
 
   const filteredHaifu = useMemo(() => {
     const keyword = archiveQuery.trim().toLowerCase();
@@ -508,9 +596,9 @@ export default function Home() {
             <a className="text-link" href="#resources">打开资料库 <span>↘</span></a>
           </div>
           <div className="hero-meta">
-            <div><strong>142</strong><span>篇资料条目</span></div>
-            <div><strong>186</strong><span>道实战练习</span></div>
-            <div><strong>36</strong><span>种常见役种</span></div>
+            <div><strong>{yakuCards.length}</strong><span>条役种索引</span></div>
+            <div><strong>{whatCutQuestions.length}</strong><span>道书籍何切</span></div>
+            <div><strong>{haifuArchive.length}</strong><span>场牌谱复盘</span></div>
           </div>
         </div>
 
@@ -543,32 +631,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="search-band" aria-label="全站搜索">
-        <div className="search-wrap">
-          <span className="search-icon">⌕</span>
-          <input
-            value={search}
-            onChange={(event) => setSearch(event.target.value)}
-            placeholder="搜索役种、规则、选手、牌谱或何切题目"
-            aria-label="搜索日麻资料"
-          />
-          <kbd>⌘ K</kbd>
-        </div>
-        {search && (
-          <div className="search-results">
-            <div className="search-result-heading">搜索结果 · {searchResults.length}</div>
-            {searchResults.length > 0 ? searchResults.map((item) => (
-              <button key={item.title} className="search-result-item">
-                <span className="result-type">{item.type}</span>
-                <strong>{item.title}</strong>
-                <small>{item.detail}</small>
-                <span className="result-arrow">→</span>
-              </button>
-            )) : <p>暂时没有匹配内容，试试“立直”“振听”或“算点”。</p>}
-          </div>
-        )}
-      </section>
-
       <section className="quick-start page-section">
         <div className="section-heading compact-heading">
           <div>
@@ -578,18 +640,27 @@ export default function Home() {
           <p>面向已有对局经验的玩家，减少引导，保留足够深度。</p>
         </div>
         <div className="quick-grid">
-          <a className="quick-card quick-featured" href="#whatcut">
+          <a className="quick-card" href="#resources">
             <div className="quick-number">01</div>
+            <div className="quick-content">
+              <span>牌面、流程、役种、规则</span>
+              <h3>打开主题资料库</h3>
+              <p>按主题速查，不从首页堆叠长篇知识内容。</p>
+            </div>
+            <span className="round-arrow">↗</span>
+          </a>
+          <a className="quick-card quick-featured" href="#whatcut">
+            <div className="quick-number">02</div>
             <div className="quick-icon"><TileFace name="Pei" label="北" /></div>
             <div className="quick-content">
-              <span>书籍题库 · Q010—Q018</span>
+              <span>书籍题库 · Q001—Q027</span>
               <h3>直接练习书中的<br />经典何切题</h3>
               <p>按原题牌姿作答，再查看书中推荐切牌与解析。</p>
             </div>
             <span className="round-arrow">↗</span>
           </a>
           <a className="quick-card" href="#scoring">
-            <div className="quick-number">02</div>
+            <div className="quick-number">03</div>
             <div className="quick-content">
               <span>翻数、符数与点数</span>
               <h3>算点图解与练习</h3>
@@ -598,11 +669,20 @@ export default function Home() {
             <span className="round-arrow">↗</span>
           </a>
           <a className="quick-card" href="#mleague">
-            <div className="quick-number">03</div>
+            <div className="quick-number">04</div>
             <div className="quick-content">
               <span>今晚有比赛吗？</span>
               <h3>查看 M.LEAGUE</h3>
               <p>赛程、队伍、选手与关键牌谱。</p>
+            </div>
+            <span className="round-arrow">↗</span>
+          </a>
+          <a className="quick-card" href="#archive">
+            <div className="quick-number">05</div>
+            <div className="quick-content">
+              <span>检索比赛 · 逐巡复盘</span>
+              <h3>进入牌谱档案</h3>
+              <p>按选手、队伍与比赛 ID 找到公开复盘和官方入口。</p>
             </div>
             <span className="round-arrow">↗</span>
           </a>
@@ -611,62 +691,81 @@ export default function Home() {
       </>}
 
       {page === "resources" && <>
-      <section className="page-intro page-section">
-        <p className="section-kicker">REFERENCE LIBRARY / 资料库</p>
-        <h1>规则、役种与牌面，<br />都在这里查。</h1>
-        <p>资料内容从首页移出，按主题集中组织。首页只保留入口和站点概览。</p>
-      </section>
-      <section className="knowledge-section page-section" id="knowledge">
-        <div className="section-heading">
-          <div>
-            <p className="section-kicker">KNOWLEDGE BASE / 基础资料库</p>
-            <h2>需要的时候，<br />快速找到准确答案。</h2>
-          </div>
-          <div className="section-aside-copy">
-            <p>基础内容不设线性课程，按主题、关键词与关联条目组织，既能速查，也能继续深入。</p>
-          </div>
-        </div>
-        <div className="knowledge-grid">
-          {knowledgeCards.map((item) => (
-            <a className="knowledge-card" href={item.href} key={item.title}>
-              <span className="knowledge-index">{item.index}</span>
-              <small>{item.subtitle}</small>
-              <h3>{item.title}</h3>
-              <strong>{item.count}</strong>
-              <p>{item.description}</p>
-              <i>↗</i>
-            </a>
-          ))}
-        </div>
-      </section>
+      <section className="resource-library page-section" aria-label="立直麻将资料库">
+        <nav className="resource-tabs" aria-label="资料主题">
+          {resourceTopics.map((topic, index) => <button
+            key={topic.key}
+            className={resourceTopic === topic.key ? "active" : ""}
+            aria-current={resourceTopic === topic.key ? "page" : undefined}
+            onClick={() => setResourceTopic(topic.key)}
+          >
+            <i>{String(index + 1).padStart(2, "0")}</i>
+            <span><small>{topic.english}</small><strong>{topic.label}</strong></span>
+            <em>{topic.count}</em>
+          </button>)}
+        </nav>
 
-      <section className="tile-guide page-section" id="tile-guide" aria-label="日麻牌面速查">
-        <div className="tile-guide-head">
-          <div>
-            <p className="section-kicker">TILE GUIDE / 牌面速查</p>
-            <h2>先认识手里的每一张牌</h2>
-          </div>
-          <div className="tile-tabs" role="tablist" aria-label="牌面分类">
-            {(Object.keys(tileGroups) as Array<keyof typeof tileGroups>).map((group) => (
-              <button
-                key={group}
-                role="tab"
-                aria-selected={tileGroup === group}
-                className={tileGroup === group ? "active" : ""}
-                onClick={() => setTileGroup(group)}
-              >{group}</button>
-            ))}
-          </div>
-        </div>
-        <div className="tile-guide-row">
-          {tileGroups[tileGroup].map((tile) => (
-            <div className="guide-tile" key={tile.name}>
-              <TileFace name={tile.name} label={tile.label} />
-              <span>{tile.label}</span>
+        {resourceTopic === "tiles" && <article className="resource-panel tile-resource" id="tile-guide">
+          <div className="resource-panel-head"><span>TILES / 牌面</span><strong>数牌 27 种 · 字牌 7 种 · 赤五 3 种</strong></div>
+          <div className="tile-guide-head">
+            <h2>牌面速查</h2>
+            <div className="tile-tabs" role="tablist" aria-label="牌面分类">
+              {(Object.keys(tileGroups) as Array<keyof typeof tileGroups>).map((group) => <button
+                key={group} role="tab" aria-selected={tileGroup === group}
+                className={tileGroup === group ? "active" : ""} onClick={() => setTileGroup(group)}
+              >{group}</button>)}
             </div>
-          ))}
-        </div>
-        <p className="asset-credit">牌面采用 FluffyStuff 公共领域日麻牌图 · 包含赤五牌</p>
+          </div>
+          <div className="tile-guide-row">
+            {tileGroups[tileGroup].map((tile) => <div className="guide-tile" key={tile.name}>
+              <TileFace name={tile.name} label={tile.label} /><span>{tile.label}</span>
+            </div>)}
+          </div>
+          <div className="red-five-note">
+            <span>赤五 / AKA DORA</span>
+            {["Man5-Dora", "Pin5-Dora", "Sou5-Dora"].map((tile) => <div key={tile}><TileFace name={tile} label={tileLabel(tile)} /><strong>{tileLabel(tile)}</strong></div>)}
+            <p>赤五通常各一张，作为一枚宝牌计算；具体数量以平台或赛事规则为准。</p>
+          </div>
+          <p className="asset-credit">牌面采用 FluffyStuff 公共领域日麻牌图</p>
+        </article>}
+
+        {resourceTopic === "flow" && <article className="resource-panel">
+          <div className="resource-panel-head"><span>FLOW / 对局流程</span><strong>从配牌到终局</strong></div>
+          <div className="flow-directory">
+            {flowEntries.map(([index, title, description]) => <div key={index}><b>{index}</b><h3>{title}</h3><p>{description}</p></div>)}
+          </div>
+        </article>}
+
+        {resourceTopic === "yaku" && <article className="resource-panel">
+          <div className="resource-panel-head"><span>YAKU / 役种辞典</span><strong>{yakuCards.length} 条 · 含役满与特殊条目</strong></div>
+          <div className="yaku-directory">
+            {yakuCards.map(([name, kana, han, closed, summary]) => <div className={han === "役满" ? "yakuman" : ""} key={name}>
+              <span>{closed}</span><strong>{han}</strong><h3>{name}</h3><small>{kana}</small><p>{summary}</p>
+            </div>)}
+          </div>
+        </article>}
+
+        {resourceTopic === "rules" && <article className="resource-panel">
+          <div className="resource-panel-head"><span>RULES / 规则索引</span><strong>以常见立直麻将规则为基准</strong></div>
+          <div className="rules-directory">
+            {ruleEntries.map((rule, index) => <details key={rule.title} open={index < 2}>
+              <summary><i>{String(index + 1).padStart(2, "0")}</i><span><small>{rule.tag}</small><strong>{rule.title}</strong></span><b>＋</b></summary>
+              <div><p>{rule.summary}</p><small>{rule.detail}</small></div>
+            </details>)}
+          </div>
+        </article>}
+
+        {resourceTopic === "scoring" && <article className="resource-panel">
+          <div className="resource-panel-head"><span>SCORING / 算点</span><strong>翻数 → 符数 → 基本点 → 支付点</strong></div>
+          <div className="scoring-reference">
+            <div className="score-formula"><span>基本点</span><strong>符 × 2<sup>翻数＋2</sup></strong><p>闲家荣和为基本点 × 4，庄家荣和为基本点 × 6；支付结果向上取整到百点。</p></div>
+            <div className="limit-table">
+              {[['满贯','5翻 / 基本点达 2000','2000'],['跳满','6—7翻','3000'],['倍满','8—10翻','4000'],['三倍满','11—12翻','6000'],['役满','13翻以上','8000']].map(([name, condition, point]) => <div key={name}><strong>{name}</strong><span>{condition}</span><b>基本点 {point}</b></div>)}
+            </div>
+            <div className="payment-grid"><div><span>闲家荣和</span><strong>基本点 × 4</strong></div><div><span>庄家荣和</span><strong>基本点 × 6</strong></div><div><span>闲家自摸</span><strong>闲 × 1 / 庄 × 2</strong></div><div><span>庄家自摸</span><strong>三家各 × 2</strong></div></div>
+          </div>
+          <a className="resource-practice-link" href="#scoring">进入自动算点练习 <span>→</span></a>
+        </article>}
       </section>
       </>}
 
@@ -682,6 +781,16 @@ export default function Home() {
                 <button onClick={randomWhatCut}>随机一题 ↻</button>
                 <div className="participant-count"><strong>{whatCutIndex + 1} / {whatCutQuestions.length}</strong><span>当前题目</span></div>
               </div>
+            </div>
+
+            <div className="question-index-strip" aria-label="何切题目索引">
+              {whatCutQuestions.map((question, index) => <button
+                key={question.id}
+                className={whatCutIndex === index ? "active" : ""}
+                aria-label={`打开第 ${question.id} 题`}
+                aria-current={whatCutIndex === index ? "true" : undefined}
+                onClick={() => { setWhatCutIndex(index); setSelectedTile(null); }}
+              >{String(question.id).padStart(3, "0")}</button>)}
             </div>
 
             <div className="round-context">
@@ -715,11 +824,17 @@ export default function Home() {
               </div>
             ) : (
               <div className={`answer-card ${answerIsBest ? "best" : "alternative"}`} aria-live="polite">
-                <div className="answer-verdict">
-                  <span>{answerIsBest ? "与书中答案一致" : "你的选择"}</span>
-                  <strong>切 <TileFace name={whatCutQuestion.tiles[selectedTile]} label={tileLabel(whatCutQuestion.tiles[selectedTile])} /> {tileLabel(whatCutQuestion.tiles[selectedTile])}</strong>
+                <div className="answer-comparison">
+                  <div className="answer-verdict">
+                    <span>{answerIsBest ? "与书中一致" : "你的选择"}</span>
+                    <strong>切 <TileFace name={whatCutQuestion.tiles[selectedTile]} label={tileLabel(whatCutQuestion.tiles[selectedTile])} /> {tileLabel(whatCutQuestion.tiles[selectedTile])}</strong>
+                  </div>
+                  {!answerIsBest && <div className="answer-verdict book-answer">
+                    <span>书中答案</span>
+                    <strong>切 <TileFace name={whatCutQuestion.answer} label={tileLabel(whatCutQuestion.answer)} /> {tileLabel(whatCutQuestion.answer)}</strong>
+                  </div>}
                 </div>
-                <p>{answerIsBest ? whatCutQuestion.explanation : `书中推荐切${tileLabel(whatCutQuestion.answer)}。${whatCutQuestion.explanation}`}</p>
+                <p>{whatCutQuestion.explanation}</p>
                 <div className="answer-actions">
                   <button onClick={() => setSelectedTile(null)}>重新选择</button>
                   <button onClick={nextWhatCut}>下一题 →</button>
@@ -729,33 +844,6 @@ export default function Home() {
             <div className="book-source-note">来源：《何切301》Q{String(whatCutQuestion.id).padStart(3, "0")} · 解答 PDF {whatCutQuestion.answerPage} 页 · 牌面已重绘</div>
           </div>
 
-        </div>
-      </section>}
-
-      {page === "resources" && <section className="yaku-section page-section" id="yaku">
-        <div className="section-heading">
-          <div>
-            <p className="section-kicker">YAKU LIBRARY / 役种辞典</p>
-            <h2>不是背下来，<br />是看懂它如何成立。</h2>
-          </div>
-          <div className="section-aside-copy">
-            <p>按翻数、门清限制与结构筛选，每个役种都有牌例、误区和对应练习。</p>
-            <a href="#resources">浏览全部 36 种役 <span>→</span></a>
-          </div>
-        </div>
-        <div className="yaku-grid">
-          {yakuCards.map((yaku, index) => (
-            <a className="yaku-card" href="#resources" key={yaku.name}>
-              <div className="yaku-index">{String(index + 1).padStart(2, "0")}</div>
-              <div className="yaku-top"><span>{yaku.level}</span><strong>{yaku.han}</strong></div>
-              <h3>{yaku.name}</h3>
-              <p>{yaku.kana}</p>
-              <div className="yaku-tiles">
-                {yaku.tiles.map((tile, tileIndex) => <TileFace key={`${tile}-${tileIndex}`} name={tile} label={tile} />)}
-              </div>
-              <div className="yaku-link">查看成立条件 <span>↗</span></div>
-            </a>
-          ))}
         </div>
       </section>}
 
@@ -924,7 +1012,7 @@ export default function Home() {
           <div>
             <p className="section-kicker">HAIFU ARCHIVE / 牌谱档案</p>
             <h2>先找到那场比赛，<br />再回到决定胜负的一巡。</h2>
-            <p>第一阶段先收录 M.LEAGUE 官方牌谱编号、完整顺位与得点。可按选手、队伍、日期或牌谱 ID 检索。</p>
+            <p>收录 M.LEAGUE 比赛编号、完整顺位与得点，可按选手、队伍、日期或牌谱 ID 检索，并直接进入逐巡复盘。</p>
           </div>
           <div className="archive-stats">
             <div><strong>{haifuArchive.length}</strong><span>已收录半庄</span></div>
@@ -972,8 +1060,9 @@ export default function Home() {
             </div>
             <div className="haifu-meta"><span>{activeHaifu.date}</span><span>常规赛 · {activeHaifu.game}</span></div>
             <div className="haifu-actions">
-              <a href="https://m-league.jp/games" target="_blank" rel="noreferrer">前往官方牌谱入口 ↗</a>
-              <p>官方单场查看器通过比赛页动态打开；可凭上方日期与牌谱 ID 定位。</p>
+              <a className="replay-primary" href={publicReplayUrl(activeHaifu)} target="_blank" rel="noreferrer">打开公开逐巡复盘 ↗</a>
+              <a href="https://m-league.jp/games/?mlm=9&mly=2025" target="_blank" rel="noreferrer">官方会员牌谱 ↗</a>
+              <p>公开复盘为第三方按比赛数据重制的天凤格式牌谱；官网查看器仅向已登录的 M.LEAGUE Supporter 会员显示。</p>
             </div>
           </article>
         </div>
