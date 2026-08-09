@@ -2,22 +2,45 @@
 
 import { useMemo, useState } from "react";
 
+type TileName = string;
+
+function TileFace({ name, label, className = "" }: { name: TileName; label: string; className?: string }) {
+  return (
+    <img
+      className={`tile-face ${className}`}
+      src={`/tiles/${name}.png`}
+      alt={label}
+      draggable={false}
+    />
+  );
+}
+
 const handTiles = [
-  { glyph: "🀈", label: "二万" },
-  { glyph: "🀉", label: "三万" },
-  { glyph: "🀊", label: "四万" },
-  { glyph: "🀋", label: "五万" },
-  { glyph: "🀌", label: "六万" },
-  { glyph: "🀍", label: "七万" },
-  { glyph: "🀙", label: "二筒" },
-  { glyph: "🀚", label: "三筒" },
-  { glyph: "🀛", label: "四筒" },
-  { glyph: "🀒", label: "三索" },
-  { glyph: "🀓", label: "四索" },
-  { glyph: "🀔", label: "五索" },
-  { glyph: "🀕", label: "六索" },
-  { glyph: "🀃", label: "北" },
+  { name: "Man2", label: "二万" },
+  { name: "Man3", label: "三万" },
+  { name: "Man4", label: "四万" },
+  { name: "Man5-Dora", label: "赤五万" },
+  { name: "Man6", label: "六万" },
+  { name: "Man7", label: "七万" },
+  { name: "Pin2", label: "二筒" },
+  { name: "Pin3", label: "三筒" },
+  { name: "Pin4", label: "四筒" },
+  { name: "Sou3", label: "三索" },
+  { name: "Sou4", label: "四索" },
+  { name: "Sou5", label: "五索" },
+  { name: "Sou6", label: "六索" },
+  { name: "Pei", label: "北" },
 ];
+
+const tileGroups = {
+  "万子": Array.from({ length: 9 }, (_, index) => ({ name: `Man${index + 1}`, label: `${index + 1}万` })),
+  "筒子": Array.from({ length: 9 }, (_, index) => ({ name: `Pin${index + 1}`, label: `${index + 1}筒` })),
+  "索子": Array.from({ length: 9 }, (_, index) => ({ name: `Sou${index + 1}`, label: `${index + 1}索` })),
+  "字牌": [
+    { name: "Ton", label: "东" }, { name: "Nan", label: "南" }, { name: "Shaa", label: "西" }, { name: "Pei", label: "北" },
+    { name: "Haku", label: "白" }, { name: "Hatsu", label: "发" }, { name: "Chun", label: "中" },
+  ],
+};
 
 const searchItems = [
   { title: "立直", type: "役种", detail: "门清限定 · 1翻" },
@@ -29,10 +52,10 @@ const searchItems = [
 ];
 
 const yakuCards = [
-  { name: "立直", kana: "リーチ", han: "1翻", level: "入门必学", tiles: "🀇🀈🀉  🀙🀚🀛  🀐🀑🀒" },
-  { name: "断幺九", kana: "タンヤオ", han: "1翻", level: "高频役种", tiles: "🀈🀉🀊  🀛🀜🀝  🀒🀓🀔" },
-  { name: "平和", kana: "ピンフ", han: "1翻", level: "容易混淆", tiles: "🀋🀌🀍  🀚🀛🀜  🀑🀒🀓" },
-  { name: "一气通贯", kana: "イッツー", han: "2翻", level: "顺子系", tiles: "🀇🀈🀉  🀊🀋🀌  🀍🀎🀏" },
+  { name: "立直", kana: "リーチ", han: "1翻", level: "入门必学", tiles: ["Man1", "Man2", "Man3", "Pin2", "Pin3", "Pin4", "Sou1", "Sou2", "Sou3"] },
+  { name: "断幺九", kana: "タンヤオ", han: "1翻", level: "高频役种", tiles: ["Man2", "Man3", "Man4", "Pin4", "Pin5-Dora", "Pin6", "Sou3", "Sou4", "Sou5"] },
+  { name: "平和", kana: "ピンフ", han: "1翻", level: "容易混淆", tiles: ["Man5", "Man6", "Man7", "Pin3", "Pin4", "Pin5", "Sou2", "Sou3", "Sou4"] },
+  { name: "一气通贯", kana: "イッツー", han: "2翻", level: "顺子系", tiles: ["Man1", "Man2", "Man3", "Man4", "Man5", "Man6", "Man7", "Man8", "Man9"] },
 ];
 
 const schedule = [
@@ -45,6 +68,7 @@ export default function Home() {
   const [selectedTile, setSelectedTile] = useState<number | null>(null);
   const [spoilers, setSpoilers] = useState(false);
   const [search, setSearch] = useState("");
+  const [tileGroup, setTileGroup] = useState<keyof typeof tileGroups>("万子");
 
   const searchResults = useMemo(() => {
     const keyword = search.trim().toLowerCase();
@@ -111,11 +135,18 @@ export default function Home() {
               <strong>02</strong>
               <span>一本场</span>
             </div>
-            <div className="mini-hand top-hand">🀫 🀫 🀫 🀫 🀫 🀫 🀫 🀫 🀫</div>
-            <div className="mini-hand bottom-hand">🀈 🀉 🀊 🀙 🀚 🀛 🀒 🀓 🀔</div>
+            <div className="mini-hand top-hand">
+              {Array.from({ length: 9 }, (_, index) => <TileFace key={index} name="Back" label="牌背" />)}
+            </div>
+            <div className="mini-hand bottom-hand">
+              {["Man2", "Man3", "Man4", "Pin2", "Pin3", "Pin4", "Sou3", "Sou4", "Sou5"].map((name) => (
+                <TileFace key={name} name={name} label={name} />
+              ))}
+            </div>
             <div className="discard-grid">
-              <span>🀇</span><span>🀂</span><span>🀄</span>
-              <span>🀅</span><span>🀆</span><span>🀃</span>
+              {["Man1", "Shaa", "Chun", "Hatsu", "Haku", "Pei"].map((name) => (
+                <TileFace key={name} name={name} label={name} />
+              ))}
             </div>
           </div>
           <p className="table-caption"><span>LIVE STUDY</span> 每一巡，都有理由</p>
@@ -159,7 +190,7 @@ export default function Home() {
         <div className="quick-grid">
           <a className="quick-card quick-featured" href="#course">
             <div className="quick-number">01</div>
-            <div className="quick-icon">🀄</div>
+            <div className="quick-icon"><TileFace name="Chun" label="红中" /></div>
             <div className="quick-content">
               <span>第一次接触日麻</span>
               <h3>用 30 分钟<br />打完第一局</h3>
@@ -188,6 +219,35 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="tile-guide page-section" aria-label="日麻牌面速查">
+        <div className="tile-guide-head">
+          <div>
+            <p className="section-kicker">TILE GUIDE / 牌面速查</p>
+            <h2>先认识手里的每一张牌</h2>
+          </div>
+          <div className="tile-tabs" role="tablist" aria-label="牌面分类">
+            {(Object.keys(tileGroups) as Array<keyof typeof tileGroups>).map((group) => (
+              <button
+                key={group}
+                role="tab"
+                aria-selected={tileGroup === group}
+                className={tileGroup === group ? "active" : ""}
+                onClick={() => setTileGroup(group)}
+              >{group}</button>
+            ))}
+          </div>
+        </div>
+        <div className="tile-guide-row">
+          {tileGroups[tileGroup].map((tile) => (
+            <div className="guide-tile" key={tile.name}>
+              <TileFace name={tile.name} label={tile.label} />
+              <span>{tile.label}</span>
+            </div>
+          ))}
+        </div>
+        <p className="asset-credit">牌面采用 FluffyStuff 公共领域日麻牌图 · 包含赤五牌</p>
+      </section>
+
       <section className="practice-section" id="practice">
         <div className="practice-inner page-section">
           <div className="what-cut-panel">
@@ -201,7 +261,7 @@ export default function Home() {
 
             <div className="round-context">
               <span className="wind-badge">南</span>
-              <div><strong>南二局 · 8巡目 · 西家</strong><small>持点 29,000 · 宝牌 🀛</small></div>
+              <div><strong>南二局 · 8巡目 · 西家</strong><small className="dora-line">持点 29,000 · 宝牌 <TileFace name="Pin4" label="四筒" /></small></div>
               <div className="points"><span>一位 36,200</span><span>四位 14,800</span></div>
             </div>
 
@@ -215,7 +275,7 @@ export default function Home() {
                   aria-label={`切${tile.label}`}
                   aria-pressed={selectedTile === index}
                 >
-                  <span>{tile.glyph}</span>
+                  <TileFace name={tile.name} label={tile.label} />
                   <small>{tile.label}</small>
                 </button>
               ))}
@@ -230,7 +290,7 @@ export default function Home() {
               <div className={`answer-card ${answerIsBest ? "best" : "alternative"}`} aria-live="polite">
                 <div className="answer-verdict">
                   <span>{answerIsBest ? "编辑推荐" : "另一种选择"}</span>
-                  <strong>切 {handTiles[selectedTile].glyph} {handTiles[selectedTile].label}</strong>
+                  <strong>切 <TileFace name={handTiles[selectedTile].name} label={handTiles[selectedTile].label} /> {handTiles[selectedTile].label}</strong>
                 </div>
                 <div className="vote-bar"><i style={{ width: answerIsBest ? "62%" : "18%" }} /></div>
                 <p>{answerIsBest
@@ -293,7 +353,9 @@ export default function Home() {
               <div className="yaku-top"><span>{yaku.level}</span><strong>{yaku.han}</strong></div>
               <h3>{yaku.name}</h3>
               <p>{yaku.kana}</p>
-              <div className="yaku-tiles">{yaku.tiles}</div>
+              <div className="yaku-tiles">
+                {yaku.tiles.map((tile, tileIndex) => <TileFace key={`${tile}-${tileIndex}`} name={tile} label={tile} />)}
+              </div>
               <div className="yaku-link">查看成立条件 <span>↗</span></div>
             </a>
           ))}
@@ -352,7 +414,11 @@ export default function Home() {
             <div><span>西</span><strong>18,400</strong><small>9p →</small></div>
             <div><span>北</span><strong>25,400</strong><small>中 →</small></div>
           </div>
-          <div className="archive-tiles">🀇 🀈 🀉　🀙 🀚 🀛　🀑 🀒 🀓　🀄 🀄</div>
+          <div className="archive-tiles">
+            {["Man1", "Man2", "Man3", "Pin2", "Pin3", "Pin4", "Sou2", "Sou3", "Sou4", "Chun", "Chun"].map((tile, index) => (
+              <TileFace key={`${tile}-${index}`} name={tile} label={tile} />
+            ))}
+          </div>
           <div className="archive-note"><span>KEY MOMENT / 11巡目</span><p>领先时是继续进攻，还是先处理危险牌？</p></div>
         </div>
       </section>
