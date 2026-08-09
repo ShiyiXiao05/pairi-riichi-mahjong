@@ -210,25 +210,24 @@ const tileGroups = {
   ],
 };
 
-type ResourceTopic = "tiles" | "flow" | "yaku" | "rules" | "scoring";
+type ResourceTopic = "tiles" | "rules" | "yaku" | "scoring";
 
 const resourceTopics: Array<{ key: ResourceTopic; label: string; english: string; count: string }> = [
   { key: "tiles", label: "牌面", english: "TILES", count: "34 + 赤牌" },
-  { key: "flow", label: "流程", english: "FLOW", count: "8 节点" },
-  { key: "yaku", label: "役种", english: "YAKU", count: "43 条" },
-  { key: "rules", label: "规则", english: "RULES", count: "10 主题" },
-  { key: "scoring", label: "算点", english: "SCORING", count: "公式与表" },
+  { key: "rules", label: "规则介绍", english: "RULES", count: "基础与细则" },
+  { key: "yaku", label: "役种", english: "YAKU", count: "43 条图例" },
+  { key: "scoring", label: "算点", english: "SCORING", count: "亲家 / 子家表" },
 ];
 
-const flowEntries = [
-  ["01", "配牌与起家", "每家 13 张，庄家先摸第 14 张。场风、自风与座次共同决定役牌。"],
-  ["02", "摸牌与打牌", "每巡先摸一张再打一张；副露后不再摸牌，直接打出一张。"],
-  ["03", "吃、碰与杠", "吃仅限上家打出的牌；碰、明杠优先于吃。副露会使手牌失去门清。"],
-  ["04", "立直", "门清、听牌且持有至少 1000 点时宣言；横置宣言牌并供托一根立直棒。"],
-  ["05", "和了", "自摸由三家支付，荣和由放铳者支付；必须至少具备一个役。"],
-  ["06", "流局", "牌山耗尽无人和牌时进入荒牌流局；听牌者与未听牌者结算不听罚符。"],
-  ["07", "连庄与本场", "庄家和牌或按规则流局听牌时连庄；每一本场增加荣和 300 点或自摸每家 100 点。"],
-  ["08", "终局", "通常在南四局满足结束条件后终局；西入、击飞与供托归属以采用规则为准。"],
+const ruleOverviewEntries = [
+  ["01", "牌局目标", "常规和牌由四组面子与一组雀头组成；七对子、国士无双是特殊牌型。仅凑成牌型还不够，至少需要一个役。"],
+  ["02", "牌与座次", "牌山使用 136 张牌。四家依次为东、南、西、北家；场风与自风会决定哪些风牌能够成为役牌。"],
+  ["03", "摸牌与舍牌", "通常从庄家开始，每巡摸一张、舍一张，直到有人和牌或牌山耗尽。副露后直接舍牌，不再额外摸牌。"],
+  ["04", "吃、碰与杠", "吃只能取上家舍牌，碰与明杠可取任一家舍牌。副露会失去门清，部分役会降一翻或无法成立。"],
+  ["05", "立直与和牌", "门清听牌时可支付 1000 点立直。自摸由三家共同支付，荣和由放铳者支付；振听状态只能自摸。"],
+  ["06", "流局与连庄", "荒牌流局时通常结算合计 3000 点不听罚符。庄家和牌或流局听牌时通常连庄，并累积本场。"],
+  ["07", "半庄与终局", "常见半庄包括东场与南场，庄家轮转至南四局。击飞、西入、供托归属及终局条件会随平台和赛事而变。"],
+  ["08", "采用规则", "赤牌、切上满贯、双响、头跳、途中流局等并非处处相同。实战前应先确认平台或赛事的完整规则。"],
 ];
 
 const ruleEntries = [
@@ -267,6 +266,73 @@ const yakuCards = [
   ["流局满贯", "ナガシマンガン", "满贯", "特殊", "流局时舍牌全为幺九且未被他家鸣取"], ["宝牌", "ドラ", "加翻", "非役", "宝牌、赤宝牌和里宝牌只加翻，不提供役"],
   ["场风牌", "バカゼ", "1翻", "可副露", "场风的刻子或杠子"], ["自风牌", "ジカゼ", "1翻", "可副露", "自风的刻子或杠子"],
   ["发与中", "ハツ・チュン", "1翻", "可副露", "发或中的刻子、杠子；白同理"],
+];
+
+const standardExample = ["Man2", "Man3", "Man4", "Pin2", "Pin3", "Pin4", "Sou3", "Sou4", "Sou5", "Sou6", "Sou7", "Sou8", "Pin5", "Pin5"];
+
+const yakuExamples: Record<string, string[]> = {
+  "断幺九": standardExample,
+  "平和": ["Man2", "Man3", "Man4", "Pin3", "Pin4", "Pin5", "Sou3", "Sou4", "Sou5", "Sou6", "Sou7", "Sou8", "Pin2", "Pin2"],
+  "一杯口": ["Man2", "Man3", "Man4", "Man2", "Man3", "Man4", "Pin3", "Pin4", "Pin5", "Sou6", "Sou7", "Sou8", "Pin5", "Pin5"],
+  "役牌": ["Haku", "Haku", "Haku", "Man2", "Man3", "Man4", "Pin3", "Pin4", "Pin5", "Sou6", "Sou7", "Sou8", "Ton", "Ton"],
+  "七对子": ["Man2", "Man2", "Man3", "Man3", "Pin4", "Pin4", "Pin5", "Pin5", "Sou6", "Sou6", "Ton", "Ton", "Haku", "Haku"],
+  "对对和": ["Man2", "Man2", "Man2", "Pin5", "Pin5", "Pin5", "Sou7", "Sou7", "Sou7", "Haku", "Haku", "Haku", "Ton", "Ton"],
+  "三暗刻": ["Man2", "Man2", "Man2", "Pin5", "Pin5", "Pin5", "Sou7", "Sou7", "Sou7", "Man3", "Man4", "Man5", "Ton", "Ton"],
+  "三色同顺": ["Man3", "Man4", "Man5", "Pin3", "Pin4", "Pin5", "Sou3", "Sou4", "Sou5", "Man6", "Man7", "Man8", "Ton", "Ton"],
+  "一气通贯": ["Man1", "Man2", "Man3", "Man4", "Man5", "Man6", "Man7", "Man8", "Man9", "Pin3", "Pin4", "Pin5", "Ton", "Ton"],
+  "混全带幺九": ["Man1", "Man2", "Man3", "Pin7", "Pin8", "Pin9", "Sou1", "Sou1", "Sou1", "Haku", "Haku", "Haku", "Ton", "Ton"],
+  "三色同刻": ["Man5", "Man5", "Man5", "Pin5", "Pin5", "Pin5", "Sou5", "Sou5", "Sou5", "Haku", "Haku", "Haku", "Ton", "Ton"],
+  "三杠子": ["Man1", "Man1", "Man1", "Man1", "Pin5", "Pin5", "Pin5", "Pin5", "Sou7", "Sou7", "Sou7", "Sou7", "Man2", "Man3", "Man4", "Ton", "Ton"],
+  "小三元": ["Haku", "Haku", "Haku", "Hatsu", "Hatsu", "Hatsu", "Chun", "Chun", "Man1", "Man2", "Man3", "Pin7", "Pin8", "Pin9"],
+  "混老头": ["Man1", "Man1", "Man1", "Man9", "Man9", "Man9", "Pin1", "Pin1", "Pin1", "Haku", "Haku", "Haku", "Ton", "Ton"],
+  "混一色": ["Man1", "Man2", "Man3", "Man4", "Man5", "Man6", "Man7", "Man8", "Man9", "Ton", "Ton", "Ton", "Haku", "Haku"],
+  "纯全带幺九": ["Man1", "Man2", "Man3", "Man7", "Man8", "Man9", "Pin1", "Pin2", "Pin3", "Sou7", "Sou8", "Sou9", "Pin9", "Pin9"],
+  "二杯口": ["Man1", "Man2", "Man3", "Man1", "Man2", "Man3", "Pin7", "Pin8", "Pin9", "Pin7", "Pin8", "Pin9", "Sou5", "Sou5"],
+  "清一色": ["Man1", "Man2", "Man3", "Man3", "Man4", "Man5", "Man5", "Man6", "Man7", "Man7", "Man8", "Man9", "Man5", "Man5"],
+  "国士无双": ["Man1", "Man9", "Pin1", "Pin9", "Sou1", "Sou9", "Ton", "Nan", "Shaa", "Pei", "Haku", "Hatsu", "Chun", "Man1"],
+  "四暗刻": ["Man1", "Man1", "Man1", "Man9", "Man9", "Man9", "Pin2", "Pin2", "Pin2", "Sou8", "Sou8", "Sou8", "Ton", "Ton"],
+  "大三元": ["Haku", "Haku", "Haku", "Hatsu", "Hatsu", "Hatsu", "Chun", "Chun", "Chun", "Man1", "Man2", "Man3", "Ton", "Ton"],
+  "小四喜": ["Ton", "Ton", "Ton", "Nan", "Nan", "Nan", "Shaa", "Shaa", "Shaa", "Pei", "Pei", "Man1", "Man2", "Man3"],
+  "大四喜": ["Ton", "Ton", "Ton", "Nan", "Nan", "Nan", "Shaa", "Shaa", "Shaa", "Pei", "Pei", "Pei", "Haku", "Haku"],
+  "字一色": ["Ton", "Ton", "Ton", "Nan", "Nan", "Nan", "Shaa", "Shaa", "Shaa", "Haku", "Haku", "Haku", "Pei", "Pei"],
+  "绿一色": ["Sou2", "Sou2", "Sou2", "Sou3", "Sou3", "Sou3", "Sou4", "Sou4", "Sou4", "Sou6", "Sou6", "Sou6", "Sou8", "Sou8"],
+  "清老头": ["Man1", "Man1", "Man1", "Man9", "Man9", "Man9", "Pin1", "Pin1", "Pin1", "Pin9", "Pin9", "Pin9", "Sou1", "Sou1"],
+  "九莲宝灯": ["Man1", "Man1", "Man1", "Man2", "Man3", "Man4", "Man5", "Man6", "Man7", "Man8", "Man9", "Man9", "Man9", "Man5"],
+  "四杠子": ["Man1", "Man1", "Man1", "Man1", "Pin2", "Pin2", "Pin2", "Pin2", "Sou3", "Sou3", "Sou3", "Sou3", "Haku", "Haku", "Haku", "Haku", "Ton", "Ton"],
+  "流局满贯": ["Man1", "Man9", "Pin1", "Pin9", "Sou1", "Sou9", "Ton", "Nan", "Shaa", "Pei", "Haku", "Hatsu", "Chun"],
+  "宝牌": ["Man2", "Man3", "Man4", "Pin4", "Pin5-Dora", "Pin6", "Sou3", "Sou4", "Sou5-Dora", "Sou6", "Sou7", "Sou8", "Man5-Dora", "Man5"],
+  "场风牌": ["Ton", "Ton", "Ton", "Man2", "Man3", "Man4", "Pin3", "Pin4", "Pin5", "Sou6", "Sou7", "Sou8", "Haku", "Haku"],
+  "自风牌": ["Nan", "Nan", "Nan", "Man2", "Man3", "Man4", "Pin3", "Pin4", "Pin5", "Sou6", "Sou7", "Sou8", "Haku", "Haku"],
+  "发与中": ["Hatsu", "Hatsu", "Hatsu", "Man2", "Man3", "Man4", "Pin3", "Pin4", "Pin5", "Sou6", "Sou7", "Sou8", "Chun", "Chun"],
+};
+
+const yakuGroups = [
+  { label: "一翻役", note: "基础役种", includes: (han: string) => han === "1翻" },
+  { label: "二翻役", note: "含食下役", includes: (han: string) => han.startsWith("2翻") },
+  { label: "三翻以上", note: "高打点役种", includes: (han: string) => han.startsWith("3翻") || han.startsWith("6翻") },
+  { label: "役满与特殊", note: "役满、流局满贯与加翻牌", includes: (han: string) => !han.startsWith("1翻") && !han.startsWith("2翻") && !han.startsWith("3翻") && !han.startsWith("6翻") },
+];
+
+function yakuRestriction(han: string, closed: string) {
+  if (closed === "门清") return "门清限定";
+  if (closed === "特殊" || closed === "非役") return closed;
+  if (han.includes("/")) return `副露可 · 食下${han.split("/")[1].trim()}`;
+  return "副露可 · 不食下";
+}
+
+const scoringTables = [
+  { title: "子家 · 荣和", note: "放铳者支付", rows: [["20符", "—", "1300", "2600", "5200"], ["25符", "—", "1600", "3200", "6400"], ["30符", "1000", "2000", "3900", "7700"], ["40符", "1300", "2600", "5200", "8000"], ["50符", "1600", "3200", "6400", "8000"], ["60符", "2000", "3900", "7700", "8000"], ["70符", "2300", "4500", "8000", "8000"]] },
+  { title: "子家 · 自摸", note: "子家支付 / 亲家支付", rows: [["20符", "—", "400 / 700", "700 / 1300", "1300 / 2600"], ["25符", "—", "—", "800 / 1600", "1600 / 3200"], ["30符", "300 / 500", "500 / 1000", "1000 / 2000", "2000 / 3900"], ["40符", "400 / 700", "700 / 1300", "1300 / 2600", "2000 / 4000"], ["50符", "400 / 800", "800 / 1600", "1600 / 3200", "2000 / 4000"], ["60符", "500 / 1000", "1000 / 2000", "2000 / 3900", "2000 / 4000"], ["70符", "600 / 1200", "1200 / 2300", "2000 / 4000", "2000 / 4000"]] },
+  { title: "亲家 · 荣和", note: "放铳者支付", rows: [["20符", "—", "2000", "3900", "7700"], ["25符", "—", "2400", "4800", "9600"], ["30符", "1500", "2900", "5800", "11600"], ["40符", "2000", "3900", "7700", "12000"], ["50符", "2400", "4800", "9600", "12000"], ["60符", "2900", "5800", "11600", "12000"], ["70符", "3400", "6800", "12000", "12000"]] },
+  { title: "亲家 · 自摸", note: "每位子家支付", rows: [["20符", "—", "700", "1300", "2600"], ["25符", "—", "—", "1600", "3200"], ["30符", "500", "1000", "2000", "3900"], ["40符", "700", "1300", "2600", "4000"], ["50符", "800", "1600", "3200", "4000"], ["60符", "1000", "2000", "3900", "4000"], ["70符", "1200", "2300", "4000", "4000"]] },
+];
+
+const limitPayments = [
+  ["满贯", "8000", "2000 / 4000", "12000", "4000"],
+  ["跳满", "12000", "3000 / 6000", "18000", "6000"],
+  ["倍满", "16000", "4000 / 8000", "24000", "8000"],
+  ["三倍满", "24000", "6000 / 12000", "36000", "12000"],
+  ["役满", "32000", "8000 / 16000", "48000", "16000"],
 ];
 
 const mleagueTeams = [
@@ -323,7 +389,7 @@ const augustEvents = [
   },
 ];
 
-const haifuArchive = [
+const mleagueHaifuArchive = [
   {
     id: "L001_S022_0001_01A", date: "2025.09.15", game: "第 1 回战", winner: "園田賢", winningTeam: "赤坂ドリブンズ", point: "+54.9pt",
     results: [["1", "園田賢", "赤坂ドリブンズ", "+54.9"], ["2", "鈴木優", "U-NEXT Pirates", "+9.8"], ["3", "石井一馬", "EARTH JETS", "-15.9"], ["4", "下石戟", "BEAST X", "-48.8"]],
@@ -362,7 +428,69 @@ const haifuArchive = [
   },
 ];
 
+const tenhouHaifuArchive = [
+  {
+    id: "TM12-FINAL-01", date: "2025.11.19", game: "决胜战 第 1 节", winner: "gousi", winningTeam: "日本プロ麻雀連盟", point: "+81.9pt",
+    results: [["1", "gousi", "日本プロ麻雀連盟", "+81.9"], ["2", "下石戟", "日本プロ麻雀協会", "+19.3"], ["3", "鈴木優", "最高位戦日本プロ麻雀協会", "-11.2"], ["4", "じょにおん！！", "天凤位预选", "-90.0"]],
+    replayUrl: "https://tenhou.net/0/?log=2025111920gm-0009-10011-d6e60374",
+  },
+  {
+    id: "TM12-FINAL-02", date: "2025.11.19", game: "决胜战 第 2 节", winner: "下石戟", winningTeam: "日本プロ麻雀協会", point: "+70.2pt",
+    results: [["1", "下石戟", "日本プロ麻雀協会", "+70.2"], ["2", "鈴木優", "最高位戦日本プロ麻雀協会", "+36.2"], ["3", "じょにおん！！", "天凤位预选", "-5.3"], ["4", "gousi", "日本プロ麻雀連盟", "-101.1"]],
+    replayUrl: "https://tenhou.net/0/?log=2025111920gm-0009-10011-865e467d",
+  },
+  {
+    id: "TM12-FINAL-03", date: "2025.11.19", game: "决胜战 第 3 节", winner: "じょにおん！！", winningTeam: "天凤位预选", point: "+70.9pt",
+    results: [["1", "じょにおん！！", "天凤位预选", "+70.9"], ["2", "gousi", "日本プロ麻雀連盟", "+22.2"], ["3", "下石戟", "日本プロ麻雀協会", "-1.5"], ["4", "鈴木優", "最高位戦日本プロ麻雀協会", "-91.6"]],
+    replayUrl: "https://tenhou.net/0/?log=2025111921gm-0009-10011-e54c86b1",
+  },
+  {
+    id: "TM12-FINAL-04", date: "2025.11.19", game: "决胜战 第 4 节", winner: "鈴木優", winningTeam: "最高位戦日本プロ麻雀協会", point: "+68.4pt",
+    results: [["1", "鈴木優", "最高位戦日本プロ麻雀協会", "+68.4"], ["2", "じょにおん！！", "天凤位预选", "+25.6"], ["3", "gousi", "日本プロ麻雀連盟", "+3.0"], ["4", "下石戟", "日本プロ麻雀協会", "-97.0"]],
+    replayUrl: "https://tenhou.net/0/?log=2025111921gm-0009-10011-73bb5074",
+  },
+  {
+    id: "TM12-STAGE8-01", date: "2025.10.08", game: "第 8 节 A 桌", winner: "いばらぎ", winningTeam: "日本プロ麻雀協会", point: "+53.0pt",
+    results: [["1", "いばらぎ", "日本プロ麻雀協会", "+53.0"], ["2", "ウルトラ立直", "天凤位预选", "+22.5"], ["3", "木原浩一", "日本プロ麻雀協会", "-0.7"], ["4", "小林剛", "麻将連合", "-74.8"]],
+    replayUrl: "https://tenhou.net/0/?log=2025100820gm-0009-10011-97010eef",
+  },
+  {
+    id: "TM12-STAGE8-02", date: "2025.10.08", game: "第 8 节 B 桌", winner: "鈴木優", winningTeam: "最高位戦日本プロ麻雀協会", point: "+71.1pt",
+    results: [["1", "鈴木優", "最高位戦日本プロ麻雀協会", "+71.1"], ["2", "いばらぎ", "日本プロ麻雀協会", "+28.0"], ["3", "ウルトラ立直", "天凤位预选", "+1.0"], ["4", "おかもと", "最高位戦日本プロ麻雀協会", "-100.1"]],
+    replayUrl: "https://tenhou.net/0/?log=2025100820gm-0009-10011-e9a481f0",
+  },
+  {
+    id: "TM12-STAGE8-03", date: "2025.10.08", game: "第 8 节 C 桌", winner: "タケオしゃん", winningTeam: "天凤位预选", point: "+76.8pt",
+    results: [["1", "タケオしゃん", "天凤位预选", "+76.8"], ["2", "堀慎吾", "日本プロ麻雀協会", "+19.8"], ["3", "いばらぎ", "日本プロ麻雀協会", "-2.5"], ["4", "鈴木優", "最高位戦日本プロ麻雀協会", "-94.1"]],
+    replayUrl: "https://tenhou.net/0/?log=2025100821gm-0009-10011-f8d01b73",
+  },
+  {
+    id: "TM12-STAGE8-04", date: "2025.10.08", game: "第 8 节 D 桌", winner: "堀慎吾", winningTeam: "日本プロ麻雀協会", point: "+64.8pt",
+    results: [["1", "堀慎吾", "日本プロ麻雀協会", "+64.8"], ["2", "下石戟", "日本プロ麻雀協会", "+22.9"], ["3", "gousi", "日本プロ麻雀連盟", "-4.3"], ["4", "おかもと", "最高位戦日本プロ麻雀協会", "-83.4"]],
+    replayUrl: "https://tenhou.net/0/?log=2025100820gm-0009-10011-d3f9e83d",
+  },
+].map((entry) => ({
+  ...entry,
+  source: "天凤名人战",
+  event: "第12期 天凤名人战",
+  sourceUrl: "https://tenhou.net/cs/2025/04tm/",
+  replayNote: "官方赛事页公开的天凤牌谱，可在逐巡查看器中复盘。",
+}));
+
+const haifuArchive = [
+  ...mleagueHaifuArchive.map((entry) => ({
+    ...entry,
+    source: "M.LEAGUE",
+    event: "2025–26 常规赛",
+    replayUrl: "",
+    sourceUrl: "https://m-league.jp/games/?mlm=9&mly=2025",
+    replayNote: "公开复盘为第三方按比赛数据重制的天凤格式牌谱；官网查看器需要 M.LEAGUE Supporter 登录。",
+  })),
+  ...tenhouHaifuArchive,
+];
+
 const haifuTeams = Array.from(new Set(haifuArchive.flatMap((entry) => entry.results.map((result) => result[2]))));
+const haifuSources = Array.from(new Set(haifuArchive.map((entry) => entry.source)));
 
 type WinType = "ron" | "tsumo";
 
@@ -482,6 +610,7 @@ type PageKey = "home" | "resources" | "whatcut" | "scoring" | "mleague" | "archi
 type MLeagueTab = "matches" | "ranking" | "teams";
 
 function publicReplayUrl(entry: (typeof haifuArchive)[number]) {
+  if (entry.replayUrl) return entry.replayUrl;
   const match = entry.id.match(/_(\d{2})([AB])$/);
   const date = entry.date.split(".").slice(1).join("-");
   return `https://m-league.konoui.dev/seasons/2025-26/regular/${date}/${match?.[2] ?? "A"}-${Number(match?.[1] ?? 1)}/`;
@@ -506,6 +635,7 @@ export default function Home() {
   const [scoreSubmitted, setScoreSubmitted] = useState(false);
   const [archiveQuery, setArchiveQuery] = useState("");
   const [archiveTeam, setArchiveTeam] = useState("全部队伍");
+  const [archiveSource, setArchiveSource] = useState("全部来源");
   const [activeHaifuId, setActiveHaifuId] = useState(haifuArchive[0].id);
 
   useEffect(() => {
@@ -524,10 +654,11 @@ export default function Home() {
     const keyword = archiveQuery.trim().toLowerCase();
     return haifuArchive.filter((entry) => {
       const matchesTeam = archiveTeam === "全部队伍" || entry.results.some((result) => result[2] === archiveTeam);
-      const searchable = `${entry.id}${entry.date}${entry.game}${entry.winner}${entry.winningTeam}${entry.results.flat().join("")}`.toLowerCase();
-      return matchesTeam && (!keyword || searchable.includes(keyword));
+      const matchesSource = archiveSource === "全部来源" || entry.source === archiveSource;
+      const searchable = `${entry.id}${entry.date}${entry.game}${entry.event}${entry.source}${entry.winner}${entry.winningTeam}${entry.results.flat().join("")}`.toLowerCase();
+      return matchesTeam && matchesSource && (!keyword || searchable.includes(keyword));
     });
-  }, [archiveQuery, archiveTeam]);
+  }, [archiveQuery, archiveSource, archiveTeam]);
 
   const activeHaifu = filteredHaifu.find((entry) => entry.id === activeHaifuId) ?? filteredHaifu[0] ?? haifuArchive[0];
 
@@ -682,7 +813,7 @@ export default function Home() {
             <div className="quick-content">
               <span>检索比赛 · 逐巡复盘</span>
               <h3>进入牌谱档案</h3>
-              <p>按选手、队伍与比赛 ID 找到公开复盘和官方入口。</p>
+              <p>按选手、赛事与来源找到公开逐巡复盘。</p>
             </div>
             <span className="round-arrow">↗</span>
           </a>
@@ -729,24 +860,29 @@ export default function Home() {
           <p className="asset-credit">牌面采用 FluffyStuff 公共领域日麻牌图</p>
         </article>}
 
-        {resourceTopic === "flow" && <article className="resource-panel">
-          <div className="resource-panel-head"><span>FLOW / 对局流程</span><strong>从配牌到终局</strong></div>
-          <div className="flow-directory">
-            {flowEntries.map(([index, title, description]) => <div key={index}><b>{index}</b><h3>{title}</h3><p>{description}</p></div>)}
-          </div>
-        </article>}
-
         {resourceTopic === "yaku" && <article className="resource-panel">
-          <div className="resource-panel-head"><span>YAKU / 役种辞典</span><strong>{yakuCards.length} 条 · 含役满与特殊条目</strong></div>
-          <div className="yaku-directory">
-            {yakuCards.map(([name, kana, han, closed, summary]) => <div className={han === "役满" ? "yakuman" : ""} key={name}>
-              <span>{closed}</span><strong>{han}</strong><h3>{name}</h3><small>{kana}</small><p>{summary}</p>
-            </div>)}
-          </div>
+          <div className="resource-panel-head"><span>YAKU / 役种辞典</span><strong>{yakuCards.length} 条 · 按翻数分类 · 每役含牌型图例</strong></div>
+          {yakuGroups.map((group) => <section className="yaku-group" key={group.label}>
+            <div className="yaku-group-head"><div><span>{group.note}</span><h2>{group.label}</h2></div><strong>{yakuCards.filter(([, , han]) => group.includes(han)).length} 条</strong></div>
+            <div className="yaku-directory">
+              {yakuCards.filter(([, , han]) => group.includes(han)).map(([name, kana, han, closed, summary]) => <div className={han === "役满" ? "yakuman" : ""} key={name}>
+                <div className="yaku-card-meta"><span>{yakuRestriction(han, closed)}</span><strong>{han}</strong></div>
+                <h3>{name}</h3><small>{kana}</small><p>{summary}</p>
+                <div className={`yaku-example-hand ${(yakuExamples[name] ?? standardExample).length > 14 ? "dense" : ""}`} aria-label={`${name}牌型图例`}>
+                  {(yakuExamples[name] ?? standardExample).map((tile, index) => <TileFace key={`${name}-${tile}-${index}`} name={tile} label={tileLabel(tile)} />)}
+                </div>
+                <em>{name === "流局满贯" ? "舍牌示例" : "和了牌型示例"}</em>
+              </div>)}
+            </div>
+          </section>)}
         </article>}
 
         {resourceTopic === "rules" && <article className="resource-panel">
-          <div className="resource-panel-head"><span>RULES / 规则索引</span><strong>以常见立直麻将规则为基准</strong></div>
+          <div className="resource-panel-head"><span>RULES / 规则介绍</span><strong>从成牌目标到终局 · 以常见立直麻将规则为基准</strong></div>
+          <div className="flow-directory rule-overview">
+            {ruleOverviewEntries.map(([index, title, description]) => <div key={index}><b>{index}</b><h3>{title}</h3><p>{description}</p></div>)}
+          </div>
+          <div className="rules-subhead"><span>RULE DETAILS</span><h2>容易影响实战判断的规则细则</h2><p>不同赛事、雀庄和线上平台可能采用不同细则，以下内容用于快速建立检查清单。</p></div>
           <div className="rules-directory">
             {ruleEntries.map((rule, index) => <details key={rule.title} open={index < 2}>
               <summary><i>{String(index + 1).padStart(2, "0")}</i><span><small>{rule.tag}</small><strong>{rule.title}</strong></span><b>＋</b></summary>
@@ -756,14 +892,23 @@ export default function Home() {
         </article>}
 
         {resourceTopic === "scoring" && <article className="resource-panel">
-          <div className="resource-panel-head"><span>SCORING / 算点</span><strong>翻数 → 符数 → 基本点 → 支付点</strong></div>
-          <div className="scoring-reference">
-            <div className="score-formula"><span>基本点</span><strong>符 × 2<sup>翻数＋2</sup></strong><p>闲家荣和为基本点 × 4，庄家荣和为基本点 × 6；支付结果向上取整到百点。</p></div>
-            <div className="limit-table">
-              {[['满贯','5翻 / 基本点达 2000','2000'],['跳满','6—7翻','3000'],['倍满','8—10翻','4000'],['三倍满','11—12翻','6000'],['役满','13翻以上','8000']].map(([name, condition, point]) => <div key={name}><strong>{name}</strong><span>{condition}</span><b>基本点 {point}</b></div>)}
-            </div>
-            <div className="payment-grid"><div><span>闲家荣和</span><strong>基本点 × 4</strong></div><div><span>庄家荣和</span><strong>基本点 × 6</strong></div><div><span>闲家自摸</span><strong>闲 × 1 / 庄 × 2</strong></div><div><span>庄家自摸</span><strong>三家各 × 2</strong></div></div>
+          <div className="resource-panel-head"><span>SCORING / 算点速查</span><strong>常用 1—4 翻 · 20—70 符</strong></div>
+          <div className="score-table-grid">
+            {scoringTables.map((table) => <section className="score-table-card" key={table.title}>
+              <header><div><span>{table.title.includes("亲家") ? "DEALER" : "NON-DEALER"}</span><h2>{table.title}</h2></div><p>{table.note}</p></header>
+              <div className="score-table-scroll"><table>
+                <thead><tr><th>符数</th><th>1翻</th><th>2翻</th><th>3翻</th><th>4翻</th></tr></thead>
+                <tbody>{table.rows.map((row) => <tr key={`${table.title}-${row[0]}`}>{row.map((cell, index) => index === 0 ? <th key={cell}>{cell}</th> : <td key={`${row[0]}-${cell}-${index}`}>{cell}</td>)}</tr>)}</tbody>
+              </table></div>
+            </section>)}
           </div>
+          <section className="score-table-card limit-score-table">
+            <header><div><span>LIMIT HANDS</span><h2>满贯以上点数</h2></div><p>子家自摸显示「子家 / 亲家」，亲家自摸为每家支付</p></header>
+            <div className="score-table-scroll"><table>
+              <thead><tr><th>等级</th><th>子家荣和</th><th>子家自摸</th><th>亲家荣和</th><th>亲家自摸</th></tr></thead>
+              <tbody>{limitPayments.map((row) => <tr key={row[0]}>{row.map((cell, index) => index === 0 ? <th key={cell}>{cell}</th> : <td key={`${row[0]}-${index}`}>{cell}</td>)}</tr>)}</tbody>
+            </table></div>
+          </section>
           <a className="resource-practice-link" href="#scoring">进入自动算点练习 <span>→</span></a>
         </article>}
       </section>
@@ -1012,12 +1157,12 @@ export default function Home() {
           <div>
             <p className="section-kicker">HAIFU ARCHIVE / 牌谱档案</p>
             <h2>先找到那场比赛，<br />再回到决定胜负的一巡。</h2>
-            <p>收录 M.LEAGUE 比赛编号、完整顺位与得点，可按选手、队伍、日期或牌谱 ID 检索，并直接进入逐巡复盘。</p>
+            <p>收录职业联赛与公开赛事的高质量牌谱、完整顺位和得点，可按选手、赛事来源、日期或牌谱 ID 检索，并直接进入逐巡复盘。</p>
           </div>
           <div className="archive-stats">
             <div><strong>{haifuArchive.length}</strong><span>已收录半庄</span></div>
-            <div><strong>{haifuTeams.length}</strong><span>可筛选队伍</span></div>
-            <div><strong>2025–26</strong><span>当前赛季</span></div>
+            <div><strong>{haifuSources.length}</strong><span>公开牌谱来源</span></div>
+            <div><strong>{haifuTeams.length}</strong><span>队伍与所属</span></div>
           </div>
         </div>
 
@@ -1027,10 +1172,17 @@ export default function Home() {
             <input value={archiveQuery} onChange={(event) => setArchiveQuery(event.target.value)} placeholder="输入选手、日期或牌谱 ID" />
           </label>
           <label className="archive-team-filter">
-            <span>TEAM / 队伍</span>
+            <span>TEAM / 队伍与所属</span>
             <select value={archiveTeam} onChange={(event) => setArchiveTeam(event.target.value)}>
               <option>全部队伍</option>
               {haifuTeams.map((team) => <option key={team}>{team}</option>)}
+            </select>
+          </label>
+          <label className="archive-source-filter">
+            <span>SOURCE / 来源</span>
+            <select value={archiveSource} onChange={(event) => setArchiveSource(event.target.value)}>
+              <option>全部来源</option>
+              {haifuSources.map((source) => <option key={source}>{source}</option>)}
             </select>
           </label>
           <div className="archive-result-count"><strong>{filteredHaifu.length}</strong><span>条结果</span></div>
@@ -1040,14 +1192,14 @@ export default function Home() {
           <div className="haifu-result-list" aria-label="牌谱检索结果">
             {filteredHaifu.map((entry) => <button className={activeHaifu.id === entry.id ? "active" : ""} onClick={() => setActiveHaifuId(entry.id)} key={entry.id}>
               <span className="haifu-date">{entry.date.replace("2025.", "")}</span>
-              <span className="haifu-summary"><small>{entry.game} · {entry.id}</small><strong>{entry.winner}</strong><em>{entry.winningTeam}</em></span>
+              <span className="haifu-summary"><small>{entry.source} · {entry.game}</small><strong>{entry.winner}</strong><em>{entry.event} · {entry.winningTeam}</em></span>
               <b>{entry.point}</b><i>→</i>
             </button>)}
             {filteredHaifu.length === 0 && <div className="haifu-empty"><strong>没有匹配的牌谱</strong><span>试试选手全名、队伍名或清空筛选条件。</span></div>}
           </div>
 
           <article className="haifu-detail">
-            <div className="haifu-detail-top"><span>OFFICIAL GAME ID</span><code>{activeHaifu.id}</code></div>
+            <div className="haifu-detail-top"><span>{activeHaifu.source} / GAME ID</span><code>{activeHaifu.id}</code></div>
             <div className="haifu-winner">
               <div><span>TOP PLAYER / 一位</span><h3>{activeHaifu.winner}</h3><p>{activeHaifu.winningTeam}</p></div>
               <strong>{activeHaifu.point}</strong>
@@ -1058,11 +1210,11 @@ export default function Home() {
                 <b>{rank}</b><span><strong>{player}</strong><small>{team}</small></span><em className={point.startsWith("-") ? "negative" : ""}>{point} pt</em>
               </div>)}
             </div>
-            <div className="haifu-meta"><span>{activeHaifu.date}</span><span>常规赛 · {activeHaifu.game}</span></div>
+            <div className="haifu-meta"><span>{activeHaifu.date}</span><span>{activeHaifu.event} · {activeHaifu.game}</span></div>
             <div className="haifu-actions">
               <a className="replay-primary" href={publicReplayUrl(activeHaifu)} target="_blank" rel="noreferrer">打开公开逐巡复盘 ↗</a>
-              <a href="https://m-league.jp/games/?mlm=9&mly=2025" target="_blank" rel="noreferrer">官方会员牌谱 ↗</a>
-              <p>公开复盘为第三方按比赛数据重制的天凤格式牌谱；官网查看器仅向已登录的 M.LEAGUE Supporter 会员显示。</p>
+              <a href={activeHaifu.sourceUrl} target="_blank" rel="noreferrer">查看赛事来源 ↗</a>
+              <p>{activeHaifu.replayNote}</p>
             </div>
           </article>
         </div>
@@ -1076,7 +1228,7 @@ export default function Home() {
         <div className="footer-links">
           <a href="#resources">资料库</a><a href="#whatcut">何切</a><a href="#scoring">算点</a><a href="#mleague">赛事</a><a href="#archive">牌谱</a>
         </div>
-        <p className="footer-note">资料持续整理 · M.LEAGUE 数据来自官方公开档案</p>
+        <p className="footer-note">资料持续整理 · 牌谱连接至赛事公开档案与复盘来源</p>
       </footer>
     </main>
   );
