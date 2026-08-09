@@ -33,6 +33,8 @@ type WhatCutQuestion = {
   explanation: string;
   questionPage: number;
   answerPage: number;
+  book?: "何切300" | "何切301";
+  tags?: string[];
 };
 
 const whatCutQuestions: WhatCutQuestion[] = [
@@ -198,7 +200,74 @@ const whatCutQuestions: WhatCutQuestion[] = [
     answer: "Man8", questionPage: 21, answerPage: 26,
     explanation: "566777 索可以拆成两面，或两面加雀头；切五万、八万、二筒、五筒的听牌率差异很小。保留五万后，摸六七筒还有 567 三色，因此切八万。",
   },
+  {
+    id: 28, round: "东一局", seat: "西家", turn: 7, doraIndicator: "Shaa", book: "何切301", tags: ["牌效率", "复合形"],
+    tiles: ["Man6", "Man7", "Man8", "Pin2", "Pin3", "Pin4", "Pin4", "Sou2", "Sou3", "Sou4", "Sou5-Dora", "Sou6", "Sou7", "Pei"],
+    answer: "Sou2", questionPage: 22, answerPage: 26,
+    explanation: "固定三索作雀头，进张与期待值最大；最高形是摸三筒形成断幺、平和、一杯口。按结构拆解，二索和五索可看作同筋浮牌，没有必要同时保留。",
+  },
+  {
+    id: 29, round: "东一局", seat: "西家", turn: 7, doraIndicator: "Shaa", book: "何切301", tags: ["牌效率", "亚两面"],
+    tiles: ["Man7", "Man8", "Man9", "Pin1", "Pin1", "Pin2", "Pin3", "Sou2", "Sou3", "Sou4", "Sou5-Dora", "Sou6", "Sou7", "Pei"],
+    answer: "Pin1", questionPage: 22, answerPage: 26,
+    explanation: "1123 筒是靠边亚两面，进一、四筒虽能形成面子加雀头，却也容易留下坎张或边张的一杯口，降低期待值。书中先切一筒，优先回避愚形听牌。",
+  },
+  {
+    id: 30, round: "东一局", seat: "西家", turn: 7, doraIndicator: "Shaa", book: "何切301", tags: ["牌效率", "听牌形"],
+    tiles: ["Man7", "Man8", "Man9", "Pin1", "Pin1", "Pin2", "Pin3", "Sou2", "Sou3", "Sou5-Dora", "Sou6", "Sou7", "Sou7", "Pei"],
+    answer: "Pin1", questionPage: 22, answerPage: 27,
+    explanation: "切二索是四、六、九索进张的两面两坎形，却没有独立雀头；切一筒的进张数最多。与进张多但容易留下亚两面的选择相比，应优先纯粹的两面听牌。",
+  },
+  {
+    id: 31, round: "东一局", seat: "东家", turn: 5, doraIndicator: "Shaa", book: "何切301", tags: ["打点", "三色"],
+    tiles: ["Man5", "Man6", "Man7", "Man8", "Pin2", "Pin2", "Pin4", "Pin5", "Pin6", "Pin7", "Sou6", "Sou7", "Sou7", "Sou7"],
+    answer: "Man8", questionPage: 30, answerPage: 33,
+    explanation: "包含三色的形状期待值最大。注意到摸三筒时能形成断幺、平和、三色，就能确定切八万。",
+  },
+  {
+    id: 32, round: "东一局", seat: "东家", turn: 5, doraIndicator: "Shaa", book: "何切301", tags: ["牌效率", "复合形"],
+    tiles: ["Man5", "Man6", "Man7", "Man8", "Pin2", "Pin2", "Pin4", "Pin5", "Pin6", "Pin7", "Sou7", "Sou7", "Sou7", "Pei"],
+    answer: "Pei", questionPage: 30, answerPage: 33,
+    explanation: "暗刻旁边不容易做面子。活用两个四连形追求多面听；八万对三色也没有帮助，因此书中先切北。",
+  },
+  {
+    id: 33, round: "东一局", seat: "东家", turn: 5, doraIndicator: "Shaa", book: "何切301", tags: ["打点", "三色", "复合形"],
+    tiles: ["Man4", "Man5", "Man6", "Man7", "Pin3", "Pin3", "Pin4", "Pin6", "Pin7", "Pin8", "Sou6", "Pei", "Pei", "Pei"],
+    answer: "Pin8", questionPage: 30, answerPage: 33,
+    explanation: "单看进张数切六索最多，但留下六索有断幺、三色与靠红五索等好处。固定三筒雀头、追求靠张听牌，所以书中切八筒。",
+  },
+  {
+    id: 34, round: "东一局", seat: "东家", turn: 8, doraIndicator: "Man1", book: "何切301", tags: ["听牌形", "和率"],
+    tiles: ["Man7", "Man7", "Man9", "Man9", "Pin2", "Pin3", "Pin4", "Pin5", "Sou2", "Sou3", "Sou4", "Chun", "Chun", "Pin4"],
+    answer: "Man7", questionPage: 31, answerPage: 34,
+    explanation: "从 7799 万中切一张，变成三枚结构。若最终听中对碰，为了更容易和出，应留下更靠边的对子，因此书中切七万。",
+  },
+  {
+    id: 35, round: "东一局", seat: "东家", turn: 8, doraIndicator: "Man1", book: "何切301", tags: ["听牌形", "完全一向听"],
+    tiles: ["Man7", "Man7", "Man9", "Man9", "Pin2", "Pin3", "Pin4", "Pin5", "Sou2", "Sou3", "Sou4", "Sou7", "Sou7", "Pin4"],
+    answer: "Man9", questionPage: 31, answerPage: 34,
+    explanation: "目标是做成向内侧靠的完全一向听。切九万固定内侧对子；即使之后摸一筒会失去断幺，整体听牌形仍更优。",
+  },
+  {
+    id: 36, round: "东一局", seat: "东家", turn: 8, doraIndicator: "Man1", book: "何切301", tags: ["打点", "听牌形", "巡目判断"],
+    tiles: ["Man7", "Man7", "Man9", "Man9", "Pin2", "Pin3", "Pin4", "Pin5", "Pin6", "Sou2", "Sou3", "Sou4", "Sou5-Dora", "Pin4"],
+    answer: "Sou5-Dora", questionPage: 31, answerPage: 34,
+    explanation: "第八巡的亲家不应放过摸八万直接听牌的机会：立直后有一杯口与赤牌的 7700 点，即使是剩三张的坎张也值得；还保留摸六万转完全一向听的变化，因此书中切赤五索。",
+  },
 ];
+
+function whatCutBook(question: WhatCutQuestion) {
+  return question.book ?? "何切301";
+}
+
+function whatCutTags(question: WhatCutQuestion) {
+  if (question.tags) return question.tags;
+  if (question.id <= 9) return ["牌效率"];
+  if (question.id <= 18) return ["复合形"];
+  return ["复合形", "打点"];
+}
+
+const whatCutTagOptions = Array.from(new Set(whatCutQuestions.flatMap(whatCutTags)));
 
 const tileGroups = {
   "万子": Array.from({ length: 9 }, (_, index) => ({ name: `Man${index + 1}`, label: `${index + 1}万` })),
@@ -485,29 +554,50 @@ const tenhouHaifuArchive = [
     replayUrl: "https://tenhou.net/0/?log=2025111921gm-0009-10011-73bb5074",
   },
   {
-    id: "TM12-STAGE8-01", date: "2025.10.08", game: "第 8 节 A 桌", winner: "いばらぎ", winningTeam: "日本プロ麻雀協会", point: "+53.0pt",
+    id: "TM12-STAGE8-01", date: "2025.10.08", game: "第 8 节 A 桌 · 第 1 战", winner: "いばらぎ", winningTeam: "日本プロ麻雀協会", point: "+53.0pt",
     results: [["1", "いばらぎ", "日本プロ麻雀協会", "+53.0"], ["2", "ウルトラ立直", "天凤位预选", "+22.5"], ["3", "木原浩一", "日本プロ麻雀協会", "-0.7"], ["4", "小林剛", "麻将連合", "-74.8"]],
     replayUrl: "https://tenhou.net/0/?log=2025100820gm-0009-10011-97010eef",
   },
   {
-    id: "TM12-STAGE8-02", date: "2025.10.08", game: "第 8 节 B 桌", winner: "鈴木優", winningTeam: "最高位戦日本プロ麻雀協会", point: "+71.1pt",
+    id: "TM12-STAGE8-02", date: "2025.10.08", game: "第 8 节 A 桌 · 第 2 战", winner: "鈴木優", winningTeam: "最高位戦日本プロ麻雀協会", point: "+71.1pt",
     results: [["1", "鈴木優", "最高位戦日本プロ麻雀協会", "+71.1"], ["2", "いばらぎ", "日本プロ麻雀協会", "+28.0"], ["3", "ウルトラ立直", "天凤位预选", "+1.0"], ["4", "おかもと", "最高位戦日本プロ麻雀協会", "-100.1"]],
     replayUrl: "https://tenhou.net/0/?log=2025100820gm-0009-10011-e9a481f0",
   },
   {
-    id: "TM12-STAGE8-03", date: "2025.10.08", game: "第 8 节 C 桌", winner: "タケオしゃん", winningTeam: "天凤位预选", point: "+76.8pt",
+    id: "TM12-STAGE8-03", date: "2025.10.08", game: "第 8 节 A 桌 · 第 3 战", winner: "タケオしゃん", winningTeam: "天凤位预选", point: "+76.8pt",
     results: [["1", "タケオしゃん", "天凤位预选", "+76.8"], ["2", "堀慎吾", "日本プロ麻雀協会", "+19.8"], ["3", "いばらぎ", "日本プロ麻雀協会", "-2.5"], ["4", "鈴木優", "最高位戦日本プロ麻雀協会", "-94.1"]],
     replayUrl: "https://tenhou.net/0/?log=2025100821gm-0009-10011-f8d01b73",
   },
   {
-    id: "TM12-STAGE8-04", date: "2025.10.08", game: "第 8 节 D 桌", winner: "堀慎吾", winningTeam: "日本プロ麻雀協会", point: "+64.8pt",
+    id: "TM12-STAGE8-04", date: "2025.10.08", game: "第 8 节 B 桌 · 第 1 战", winner: "堀慎吾", winningTeam: "日本プロ麻雀協会", point: "+64.8pt",
     results: [["1", "堀慎吾", "日本プロ麻雀協会", "+64.8"], ["2", "下石戟", "日本プロ麻雀協会", "+22.9"], ["3", "gousi", "日本プロ麻雀連盟", "-4.3"], ["4", "おかもと", "最高位戦日本プロ麻雀協会", "-83.4"]],
     replayUrl: "https://tenhou.net/0/?log=2025100820gm-0009-10011-d3f9e83d",
+  },
+  {
+    id: "TM12-STAGE7-01", date: "2025.09.24", game: "第 7 节 A 桌 · 第 1 战", winner: "じょにおん！！", winningTeam: "天凤位预选", point: "+70.9pt",
+    results: [["1", "じょにおん！！", "天凤位预选", "+70.9"], ["2", "gousi", "日本プロ麻雀連盟", "+23.4"], ["3", "いばらぎ", "日本プロ麻雀協会", "-6.0"], ["4", "木原浩一", "日本プロ麻雀協会", "-88.3"]],
+    replayUrl: "https://tenhou.net/0/?log=2025092420gm-0009-10011-9e79e1cf",
+  },
+  {
+    id: "TM12-STAGE7-02", date: "2025.09.24", game: "第 7 节 A 桌 · 第 2 战", winner: "鈴木優", winningTeam: "最高位戦日本プロ麻雀協会", point: "+93.3pt",
+    results: [["1", "鈴木優", "最高位戦日本プロ麻雀協会", "+93.3"], ["2", "いばらぎ", "日本プロ麻雀協会", "+22.4"], ["3", "下石戟", "日本プロ麻雀協会", "+1.2"], ["4", "yoteru", "天凤位预选", "-116.9"]],
+    replayUrl: "https://tenhou.net/0/?log=2025092420gm-0009-10011-cea67063",
+  },
+  {
+    id: "TM12-STAGE7-03", date: "2025.09.24", game: "第 7 节 A 桌 · 第 3 战", winner: "堀慎吾", winningTeam: "日本プロ麻雀協会", point: "+60.0pt",
+    results: [["1", "堀慎吾", "日本プロ麻雀協会", "+60.0"], ["2", "下石戟", "日本プロ麻雀協会", "+18.1"], ["3", "いばらぎ", "日本プロ麻雀協会", "-3.1"], ["4", "おかもと", "最高位戦日本プロ麻雀協会", "-75.0"]],
+    replayUrl: "https://tenhou.net/0/?log=2025092421gm-0009-10011-512fabfd",
+  },
+  {
+    id: "TM12-STAGE7-04", date: "2025.09.24", game: "第 7 节 A 桌 · 第 4 战", winner: "小林剛", winningTeam: "麻将連合", point: "+69.8pt",
+    results: [["1", "小林剛", "麻将連合", "+69.8"], ["2", "いばらぎ", "日本プロ麻雀協会", "+23.0"], ["3", "堀慎吾", "日本プロ麻雀協会", "-9.3"], ["4", "じょにおん！！", "天凤位预选", "-83.5"]],
+    replayUrl: "https://tenhou.net/0/?log=2025092422gm-0009-10011-21fc682b",
   },
 ].map((entry) => ({
   ...entry,
   source: "天凤名人战",
   event: "第12期 天凤名人战",
+  stage: entry.id.includes("FINAL") ? "决胜战" : entry.id.includes("STAGE8") ? "第 8 节" : "第 7 节",
   sourceUrl: "https://tenhou.net/cs/2025/04tm/",
   replayNote: "官方赛事页公开的天凤牌谱，可在逐巡查看器中复盘。",
 }));
@@ -517,6 +607,7 @@ const haifuArchive = [
     ...entry,
     source: "M.LEAGUE",
     event: "2025–26 常规赛",
+    stage: "常规赛",
     replayUrl: "",
     sourceUrl: "https://m-league.jp/games/?mlm=9&mly=2025",
     replayNote: "公开复盘为第三方按比赛数据重制的天凤格式牌谱；官网查看器需要 M.LEAGUE Supporter 登录。",
@@ -526,6 +617,8 @@ const haifuArchive = [
 
 const haifuTeams = Array.from(new Set(haifuArchive.flatMap((entry) => entry.results.map((result) => result[2]))));
 const haifuSources = Array.from(new Set(haifuArchive.map((entry) => entry.source)));
+const haifuYears = Array.from(new Set(haifuArchive.map((entry) => entry.date.slice(0, 4))));
+const haifuStages = Array.from(new Set(haifuArchive.map((entry) => entry.stage)));
 
 type WinType = "ron" | "tsumo";
 
@@ -671,6 +764,9 @@ export default function Home() {
   const [archiveQuery, setArchiveQuery] = useState("");
   const [archiveTeam, setArchiveTeam] = useState("全部队伍");
   const [archiveSource, setArchiveSource] = useState("全部来源");
+  const [archiveYear, setArchiveYear] = useState("全部年份");
+  const [archiveStage, setArchiveStage] = useState("全部阶段");
+  const [whatCutTag, setWhatCutTag] = useState("全部主题");
   const [activeHaifuId, setActiveHaifuId] = useState(haifuArchive[0].id);
 
   useEffect(() => {
@@ -690,29 +786,41 @@ export default function Home() {
     return haifuArchive.filter((entry) => {
       const matchesTeam = archiveTeam === "全部队伍" || entry.results.some((result) => result[2] === archiveTeam);
       const matchesSource = archiveSource === "全部来源" || entry.source === archiveSource;
+      const matchesYear = archiveYear === "全部年份" || entry.date.startsWith(archiveYear);
+      const matchesStage = archiveStage === "全部阶段" || entry.stage === archiveStage;
       const searchable = `${entry.id}${entry.date}${entry.game}${entry.event}${entry.source}${entry.winner}${entry.winningTeam}${entry.results.flat().join("")}`.toLowerCase();
-      return matchesTeam && matchesSource && (!keyword || searchable.includes(keyword));
+      return matchesTeam && matchesSource && matchesYear && matchesStage && (!keyword || searchable.includes(keyword));
     });
-  }, [archiveQuery, archiveSource, archiveTeam]);
+  }, [archiveQuery, archiveSource, archiveStage, archiveTeam, archiveYear]);
 
   const activeHaifu = filteredHaifu.find((entry) => entry.id === activeHaifuId) ?? filteredHaifu[0] ?? haifuArchive[0];
 
   const whatCutQuestion = whatCutQuestions[whatCutIndex];
+  const filteredWhatCutIndexes = useMemo(() => whatCutQuestions
+    .map((question, index) => ({ question, index }))
+    .filter(({ question }) => whatCutTag === "全部主题" || whatCutTags(question).includes(whatCutTag)), [whatCutTag]);
+  const whatCutPosition = Math.max(0, filteredWhatCutIndexes.findIndex(({ index }) => index === whatCutIndex));
   const answerIsBest = selectedTile !== null && whatCutQuestion.tiles[selectedTile] === whatCutQuestion.answer;
   const parsedScoreInputs = scoreInputs.map((value) => Number(value.replace(/[^\d]/g, "")));
   const scoreIsCorrect = scoreSubmitted && scoreQuestion.answers.every((answer, index) => parsedScoreInputs[index] === answer);
 
   const nextWhatCut = () => {
-    setWhatCutIndex((current) => (current + 1) % whatCutQuestions.length);
+    const next = filteredWhatCutIndexes[(whatCutPosition + 1) % filteredWhatCutIndexes.length];
+    setWhatCutIndex(next.index);
     setSelectedTile(null);
   };
 
   const randomWhatCut = () => {
-    setWhatCutIndex((current) => {
-      if (whatCutQuestions.length < 2) return current;
-      const offset = 1 + Math.floor(Math.random() * (whatCutQuestions.length - 1));
-      return (current + offset) % whatCutQuestions.length;
-    });
+    if (filteredWhatCutIndexes.length < 2) return;
+    const offset = 1 + Math.floor(Math.random() * (filteredWhatCutIndexes.length - 1));
+    setWhatCutIndex(filteredWhatCutIndexes[(whatCutPosition + offset) % filteredWhatCutIndexes.length].index);
+    setSelectedTile(null);
+  };
+
+  const changeWhatCutTag = (tag: string) => {
+    setWhatCutTag(tag);
+    const first = whatCutQuestions.findIndex((question) => tag === "全部主题" || whatCutTags(question).includes(tag));
+    if (first >= 0) setWhatCutIndex(first);
     setSelectedTile(null);
   };
 
@@ -968,13 +1076,14 @@ export default function Home() {
                 <h2>书籍何切题库</h2>
               </div>
               <div className="question-tools">
+                <label><span>主题</span><select value={whatCutTag} onChange={(event) => changeWhatCutTag(event.target.value)}><option>全部主题</option>{whatCutTagOptions.map((tag) => <option key={tag}>{tag}</option>)}</select></label>
                 <button onClick={randomWhatCut}>随机一题 ↻</button>
-                <div className="participant-count"><strong>{whatCutIndex + 1} / {whatCutQuestions.length}</strong><span>当前题目</span></div>
+                <div className="participant-count"><strong>{whatCutPosition + 1} / {filteredWhatCutIndexes.length}</strong><span>当前筛选</span></div>
               </div>
             </div>
 
             <div className="question-index-strip" aria-label="何切题目索引">
-              {whatCutQuestions.map((question, index) => <button
+              {filteredWhatCutIndexes.map(({ question, index }) => <button
                 key={question.id}
                 className={whatCutIndex === index ? "active" : ""}
                 aria-label={`打开第 ${question.id} 题`}
@@ -988,8 +1097,9 @@ export default function Home() {
               <div>
                 <strong>{whatCutQuestion.round} · {whatCutQuestion.turn}巡目 · {whatCutQuestion.seat}</strong>
                 <small className="dora-line">宝牌指示牌 <TileFace name={whatCutQuestion.doraIndicator} label={tileLabel(whatCutQuestion.doraIndicator)} /></small>
+                <span className="whatcut-tags">{whatCutTags(whatCutQuestion).map((tag) => <i key={tag}>{tag}</i>)}</span>
               </div>
-              <div className="points"><span>《何切301》</span><span>题面 PDF {whatCutQuestion.questionPage} 页</span></div>
+              <div className="points"><span>《{whatCutBook(whatCutQuestion)}》</span><span>题面 PDF {whatCutQuestion.questionPage} 页</span></div>
             </div>
 
             <p className="question-copy">这手牌你会切哪一张？点击牌面提交选择。</p>
@@ -1031,7 +1141,7 @@ export default function Home() {
                 </div>
               </div>
             )}
-            <div className="book-source-note">来源：《何切301》Q{String(whatCutQuestion.id).padStart(3, "0")} · 解答 PDF {whatCutQuestion.answerPage} 页 · 牌面已重绘</div>
+            <div className="book-source-note">来源：《{whatCutBook(whatCutQuestion)}》Q{String(whatCutQuestion.id).padStart(3, "0")} · 解答 PDF {whatCutQuestion.answerPage} 页 · 牌面已两次核对并重绘</div>
           </div>
 
         </div>
@@ -1228,6 +1338,20 @@ export default function Home() {
             <select value={archiveSource} onChange={(event) => setArchiveSource(event.target.value)}>
               <option>全部来源</option>
               {haifuSources.map((source) => <option key={source}>{source}</option>)}
+            </select>
+          </label>
+          <label className="archive-year-filter">
+            <span>YEAR / 年份</span>
+            <select value={archiveYear} onChange={(event) => setArchiveYear(event.target.value)}>
+              <option>全部年份</option>
+              {haifuYears.map((year) => <option key={year}>{year}</option>)}
+            </select>
+          </label>
+          <label className="archive-stage-filter">
+            <span>STAGE / 阶段</span>
+            <select value={archiveStage} onChange={(event) => setArchiveStage(event.target.value)}>
+              <option>全部阶段</option>
+              {haifuStages.map((stage) => <option key={stage}>{stage}</option>)}
             </select>
           </label>
           <div className="archive-result-count"><strong>{filteredHaifu.length}</strong><span>条结果</span></div>
