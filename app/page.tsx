@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, type CSSProperties } from "react";
 
 type TileName = string;
 
@@ -36,6 +36,60 @@ type WhatCutQuestion = {
 };
 
 const whatCutQuestions: WhatCutQuestion[] = [
+  {
+    id: 1, round: "东一局", seat: "西家", turn: 8, doraIndicator: "Pin2",
+    tiles: ["Man3", "Man4", "Man5", "Man6", "Man7", "Pin2", "Pin3", "Pin8", "Pin8", "Sou5", "Sou7", "Sou7", "Sou9", "Pin1"],
+    answer: "Sou9", questionPage: 5, answerPage: 8,
+    explanation: "书中推荐切九索。索子几种切法的进张枚数相同，因此优先留下更容易做成平和的两个坎张结构。",
+  },
+  {
+    id: 2, round: "东一局", seat: "西家", turn: 8, doraIndicator: "Pin2",
+    tiles: ["Man3", "Man4", "Man5", "Man6", "Man7", "Pin2", "Pin3", "Pin8", "Pin8", "Sou5", "Sou7", "Sou7", "Sou9", "Pin4"],
+    answer: "Sou9", questionPage: 5, answerPage: 8,
+    explanation: "书中推荐切九索。先确定断幺路线，既保留更有利的打点，也为需要提速时留下鸣牌回避手的空间。",
+  },
+  {
+    id: 3, round: "东一局", seat: "西家", turn: 8, doraIndicator: "Pin2",
+    tiles: ["Man3", "Man4", "Man5", "Man6", "Man7", "Pin2", "Pin3", "Pin8", "Pin8", "Sou5", "Sou7", "Sou7", "Sou9", "Sou7"],
+    answer: "Sou5", questionPage: 5, answerPage: 8,
+    explanation: "书中推荐切五索。切五索与切九索的进张数相同；保留九索一侧能多接赤五索，也能在摸六索时转成平和形。",
+  },
+  {
+    id: 4, round: "东一局", seat: "东家", turn: 6, doraIndicator: "Sou5-Dora",
+    tiles: ["Man6", "Man7", "Man8", "Man8", "Man8", "Man9", "Pin4", "Pin5-Dora", "Pin5", "Pin6", "Pin8", "Sou2", "Sou2", "Pin8"],
+    answer: "Pin5", questionPage: 6, answerPage: 9,
+    explanation: "书中推荐切五筒。固定筒子两面，能做出更容易平和的形状；万子一侧同时保留五、七、八万三种有效牌。",
+  },
+  {
+    id: 5, round: "东一局", seat: "东家", turn: 6, doraIndicator: "Sou5-Dora",
+    tiles: ["Man6", "Man7", "Man8", "Man8", "Man8", "Man9", "Pin4", "Pin5-Dora", "Pin5", "Pin6", "Pin8", "Ton", "Ton", "Pin8"],
+    answer: "Man9", questionPage: 6, answerPage: 9,
+    explanation: "书中推荐切九万。双东的两翻价值很高，保留对子后无论如何鸣牌都更容易拿到役；与切五筒相比也只少一枚有效牌。",
+  },
+  {
+    id: 6, round: "东一局", seat: "西家", turn: 6, doraIndicator: "Man1",
+    tiles: ["Man3", "Man3", "Pin2", "Pin2", "Pin3", "Pin5-Dora", "Pin6", "Pin6", "Pin8", "Pin8", "Pin8", "Sou4", "Sou5-Dora", "Sou3"],
+    answer: "Pin2", questionPage: 6, answerPage: 9,
+    explanation: "书中推荐切二筒。切八筒虽然更容易做出一杯口，但高目的一杯口不值得牺牲五枚有效牌，单纯扩张进张更重要。",
+  },
+  {
+    id: 7, round: "东一局", seat: "东家", turn: 7, doraIndicator: "Man6",
+    tiles: ["Man6", "Man7", "Pin3", "Pin4", "Pin5", "Pin5-Dora", "Pin6", "Pin7", "Pin7", "Pin7", "Sou2", "Sou2", "Sou4", "Pin5"],
+    answer: "Sou4", questionPage: 7, answerPage: 10,
+    explanation: "书中推荐切四索。先抽出完成的567筒，就能看出剩余筒子是三面张并带补强牌；固定索子雀头后，进张与最终形都更好。",
+  },
+  {
+    id: 8, round: "东一局", seat: "东家", turn: 7, doraIndicator: "Man6",
+    tiles: ["Man6", "Man7", "Pin3", "Pin4", "Pin5-Dora", "Pin5", "Pin6", "Pin7", "Pin7", "Pin7", "Sou2", "Sou2", "Sou4", "Pin2"],
+    answer: "Pin5", questionPage: 7, answerPage: 10,
+    explanation: "书中推荐切五筒。两个雀头候选中，过早拆索子的进张损失太大；切五筒能保留索子当前形状，进张更多，也不容易丢掉断幺。",
+  },
+  {
+    id: 9, round: "东一局", seat: "西家", turn: 6, doraIndicator: "Pin1",
+    tiles: ["Man1", "Man1", "Man2", "Pin2", "Pin2", "Pin3", "Pin5-Dora", "Pin6", "Pin6", "Pin8", "Pin8", "Pin8", "Sou5-Dora", "Sou3"],
+    answer: "Man2", questionPage: 7, answerPage: 11,
+    explanation: "书中推荐切二万。宝牌三筒构成两向听牌姿；切二万能在维持三雀头变化的同时自然转为食断，整体效率优于让复杂筒子形一直不动。",
+  },
   {
     id: 10, round: "东一局", seat: "东家", turn: 4, doraIndicator: "Shaa",
     tiles: ["Man2", "Man2", "Man3", "Man5-Dora", "Man6", "Man7", "Pin5", "Pin5", "Pin7", "Sou1", "Sou1", "Sou3", "Sou5-Dora", "Sou7"],
@@ -125,10 +179,45 @@ const yakuCards = [
   { name: "一气通贯", kana: "イッツー", han: "2翻", level: "顺子系", tiles: ["Man1", "Man2", "Man3", "Man4", "Man5", "Man6", "Man7", "Man8", "Man9"] },
 ];
 
-const schedule = [
-  { date: "10.06", week: "周二", round: "常规赛 DAY 01", teams: ["赤坂", "风林火山", "樱花骑士", "ABEMAS"], time: "18:00" },
-  { date: "10.08", week: "周四", round: "常规赛 DAY 02", teams: ["格斗俱乐部", "凤凰", "雷电", "海盗"], time: "18:00" },
-  { date: "10.09", week: "周五", round: "常规赛 DAY 03", teams: ["BEAST", "赤坂", "樱花骑士", "雷电"], time: "18:00" },
+const mleagueTeams = [
+  { slug: "jets", short: "JETS", name: "EARTH JETS", accent: "#276b60", players: ["石井一馬", "三浦智博", "逢川恵夢", "HIRO柴田"] },
+  { slug: "drivens", short: "DRIVENS", name: "赤坂ドリブンズ", accent: "#b89b2d", players: ["園田賢", "鈴木たろう", "浅見真紀", "渡辺太"] },
+  { slug: "furinkazan", short: "風林火山", name: "EX風林火山", accent: "#b12924", players: ["二階堂亜樹", "勝又健志", "永井孝典", "内川幸太郎"] },
+  { slug: "sakuraknights", short: "SAKURA", name: "KADOKAWAサクラナイツ", accent: "#d8789b", players: ["岡田紗佳", "堀慎吾", "阿久津翔太", "尻無濱航"] },
+  { slug: "fightclub", short: "KONAMI", name: "KONAMI麻雀格闘倶楽部", accent: "#8e171d", players: ["佐々木寿人", "高宮まり", "伊達朱里紗", "滝沢和典"] },
+  { slug: "abemas", short: "ABEMAS", name: "CyberAgent ABEMAS", accent: "#e0c32d", players: ["多井隆晴", "白鳥翔", "松本吉弘", "日向藍子"] },
+  { slug: "phoenix", short: "PHOENIX", name: "セガサミーフェニックス", accent: "#e4772e", players: ["茅森早香", "醍醐大", "竹内元太", "佐野ひなこ"] },
+  { slug: "raiden", short: "雷電", name: "TEAM RAIDEN / 雷電", accent: "#282d31", players: ["萩原聖人", "瀬戸熊直樹", "黒沢咲", "本田朋広"] },
+  { slug: "beast", short: "BEAST", name: "BEAST X", accent: "#2c497c", players: ["鈴木大介", "中田花奈", "下石戟", "東城りお"] },
+  { slug: "pirates", short: "PIRATES", name: "U-NEXT Pirates", accent: "#167f87", players: ["瑞原明奈", "鈴木優", "仲林圭", "朝倉康心"] },
+];
+
+const regularStandings = [
+  ["EX風林火山", "697.3"], ["KONAMI麻雀格闘倶楽部", "691.4"], ["BEAST X", "689.7"],
+  ["赤坂ドリブンズ", "246.6"], ["セガサミーフェニックス", "124.2"], ["TEAM RAIDEN / 雷電", "-213.7"],
+  ["CyberAgent ABEMAS", "-245.9"], ["U-NEXT Pirates", "-622.4"], ["KADOKAWAサクラナイツ", "-626.7"], ["EARTH JETS", "-740.5"],
+];
+
+const semifinalStandings = [
+  ["EX風林火山", "446.6"], ["BEAST X", "376.7"], ["KONAMI麻雀格闘倶楽部", "240.7"],
+  ["TEAM RAIDEN / 雷電", "152.4"], ["セガサミーフェニックス", "21.3"], ["赤坂ドリブンズ", "-119.8"],
+];
+
+const matchArchive = [
+  {
+    date: "09.15", week: "周一", label: "常规赛 DAY 01",
+    games: [
+      { number: "第 1 回战", players: ["園田賢", "鈴木優", "石井一馬", "下石戟"], winner: "園田賢", point: "+54.9pt", gameId: "L001_S022_0001_01A" },
+      { number: "第 2 回战", players: ["仲林圭", "東城りお", "鈴木たろう", "三浦智博"], winner: "仲林圭", point: "+66.4pt", gameId: "L001_S022_0001_02A" },
+    ],
+  },
+  {
+    date: "09.16", week: "周二", label: "常规赛 DAY 02",
+    games: [
+      { number: "第 1 回战", players: ["阿久津翔太", "佐々木寿人", "二階堂亜樹", "松本吉弘"], winner: "阿久津翔太", point: "+76.0pt", gameId: "L001_S022_0002_01A" },
+      { number: "第 2 回战", players: ["白鳥翔", "岡田紗佳", "伊達朱里紗", "内川幸太郎"], winner: "白鳥翔", point: "+55.9pt", gameId: "L001_S022_0002_02A" },
+    ],
+  },
 ];
 
 type WinType = "ron" | "tsumo";
@@ -246,6 +335,7 @@ function createScoreQuestion(): ScoreQuestion {
 }
 
 type PageKey = "home" | "resources" | "whatcut" | "scoring" | "mleague" | "archive";
+type MLeagueTab = "matches" | "ranking" | "teams";
 
 function pageFromHash(hash: string): PageKey {
   const page = hash.replace("#", "") as PageKey;
@@ -257,6 +347,8 @@ export default function Home() {
   const [whatCutIndex, setWhatCutIndex] = useState(0);
   const [selectedTile, setSelectedTile] = useState<number | null>(null);
   const [spoilers, setSpoilers] = useState(false);
+  const [mleagueTab, setMleagueTab] = useState<MLeagueTab>("matches");
+  const [selectedTeam, setSelectedTeam] = useState(0);
   const [search, setSearch] = useState("");
   const [tileGroup, setTileGroup] = useState<keyof typeof tileGroups>("万子");
   const [scoreQuestion, setScoreQuestion] = useState<ScoreQuestion>(createScoreQuestion);
@@ -290,6 +382,15 @@ export default function Home() {
 
   const nextWhatCut = () => {
     setWhatCutIndex((current) => (current + 1) % whatCutQuestions.length);
+    setSelectedTile(null);
+  };
+
+  const randomWhatCut = () => {
+    setWhatCutIndex((current) => {
+      if (whatCutQuestions.length < 2) return current;
+      const offset = 1 + Math.floor(Math.random() * (whatCutQuestions.length - 1));
+      return (current + offset) % whatCutQuestions.length;
+    });
     setSelectedTile(null);
   };
 
@@ -509,7 +610,10 @@ export default function Home() {
                 <p className="section-kicker light">BOOK PRACTICE · Q{String(whatCutQuestion.id).padStart(3, "0")}</p>
                 <h2>书籍何切题库</h2>
               </div>
-              <div className="participant-count"><strong>{whatCutIndex + 1} / {whatCutQuestions.length}</strong><span>当前题目</span></div>
+              <div className="question-tools">
+                <button onClick={randomWhatCut}>随机一题 ↻</button>
+                <div className="participant-count"><strong>{whatCutIndex + 1} / {whatCutQuestions.length}</strong><span>当前题目</span></div>
+              </div>
             </div>
 
             <div className="round-context">
@@ -663,32 +767,72 @@ export default function Home() {
               <p className="section-kicker light">PRO MAHJONG / 职业赛事</p>
               <h2>M.LEAGUE<br /><em>赛事档案</em></h2>
             </div>
-            <div className="season-block"><small>SELECTED SEASON</small><strong>2026—27</strong><span>REGULAR SEASON</span></div>
+            <div className="season-block"><small>SELECTED SEASON</small><strong>2025—26</strong><span>OFFICIAL SEASON ARCHIVE</span></div>
           </div>
 
           <div className="schedule-card">
             <div className="schedule-toolbar">
-              <div className="schedule-tabs"><button className="active">近期赛程</button><button>积分榜</button><button>选手</button></div>
-              <label className="spoiler-toggle">
-                <span>隐藏赛果</span>
-                <input type="checkbox" checked={!spoilers} onChange={() => setSpoilers(!spoilers)} />
-                <i />
-              </label>
+              <div className="schedule-tabs">
+                <button className={mleagueTab === "matches" ? "active" : ""} onClick={() => setMleagueTab("matches")}>赛程与牌谱</button>
+                <button className={mleagueTab === "ranking" ? "active" : ""} onClick={() => setMleagueTab("ranking")}>赛季排名</button>
+                <button className={mleagueTab === "teams" ? "active" : ""} onClick={() => setMleagueTab("teams")}>队伍与选手</button>
+              </div>
+              {mleagueTab === "matches" && <label className="spoiler-toggle">
+                  <span>隐藏赛果</span>
+                  <input type="checkbox" checked={!spoilers} onChange={() => setSpoilers(!spoilers)} />
+                  <i />
+                </label>}
             </div>
-            <div className="schedule-list">
-              {schedule.map((match, index) => (
-                <article className="match-row" key={match.date}>
-                  <div className="match-date"><strong>{match.date}</strong><span>{match.week}</span></div>
-                  <div className="match-info"><small>{match.round}</small><strong>{spoilers ? (index === 0 ? "海盗 +58.2" : "赛果待录入") : "四队两半庄 · 赛果隐藏"}</strong></div>
-                  <div className="team-dots" aria-label={match.teams.join("、")}>
-                    {match.teams.map((team, teamIndex) => <span key={team} className={`team team-${teamIndex + 1}`} title={team}>{team.slice(0, 1)}</span>)}
+            {mleagueTab === "matches" && <div className="match-archive-list">
+              {matchArchive.map((match) => (
+                <article className="match-day" key={match.date}>
+                  <div className="match-day-head">
+                    <div className="match-date"><strong>{match.date}</strong><span>{match.week}</span></div>
+                    <div><small>{match.label}</small><strong>两场半庄</strong></div>
                   </div>
-                  <div className="match-time"><small>START</small><strong>{match.time}</strong></div>
-                  <a href="#archive" aria-label={`查看${match.date}比赛详情`}>→</a>
+                  <div className="match-games">
+                    {match.games.map((game) => <div className="match-game" key={game.gameId}>
+                      <span className="game-number">{game.number}</span>
+                      <div className="lineup" aria-label={game.players.join("、")}>
+                        {game.players.map((player) => <span key={player}>{player}</span>)}
+                      </div>
+                      <div className={`game-result ${spoilers ? "revealed" : ""}`}>
+                        <small>{spoilers ? "1 位" : "赛果隐藏"}</small>
+                        <strong>{spoilers ? `${game.winner} ${game.point}` : game.gameId}</strong>
+                      </div>
+                    </div>)}
+                  </div>
                 </article>
               ))}
-            </div>
-            <div className="schedule-footer"><span>以上赛程为原型示例数据</span><a href="#mleague">打开完整赛历 <b>↗</b></a></div>
+            </div>}
+
+            {mleagueTab === "ranking" && <div className="standings-wrap">
+              <div className="standings-block">
+                <div className="standings-heading"><span>REGULAR SEASON</span><strong>常规赛最终排名</strong></div>
+                <ol>{regularStandings.map(([team, point], index) => <li key={team}><b>{String(index + 1).padStart(2, "0")}</b><span>{team}</span><strong className={point.startsWith("-") ? "negative" : ""}>{point} pt</strong></li>)}</ol>
+              </div>
+              <div className="standings-block semifinal">
+                <div className="standings-heading"><span>SEMIFINAL SERIES</span><strong>半决赛排名</strong></div>
+                <ol>{semifinalStandings.map(([team, point], index) => <li key={team}><b>{String(index + 1).padStart(2, "0")}</b><span>{team}</span><strong className={point.startsWith("-") ? "negative" : ""}>{point} pt</strong></li>)}</ol>
+              </div>
+            </div>}
+
+            {mleagueTab === "teams" && <div className="teams-browser">
+              <div className="team-selector" aria-label="选择队伍">
+                {mleagueTeams.map((team, index) => <button className={selectedTeam === index ? "active" : ""} onClick={() => setSelectedTeam(index)} key={team.slug} style={{ "--team-accent": team.accent } as CSSProperties}>
+                  <i>{String(index + 1).padStart(2, "0")}</i><span>{team.short}</span>
+                </button>)}
+              </div>
+              <article className="roster-card" style={{ "--team-accent": mleagueTeams[selectedTeam].accent } as CSSProperties}>
+                <div className="roster-title"><span>TEAM {String(selectedTeam + 1).padStart(2, "0")}</span><h3>{mleagueTeams[selectedTeam].name}</h3><p>2025–26 赛季官方登记选手</p></div>
+                <div className="player-grid">
+                  {mleagueTeams[selectedTeam].players.map((player, index) => <div key={player}><span>{String(index + 1).padStart(2, "0")}</span><strong>{player}</strong><small>M.LEAGUER</small></div>)}
+                </div>
+                <a href={`https://m-league.jp/teams/${mleagueTeams[selectedTeam].slug}`} target="_blank" rel="noreferrer">打开官方队伍页 ↗</a>
+              </article>
+            </div>}
+
+            <div className="schedule-footer"><span>官方资料快照 · 更新于 2026.08.09</span><a href="https://m-league.jp/games" target="_blank" rel="noreferrer">查看官方日程、结果与牌谱 <b>↗</b></a></div>
           </div>
         </div>
       </section>}
@@ -725,7 +869,7 @@ export default function Home() {
         <div className="footer-links">
           <a href="#resources">资料库</a><a href="#whatcut">何切</a><a href="#scoring">算点</a><a href="#mleague">赛事</a><a href="#archive">牌谱</a>
         </div>
-        <p className="footer-note">原型版本 · 内容与赛程数据仅供设计演示</p>
+        <p className="footer-note">资料持续整理 · M.LEAGUE 数据来自官方公开档案</p>
       </footer>
     </main>
   );
