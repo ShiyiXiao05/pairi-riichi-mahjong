@@ -10,7 +10,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     title: "牌理 PAIRI｜立直麻将知识与实战资料馆",
-    description: "从零学习日麻，练习何切与算点，追踪 M.LEAGUE 赛程并研究职业牌谱。",
+    description: "查阅日麻规则与役种，练习何切和算点，追踪 M.LEAGUE 赛程并研究职业牌谱。",
     openGraph: {
       title: "牌理 PAIRI｜立直麻将资料馆",
       description: "从第一巡开始，读懂一局日麻。",

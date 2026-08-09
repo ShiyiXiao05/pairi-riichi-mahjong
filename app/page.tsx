@@ -8,7 +8,7 @@ function TileFace({ name, label, className = "" }: { name: TileName; label: stri
   return (
     <img
       className={`tile-face ${className}`}
-      src={`/tiles/${name}.png`}
+      src={`/tiles/${name}.png?v=3`}
       alt={label}
       draggable={false}
     />
@@ -51,6 +51,13 @@ const searchItems = [
   { title: "南二局的押引选择", type: "何切", detail: "1842 人已作答" },
 ];
 
+const knowledgeCards = [
+  { index: "01", title: "牌面速查", subtitle: "TILES", count: "34 种基础牌 · 3 种赤牌", description: "万、筒、索、字牌与常用牌姿标记。", href: "#tile-guide" },
+  { index: "02", title: "对局流程", subtitle: "FLOW", count: "18 个关键节点", description: "从配牌、摸切到连庄与终局的完整流程。", href: "#knowledge" },
+  { index: "03", title: "役种辞典", subtitle: "YAKU", count: "36 种常见役", description: "成立条件、门清限制、复合关系与牌例。", href: "#yaku" },
+  { index: "04", title: "规则查阅", subtitle: "RULES", count: "52 条规则索引", description: "振听、鸣牌、流局、包牌与常见规则差异。", href: "#knowledge" },
+];
+
 const yakuCards = [
   { name: "立直", kana: "リーチ", han: "1翻", level: "入门必学", tiles: ["Man1", "Man2", "Man3", "Pin2", "Pin3", "Pin4", "Sou1", "Sou2", "Sou3"] },
   { name: "断幺九", kana: "タンヤオ", han: "1翻", level: "高频役种", tiles: ["Man2", "Man3", "Man4", "Pin4", "Pin5-Dora", "Pin6", "Sou3", "Sou4", "Sou5"] },
@@ -69,6 +76,7 @@ export default function Home() {
   const [spoilers, setSpoilers] = useState(false);
   const [search, setSearch] = useState("");
   const [tileGroup, setTileGroup] = useState<keyof typeof tileGroups>("万子");
+  const [scoreAnswer, setScoreAnswer] = useState<number | null>(null);
 
   const searchResults = useMemo(() => {
     const keyword = search.trim().toLowerCase();
@@ -92,16 +100,17 @@ export default function Home() {
         </a>
 
         <nav className="main-nav" aria-label="主导航">
-          <a href="#learn">学习路径</a>
+          <a href="#knowledge">资料库</a>
           <a href="#yaku">役种辞典</a>
           <a href="#practice">训练场</a>
+          <a href="#scoring">算点</a>
           <a href="#mleague">赛事</a>
           <a href="#archive">牌谱库</a>
         </nav>
 
         <div className="header-actions">
           <button className="icon-button" aria-label="我的收藏">☆</button>
-          <a className="header-cta" href="#learn">开始学习</a>
+          <a className="header-cta" href="#practice">开始训练</a>
         </div>
       </header>
 
@@ -111,14 +120,14 @@ export default function Home() {
           <p className="eyebrow"><span /> 立直麻将 · 知识与实战</p>
           <h1>从第一巡开始，<br /><em>读懂一局日麻。</em></h1>
           <p className="hero-description">
-            学规则、认役种、练何切，也重新观看每一场职业对局。给新手一条清楚的路，也给牌友一张更深的地图。
+            查规则、练何切、复核算点，也重新观看每一场职业对局。给已经坐上牌桌的玩家，一张更深的地图。
           </p>
           <div className="hero-actions">
-            <a className="primary-button" href="#learn">从零开始学 <span>→</span></a>
+            <a className="primary-button" href="#practice">进入训练场 <span>→</span></a>
             <a className="text-link" href="#practice">今日一何切 <span>↘</span></a>
           </div>
           <div className="hero-meta">
-            <div><strong>42</strong><span>篇入门课程</span></div>
+            <div><strong>142</strong><span>篇资料条目</span></div>
             <div><strong>186</strong><span>道实战练习</span></div>
             <div><strong>36</strong><span>种常见役种</span></div>
           </div>
@@ -179,31 +188,31 @@ export default function Home() {
         )}
       </section>
 
-      <section className="quick-start page-section" id="learn">
+      <section className="quick-start page-section">
         <div className="section-heading compact-heading">
           <div>
-            <p className="section-kicker">START HERE / 从这里开始</p>
-            <h2>今天想做什么？</h2>
+            <p className="section-kicker">QUICK ACCESS / 快捷入口</p>
+            <h2>从问题出发，直接进入。</h2>
           </div>
-          <p>不用先理解所有规则，选择一条路线就好。</p>
+          <p>面向已有对局经验的玩家，减少引导，保留足够深度。</p>
         </div>
         <div className="quick-grid">
-          <a className="quick-card quick-featured" href="#course">
+          <a className="quick-card quick-featured" href="#practice">
             <div className="quick-number">01</div>
-            <div className="quick-icon"><TileFace name="Chun" label="红中" /></div>
+            <div className="quick-icon"><TileFace name="Pei" label="北" /></div>
             <div className="quick-content">
-              <span>第一次接触日麻</span>
-              <h3>用 30 分钟<br />打完第一局</h3>
-              <p>从认牌到完成一次和牌，6 个轻量章节。</p>
+              <span>今日局面 · #042</span>
+              <h3>比较进张、打点<br />与风险的何切</h3>
+              <p>提交选择后查看票型分布与编辑分析。</p>
             </div>
             <span className="round-arrow">↗</span>
           </a>
-          <a className="quick-card" href="#practice">
+          <a className="quick-card" href="#scoring">
             <div className="quick-number">02</div>
             <div className="quick-content">
-              <span>已经会打，想要进步</span>
-              <h3>进入每日训练场</h3>
-              <p>何切、听牌、牌效率与押引判断。</p>
+              <span>翻数、符数与点数</span>
+              <h3>算点图解与练习</h3>
+              <p>从基本点公式走到庄闲、自摸与荣和。</p>
             </div>
             <span className="round-arrow">↗</span>
           </a>
@@ -219,7 +228,31 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="tile-guide page-section" aria-label="日麻牌面速查">
+      <section className="knowledge-section page-section" id="knowledge">
+        <div className="section-heading">
+          <div>
+            <p className="section-kicker">KNOWLEDGE BASE / 基础资料库</p>
+            <h2>需要的时候，<br />快速找到准确答案。</h2>
+          </div>
+          <div className="section-aside-copy">
+            <p>基础内容不设线性课程，按主题、关键词与关联条目组织，既能速查，也能继续深入。</p>
+          </div>
+        </div>
+        <div className="knowledge-grid">
+          {knowledgeCards.map((item) => (
+            <a className="knowledge-card" href={item.href} key={item.title}>
+              <span className="knowledge-index">{item.index}</span>
+              <small>{item.subtitle}</small>
+              <h3>{item.title}</h3>
+              <strong>{item.count}</strong>
+              <p>{item.description}</p>
+              <i>↗</i>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <section className="tile-guide page-section" id="tile-guide" aria-label="日麻牌面速查">
         <div className="tile-guide-head">
           <div>
             <p className="section-kicker">TILE GUIDE / 牌面速查</p>
@@ -276,7 +309,6 @@ export default function Home() {
                   aria-pressed={selectedTile === index}
                 >
                   <TileFace name={tile.name} label={tile.label} />
-                  <small>{tile.label}</small>
                 </button>
               ))}
             </div>
@@ -301,37 +333,6 @@ export default function Home() {
             )}
           </div>
 
-          <aside className="learning-card" id="course">
-            <div className="learning-head">
-              <p className="section-kicker">YOUR JOURNEY</p>
-              <h3>我的学习路径</h3>
-              <span className="progress-number">42%</span>
-            </div>
-            <div className="progress-track"><i /></div>
-            <div className="course-list">
-              <a className="course-row completed" href="#course">
-                <span className="course-state">✓</span>
-                <div><small>CHAPTER 01</small><strong>认识一副日麻牌</strong></div>
-                <em>已完成</em>
-              </a>
-              <a className="course-row completed" href="#course">
-                <span className="course-state">✓</span>
-                <div><small>CHAPTER 02</small><strong>一局是怎样进行的</strong></div>
-                <em>已完成</em>
-              </a>
-              <a className="course-row current" href="#course">
-                <span className="course-state">03</span>
-                <div><small>正在学习 · 6 MIN</small><strong>先记住这五种役</strong></div>
-                <em>继续 →</em>
-              </a>
-              <a className="course-row locked" href="#course">
-                <span className="course-state">04</span>
-                <div><small>CHAPTER 04</small><strong>振听为什么不能荣和</strong></div>
-                <em>待解锁</em>
-              </a>
-            </div>
-            <a className="full-course-link" href="#course">查看完整学习地图 <span>→</span></a>
-          </aside>
         </div>
       </section>
 
@@ -359,6 +360,72 @@ export default function Home() {
               <div className="yaku-link">查看成立条件 <span>↗</span></div>
             </a>
           ))}
+        </div>
+      </section>
+
+      <section className="scoring-section" id="scoring">
+        <div className="page-section">
+          <div className="scoring-heading">
+            <div>
+              <p className="section-kicker light">SCORING LAB / 算点实验室</p>
+              <h2>把算点拆成一张<br />可以反复使用的图。</h2>
+            </div>
+            <p>先判断役与翻，再计算符和基本点，最后根据庄闲及和牌方式得出支付点数。</p>
+          </div>
+
+          <div className="score-flow" aria-label="日麻算点流程图">
+            <div className="flow-node"><span>STEP 01</span><strong>确认役种</strong><small>必须至少有一役</small></div>
+            <i>→</i>
+            <div className="flow-node"><span>STEP 02</span><strong>合计翻数</strong><small>役 + 宝牌 + 赤牌</small></div>
+            <i>→</i>
+            <div className="flow-node accent"><span>STEP 03</span><strong>计算符数</strong><small>底符、面子、雀头、听牌</small></div>
+            <i>→</i>
+            <div className="flow-node"><span>STEP 04</span><strong>求基本点</strong><small>符 × 2<sup>2+翻</sup></small></div>
+            <i>→</i>
+            <div className="flow-node"><span>STEP 05</span><strong>庄闲与和法</strong><small>荣和 / 自摸 / 取整</small></div>
+          </div>
+
+          <div className="scoring-workbench">
+            <article className="worked-example">
+              <div className="score-card-head"><span>CALCULATION MAP</span><strong>3翻 30符 · 子家荣和</strong></div>
+              <div className="score-hand">
+                {["Man2", "Man3", "Man4", "Pin3", "Pin4", "Pin5-Dora", "Sou4", "Sou5", "Sou6", "Pin6", "Pin7", "Pin8", "Haku", "Haku"].map((tile, index) => (
+                  <TileFace key={`${tile}-${index}`} name={tile} label={tile} />
+                ))}
+              </div>
+              <div className="formula-steps">
+                <div><small>翻数</small><strong>立直 1 + 平和 1 + 赤 1</strong><b>3翻</b></div>
+                <div><small>符数</small><strong>副底20 + 门清荣和10</strong><b>30符</b></div>
+                <div><small>基本点</small><strong>30 × 2<sup>2+3</sup></strong><b>960</b></div>
+                <div className="total"><small>子家荣和</small><strong>960 × 4 = 3,840 · 百位进位</strong><b>3,900点</b></div>
+              </div>
+            </article>
+
+            <aside className="score-practice">
+              <div className="practice-badge">PRACTICE 01</div>
+              <h3>这手荣和是多少点？</h3>
+              <p>南家 · 3翻30符 · 荣和</p>
+              <div className="score-options">
+                {[2000, 3900, 5200, 7700].map((points) => (
+                  <button
+                    key={points}
+                    className={scoreAnswer === points ? (points === 3900 ? "correct" : "wrong") : ""}
+                    onClick={() => setScoreAnswer(points)}
+                    aria-pressed={scoreAnswer === points}
+                  >{points.toLocaleString()} 点</button>
+                ))}
+              </div>
+              {scoreAnswer === null ? (
+                <div className="score-hint">提示：先求基本点，再乘子家荣和倍率 4。</div>
+              ) : (
+                <div className={`score-feedback ${scoreAnswer === 3900 ? "correct" : "wrong"}`} aria-live="polite">
+                  <strong>{scoreAnswer === 3900 ? "正确 · 3,900点" : "再算一次"}</strong>
+                  <p>{scoreAnswer === 3900 ? "基本点 960，子家荣和乘 4 后为 3,840，向上取整至百位。" : "注意最终支付点数需要向上取整到百位。"}</p>
+                  <button onClick={() => setScoreAnswer(null)}>重置题目</button>
+                </div>
+              )}
+            </aside>
+          </div>
         </div>
       </section>
 
@@ -429,7 +496,7 @@ export default function Home() {
           <div><strong>牌理 PAIRI</strong><p>立直麻将知识与实战资料馆</p></div>
         </div>
         <div className="footer-links">
-          <a href="#learn">学习</a><a href="#practice">训练</a><a href="#mleague">赛事</a><a href="#archive">牌谱</a>
+          <a href="#knowledge">资料库</a><a href="#practice">何切</a><a href="#scoring">算点</a><a href="#mleague">赛事</a><a href="#archive">牌谱</a>
         </div>
         <p className="footer-note">原型版本 · 内容与赛程数据仅供设计演示</p>
       </footer>
