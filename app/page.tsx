@@ -220,6 +220,60 @@ const matchArchive = [
   },
 ];
 
+const augustEvents = [
+  {
+    date: "08.07", tag: "M TOURNAMENT", title: "M Tournament 2026 决赛",
+    description: "八月有杯赛决赛与官方公开观赛活动，但不属于 M.LEAGUE 常规赛。",
+    href: "https://m-league.jp/news202607101400/",
+  },
+  {
+    date: "08.24", tag: "OFF-SEASON EVENT", title: "M.LEAGUE 儿童麻将节 2026",
+    description: "19 名 M 联盟选手参加的休赛期麻将大会、麻将教室与交流活动。",
+    href: "https://m-league.jp/news202607091500/",
+  },
+];
+
+const haifuArchive = [
+  {
+    id: "L001_S022_0001_01A", date: "2025.09.15", game: "第 1 回战", winner: "園田賢", winningTeam: "赤坂ドリブンズ", point: "+54.9pt",
+    results: [["1", "園田賢", "赤坂ドリブンズ", "+54.9"], ["2", "鈴木優", "U-NEXT Pirates", "+9.8"], ["3", "石井一馬", "EARTH JETS", "-15.9"], ["4", "下石戟", "BEAST X", "-48.8"]],
+  },
+  {
+    id: "L001_S022_0001_02A", date: "2025.09.15", game: "第 2 回战", winner: "仲林圭", winningTeam: "U-NEXT Pirates", point: "+66.4pt",
+    results: [["1", "仲林圭", "U-NEXT Pirates", "+66.4"], ["2", "東城りお", "BEAST X", "+6.1"], ["3", "鈴木たろう", "赤坂ドリブンズ", "-17.5"], ["4", "三浦智博", "EARTH JETS", "-55.0"]],
+  },
+  {
+    id: "L001_S022_0002_01A", date: "2025.09.16", game: "第 1 回战", winner: "阿久津翔太", winningTeam: "KADOKAWAサクラナイツ", point: "+76.0pt",
+    results: [["1", "阿久津翔太", "KADOKAWAサクラナイツ", "+76.0"], ["2", "佐々木寿人", "KONAMI麻雀格闘倶楽部", "+6.2"], ["3", "二階堂亜樹", "EX風林火山", "-23.8"], ["4", "松本吉弘", "CyberAgent ABEMAS", "-58.4"]],
+  },
+  {
+    id: "L001_S022_0002_02A", date: "2025.09.16", game: "第 2 回战", winner: "白鳥翔", winningTeam: "CyberAgent ABEMAS", point: "+55.9pt",
+    results: [["1", "白鳥翔", "CyberAgent ABEMAS", "+55.9"], ["2", "岡田紗佳", "KADOKAWAサクラナイツ", "+11.7"], ["3", "伊達朱里紗", "KONAMI麻雀格闘倶楽部", "-17.1"], ["4", "内川幸太郎", "EX風林火山", "-50.5"]],
+  },
+  {
+    id: "L001_S022_0003_01A", date: "2025.09.18", game: "第 1 回战", winner: "萩原聖人", winningTeam: "TEAM RAIDEN / 雷電", point: "+58.5pt",
+    results: [["1", "萩原聖人", "TEAM RAIDEN / 雷電", "+58.5"], ["2", "瑞原明奈", "U-NEXT Pirates", "+5.8"], ["3", "東城りお", "BEAST X", "-15.9"], ["4", "醍醐大", "セガサミーフェニックス", "-48.4"]],
+  },
+  {
+    id: "L001_S022_0004_01A", date: "2025.09.19", game: "第 1 回战", winner: "永井孝典", winningTeam: "EX風林火山", point: "+62.8pt",
+    results: [["1", "永井孝典", "EX風林火山", "+62.8"], ["2", "逢川恵夢", "EARTH JETS", "+3.7"], ["3", "瀬戸熊直樹", "TEAM RAIDEN / 雷電", "-16.8"], ["4", "多井隆晴", "CyberAgent ABEMAS", "-49.7"]],
+  },
+  {
+    id: "L001_S022_0004_02A", date: "2025.09.19", game: "第 2 回战", winner: "内川幸太郎", winningTeam: "EX風林火山", point: "+64.2pt",
+    results: [["1", "内川幸太郎", "EX風林火山", "+64.2"], ["2", "白鳥翔", "CyberAgent ABEMAS", "+14.0"], ["3", "黒沢咲", "TEAM RAIDEN / 雷電", "-10.8"], ["4", "HIRO柴田", "EARTH JETS", "-67.4"]],
+  },
+  {
+    id: "L001_S022_0005_01A", date: "2025.09.22", game: "第 1 回战", winner: "瑞原明奈", winningTeam: "U-NEXT Pirates", point: "+54.6pt",
+    results: [["1", "瑞原明奈", "U-NEXT Pirates", "+54.6"], ["2", "佐々木寿人", "KONAMI麻雀格闘倶楽部", "+14.1"], ["3", "日向藍子", "CyberAgent ABEMAS", "-16.7"], ["4", "茅森早香", "セガサミーフェニックス", "-52.0"]],
+  },
+  {
+    id: "L001_S022_0005_02A", date: "2025.09.22", game: "第 2 回战", winner: "白鳥翔", winningTeam: "CyberAgent ABEMAS", point: "+56.5pt",
+    results: [["1", "白鳥翔", "CyberAgent ABEMAS", "+56.5"], ["2", "高宮まり", "KONAMI麻雀格闘倶楽部", "+8.6"], ["3", "鈴木優", "U-NEXT Pirates", "-21.3"], ["4", "竹内元太", "セガサミーフェニックス", "-43.8"]],
+  },
+];
+
+const haifuTeams = Array.from(new Set(haifuArchive.flatMap((entry) => entry.results.map((result) => result[2]))));
+
 type WinType = "ron" | "tsumo";
 
 type ScoreQuestion = {
@@ -354,6 +408,9 @@ export default function Home() {
   const [scoreQuestion, setScoreQuestion] = useState<ScoreQuestion>(createScoreQuestion);
   const [scoreInputs, setScoreInputs] = useState(["", ""]);
   const [scoreSubmitted, setScoreSubmitted] = useState(false);
+  const [archiveQuery, setArchiveQuery] = useState("");
+  const [archiveTeam, setArchiveTeam] = useState("全部队伍");
+  const [activeHaifuId, setActiveHaifuId] = useState(haifuArchive[0].id);
 
   useEffect(() => {
     const updatePage = () => {
@@ -374,6 +431,17 @@ export default function Home() {
       `${item.title}${item.type}${item.detail}`.toLowerCase().includes(keyword),
     );
   }, [search]);
+
+  const filteredHaifu = useMemo(() => {
+    const keyword = archiveQuery.trim().toLowerCase();
+    return haifuArchive.filter((entry) => {
+      const matchesTeam = archiveTeam === "全部队伍" || entry.results.some((result) => result[2] === archiveTeam);
+      const searchable = `${entry.id}${entry.date}${entry.game}${entry.winner}${entry.winningTeam}${entry.results.flat().join("")}`.toLowerCase();
+      return matchesTeam && (!keyword || searchable.includes(keyword));
+    });
+  }, [archiveQuery, archiveTeam]);
+
+  const activeHaifu = filteredHaifu.find((entry) => entry.id === activeHaifuId) ?? filteredHaifu[0] ?? haifuArchive[0];
 
   const whatCutQuestion = whatCutQuestions[whatCutIndex];
   const answerIsBest = selectedTile !== null && whatCutQuestion.tiles[selectedTile] === whatCutQuestion.answer;
@@ -784,6 +852,20 @@ export default function Home() {
                 </label>}
             </div>
             {mleagueTab === "matches" && <div className="match-archive-list">
+              <div className="offseason-board">
+                <div className="offseason-copy">
+                  <span>AUGUST 2026 / 休赛期</span>
+                  <strong>八月没有 M.LEAGUE 常规赛</strong>
+                  <p>2026–27 赛季开幕日与常规赛日程尚待官方公布；本月仍有 M Tournament 决赛和联盟线下活动。</p>
+                  <a href="https://m-league.jp/news202606021500/" target="_blank" rel="noreferrer">查看新赛季官方说明 ↗</a>
+                </div>
+                <div className="august-events">
+                  {augustEvents.map((event) => <a href={event.href} target="_blank" rel="noreferrer" key={event.date}>
+                    <b>{event.date}</b><span>{event.tag}</span><strong>{event.title}</strong><p>{event.description}</p><i>↗</i>
+                  </a>)}
+                </div>
+              </div>
+              <div className="archive-divider"><span>2025–26 SEASON ARCHIVE</span><strong>已结束赛季牌谱</strong></div>
               {matchArchive.map((match) => (
                 <article className="match-day" key={match.date}>
                   <div className="match-day-head">
@@ -837,27 +919,63 @@ export default function Home() {
         </div>
       </section>}
 
-      {page === "archive" && <section className="archive-section page-section" id="archive">
-        <div className="archive-copy">
-          <p className="section-kicker">HAIFU ARCHIVE / 牌谱档案</p>
-          <h2>不只看结果，<br />回到决定胜负的那一巡。</h2>
-          <p>按选手、队伍、局数、役种和打点检索职业牌谱，把赛场上的选择变成自己的经验。</p>
-          <a className="primary-button dark-button" href="#archive">探索牌谱库 <span>→</span></a>
+      {page === "archive" && <section className="haifu-library page-section" id="archive">
+        <div className="archive-library-head">
+          <div>
+            <p className="section-kicker">HAIFU ARCHIVE / 牌谱档案</p>
+            <h2>先找到那场比赛，<br />再回到决定胜负的一巡。</h2>
+            <p>第一阶段先收录 M.LEAGUE 官方牌谱编号、完整顺位与得点。可按选手、队伍、日期或牌谱 ID 检索。</p>
+          </div>
+          <div className="archive-stats">
+            <div><strong>{haifuArchive.length}</strong><span>已收录半庄</span></div>
+            <div><strong>{haifuTeams.length}</strong><span>可筛选队伍</span></div>
+            <div><strong>2025–26</strong><span>当前赛季</span></div>
+          </div>
         </div>
-        <div className="archive-visual">
-          <div className="archive-stamp"><span>ARCHIVE</span><strong>牌譜</strong><small>NO. 0186</small></div>
-          <div className="round-log">
-            <div><span>東</span><strong>25,000</strong><small>4m →</small></div>
-            <div className="active"><span>南</span><strong>31,200</strong><small>立直</small></div>
-            <div><span>西</span><strong>18,400</strong><small>9p →</small></div>
-            <div><span>北</span><strong>25,400</strong><small>中 →</small></div>
+
+        <div className="archive-controls">
+          <label className="archive-search">
+            <span>SEARCH / 搜索</span>
+            <input value={archiveQuery} onChange={(event) => setArchiveQuery(event.target.value)} placeholder="输入选手、日期或牌谱 ID" />
+          </label>
+          <label className="archive-team-filter">
+            <span>TEAM / 队伍</span>
+            <select value={archiveTeam} onChange={(event) => setArchiveTeam(event.target.value)}>
+              <option>全部队伍</option>
+              {haifuTeams.map((team) => <option key={team}>{team}</option>)}
+            </select>
+          </label>
+          <div className="archive-result-count"><strong>{filteredHaifu.length}</strong><span>条结果</span></div>
+        </div>
+
+        <div className="archive-workspace">
+          <div className="haifu-result-list" aria-label="牌谱检索结果">
+            {filteredHaifu.map((entry) => <button className={activeHaifu.id === entry.id ? "active" : ""} onClick={() => setActiveHaifuId(entry.id)} key={entry.id}>
+              <span className="haifu-date">{entry.date.replace("2025.", "")}</span>
+              <span className="haifu-summary"><small>{entry.game} · {entry.id}</small><strong>{entry.winner}</strong><em>{entry.winningTeam}</em></span>
+              <b>{entry.point}</b><i>→</i>
+            </button>)}
+            {filteredHaifu.length === 0 && <div className="haifu-empty"><strong>没有匹配的牌谱</strong><span>试试选手全名、队伍名或清空筛选条件。</span></div>}
           </div>
-          <div className="archive-tiles">
-            {["Man1", "Man2", "Man3", "Pin2", "Pin3", "Pin4", "Sou2", "Sou3", "Sou4", "Chun", "Chun"].map((tile, index) => (
-              <TileFace key={`${tile}-${index}`} name={tile} label={tile} />
-            ))}
-          </div>
-          <div className="archive-note"><span>KEY MOMENT / 11巡目</span><p>领先时是继续进攻，还是先处理危险牌？</p></div>
+
+          <article className="haifu-detail">
+            <div className="haifu-detail-top"><span>OFFICIAL GAME ID</span><code>{activeHaifu.id}</code></div>
+            <div className="haifu-winner">
+              <div><span>TOP PLAYER / 一位</span><h3>{activeHaifu.winner}</h3><p>{activeHaifu.winningTeam}</p></div>
+              <strong>{activeHaifu.point}</strong>
+            </div>
+            <div className="haifu-ranking">
+              <div className="haifu-ranking-head"><span>顺位</span><span>选手 / 队伍</span><span>得点</span></div>
+              {activeHaifu.results.map(([rank, player, team, point]) => <div className={rank === "1" ? "winner" : ""} key={`${activeHaifu.id}-${player}`}>
+                <b>{rank}</b><span><strong>{player}</strong><small>{team}</small></span><em className={point.startsWith("-") ? "negative" : ""}>{point} pt</em>
+              </div>)}
+            </div>
+            <div className="haifu-meta"><span>{activeHaifu.date}</span><span>常规赛 · {activeHaifu.game}</span></div>
+            <div className="haifu-actions">
+              <a href="https://m-league.jp/games" target="_blank" rel="noreferrer">前往官方牌谱入口 ↗</a>
+              <p>官方单场查看器通过比赛页动态打开；可凭上方日期与牌谱 ID 定位。</p>
+            </div>
+          </article>
         </div>
       </section>}
 
