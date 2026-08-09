@@ -1,5 +1,3 @@
-"use client";
-
 import { useMemo, useState } from "react";
 
 type TileName = string;
@@ -8,7 +6,7 @@ function TileFace({ name, label, className = "" }: { name: TileName; label: stri
   return (
     <img
       className={`tile-face ${className}`}
-      src={`/tiles/${name}.png?v=3`}
+      src={`tiles/${name}.png?v=4`}
       alt={label}
       draggable={false}
     />
@@ -71,12 +69,115 @@ const schedule = [
   { date: "10.09", week: "周五", round: "常规赛 DAY 03", teams: ["BEAST", "赤坂", "樱花骑士", "雷电"], time: "18:00" },
 ];
 
+type WinType = "ron" | "tsumo";
+
+type ScoreQuestion = {
+  id: number;
+  han: number;
+  fu: number;
+  dealer: boolean;
+  winType: WinType;
+  correct: string;
+  options: string[];
+  explanation: string;
+};
+
+const roundUp100 = (points: number) => Math.ceil(points / 100) * 100;
+
+function basicPoints(han: number, fu: number) {
+  if (han >= 13) return { points: 8000, name: "役满" };
+  if (han >= 11) return { points: 6000, name: "三倍满" };
+  if (han >= 8) return { points: 4000, name: "倍满" };
+  if (han >= 6) return { points: 3000, name: "跳满" };
+  const raw = fu * 2 ** (han + 2);
+  if (han >= 5 || raw >= 2000) return { points: 2000, name: "满贯" };
+  return { points: raw, name: null };
+}
+
+function calculateScore(han: number, fu: number, dealer: boolean, winType: WinType) {
+  const base = basicPoints(han, fu);
+  if (winType === "ron") {
+    const payment = roundUp100(base.points * (dealer ? 6 : 4));
+    return {
+      display: `${payment.toLocaleString()} 点`,
+      explanation: `${base.name ? `${base.name}基本点 ${base.points.toLocaleString()}` : `基本点 ${base.points.toLocaleString()}`}，${dealer ? "亲家" : "子家"}荣和倍率 ${dealer ? 6 : 4}，最终为 ${payment.toLocaleString()} 点。`,
+    };
+  }
+
+  if (dealer) {
+    const each = roundUp100(base.points * 2);
+    return {
+      display: `${each.toLocaleString()} ALL`,
+      explanation: `${base.name ? base.name : `基本点 ${base.points.toLocaleString()}`}，亲家自摸由三家各支付 ${each.toLocaleString()} 点。`,
+    };
+  }
+
+  const child = roundUp100(base.points);
+  const parent = roundUp100(base.points * 2);
+  return {
+    display: `${child.toLocaleString()} / ${parent.toLocaleString()}`,
+    explanation: `${base.name ? base.name : `基本点 ${base.points.toLocaleString()}`}，子家自摸：子家各付 ${child.toLocaleString()}，亲家支付 ${parent.toLocaleString()} 点。`,
+  };
+}
+
+function shuffled<T>(items: T[]) {
+  return [...items].sort(() => Math.random() - 0.5);
+}
+
+function validFu(han: number) {
+  if (han === 1) return [30, 40, 50, 60, 70, 80, 90, 100, 110];
+  if (han <= 4) return [20, 25, 30, 40, 50, 60, 70, 80, 90, 100, 110];
+  return [30, 40];
+}
+
+function createScoreQuestion(): ScoreQuestion {
+  const hanPool = [1, 2, 2, 3, 3, 3, 4, 4, 5, 6, 7, 8, 10, 11, 12, 13];
+  const han = hanPool[Math.floor(Math.random() * hanPool.length)];
+  const fuPool = validFu(han);
+  const fu = fuPool[Math.floor(Math.random() * fuPool.length)];
+  const dealer = Math.random() < 0.28;
+  const winType: WinType = Math.random() < 0.5 ? "ron" : "tsumo";
+  const result = calculateScore(han, fu, dealer, winType);
+  const choices = new Set([result.display]);
+
+  let attempts = 0;
+  while (choices.size < 4 && attempts < 80) {
+    attempts += 1;
+    const alternateHan = hanPool[Math.floor(Math.random() * hanPool.length)];
+    const alternateFuPool = validFu(alternateHan);
+    const alternateFu = alternateFuPool[Math.floor(Math.random() * alternateFuPool.length)];
+    choices.add(calculateScore(alternateHan, alternateFu, dealer, winType).display);
+  }
+
+  // Every win type has more than four distinct payments, but keep a deterministic
+  // fallback so an unlucky random sequence can never stall question generation.
+  for (const alternateHan of [1, 2, 3, 4, 5, 6, 8, 11, 13]) {
+    for (const alternateFu of validFu(alternateHan)) {
+      if (choices.size >= 4) break;
+      choices.add(calculateScore(alternateHan, alternateFu, dealer, winType).display);
+    }
+    if (choices.size >= 4) break;
+  }
+
+  return {
+    id: Math.floor(10000 + Math.random() * 90000),
+    han,
+    fu,
+    dealer,
+    winType,
+    correct: result.display,
+    options: shuffled([...choices]),
+    explanation: result.explanation,
+  };
+}
+
 export default function Home() {
   const [selectedTile, setSelectedTile] = useState<number | null>(null);
   const [spoilers, setSpoilers] = useState(false);
   const [search, setSearch] = useState("");
   const [tileGroup, setTileGroup] = useState<keyof typeof tileGroups>("万子");
-  const [scoreAnswer, setScoreAnswer] = useState<number | null>(null);
+  const [scoreQuestion, setScoreQuestion] = useState<ScoreQuestion>(createScoreQuestion);
+  const [scoreAnswer, setScoreAnswer] = useState<string | null>(null);
 
   const searchResults = useMemo(() => {
     const keyword = search.trim().toLowerCase();
@@ -402,26 +503,26 @@ export default function Home() {
             </article>
 
             <aside className="score-practice">
-              <div className="practice-badge">PRACTICE 01</div>
-              <h3>这手荣和是多少点？</h3>
-              <p>南家 · 3翻30符 · 荣和</p>
+              <div className="practice-badge">AUTO PRACTICE · #{scoreQuestion.id}</div>
+              <h3>这次和牌是多少点？</h3>
+              <p>{scoreQuestion.dealer ? "亲家" : "子家"} · {scoreQuestion.han}翻{scoreQuestion.fu}符 · {scoreQuestion.winType === "ron" ? "荣和" : "自摸"}</p>
               <div className="score-options">
-                {[2000, 3900, 5200, 7700].map((points) => (
+                {scoreQuestion.options.map((option) => (
                   <button
-                    key={points}
-                    className={scoreAnswer === points ? (points === 3900 ? "correct" : "wrong") : ""}
-                    onClick={() => setScoreAnswer(points)}
-                    aria-pressed={scoreAnswer === points}
-                  >{points.toLocaleString()} 点</button>
+                    key={option}
+                    className={scoreAnswer === option ? (option === scoreQuestion.correct ? "correct" : "wrong") : ""}
+                    onClick={() => setScoreAnswer(option)}
+                    aria-pressed={scoreAnswer === option}
+                  >{option}</button>
                 ))}
               </div>
               {scoreAnswer === null ? (
-                <div className="score-hint">提示：先求基本点，再乘子家荣和倍率 4。</div>
+                <div className="score-hint">题目会自动覆盖庄闲、荣和、自摸、不同翻符和满贯以上。</div>
               ) : (
-                <div className={`score-feedback ${scoreAnswer === 3900 ? "correct" : "wrong"}`} aria-live="polite">
-                  <strong>{scoreAnswer === 3900 ? "正确 · 3,900点" : "再算一次"}</strong>
-                  <p>{scoreAnswer === 3900 ? "基本点 960，子家荣和乘 4 后为 3,840，向上取整至百位。" : "注意最终支付点数需要向上取整到百位。"}</p>
-                  <button onClick={() => setScoreAnswer(null)}>重置题目</button>
+                <div className={`score-feedback ${scoreAnswer === scoreQuestion.correct ? "correct" : "wrong"}`} aria-live="polite">
+                  <strong>{scoreAnswer === scoreQuestion.correct ? `正确 · ${scoreQuestion.correct}` : `正确答案 · ${scoreQuestion.correct}`}</strong>
+                  <p>{scoreQuestion.explanation}</p>
+                  <button onClick={() => { setScoreQuestion(createScoreQuestion()); setScoreAnswer(null); }}>生成下一题</button>
                 </div>
               )}
             </aside>
