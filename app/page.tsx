@@ -392,7 +392,7 @@ type ResourceTopic = "tiles" | "rules" | "yaku" | "scoring";
 const resourceTopics: Array<{ key: ResourceTopic; label: string; english: string; count: string }> = [
   { key: "tiles", label: "牌面", english: "TILES", count: "34 + 赤牌" },
   { key: "rules", label: "规则介绍", english: "RULES", count: "基础与细则" },
-  { key: "yaku", label: "役种", english: "YAKU", count: "40 条图例" },
+  { key: "yaku", label: "役种", english: "YAKU", count: "46 条图例" },
   { key: "scoring", label: "算点", english: "SCORING", count: "亲家 / 子家表" },
 ];
 
@@ -450,15 +450,21 @@ const yakuCards = [
   ["流局满贯", "ナガシマンガン", "满贯", "特殊", "采用该规则时，荒牌流局且舍牌全为幺九、未被他家鸣取可计满贯"], ["宝牌", "ドラ", "加翻", "非役", "宝牌、赤宝牌和里宝牌只加翻，不提供役"],
 ];
 
-const standardExample = ["Man2", "Man3", "Man4", "Pin2", "Pin3", "Pin4", "Sou3", "Sou4", "Sou5", "Sou6", "Sou7", "Sou8", "Pin5", "Pin5"];
-
 const yakuExamples: Record<string, string[]> = {
-  "断幺九": standardExample,
+  "立直": ["Man2", "Man3", "Man4", "Pin3", "Pin4", "Pin5", "Sou4", "Sou5", "Sou6", "Man6", "Man7", "Man8", "Haku", "Haku"],
+  "一发": ["Man4", "Man5", "Man6", "Pin2", "Pin3", "Pin4", "Sou6", "Sou7", "Sou8", "Pin6", "Pin7", "Pin8", "Nan", "Nan"],
+  "门前清自摸和": ["Man3", "Man4", "Man5", "Pin5", "Pin5", "Pin5", "Sou2", "Sou3", "Sou4", "Man7", "Man8", "Man9", "Shaa", "Shaa"],
+  "断幺九": ["Man2", "Man3", "Man4", "Pin2", "Pin3", "Pin4", "Sou3", "Sou4", "Sou5", "Sou6", "Sou7", "Sou8", "Pin5", "Pin5"],
   "平和": ["Man2", "Man3", "Man4", "Pin3", "Pin4", "Pin5", "Sou3", "Sou4", "Sou5", "Sou6", "Sou7", "Sou8", "Pin2", "Pin2"],
   "一杯口": ["Man2", "Man3", "Man4", "Man2", "Man3", "Man4", "Pin3", "Pin4", "Pin5", "Sou6", "Sou7", "Sou8", "Pin5", "Pin5"],
   "役牌·自风": ["Nan", "Nan", "Nan", "Man2", "Man3", "Man4", "Pin3", "Pin4", "Pin5", "Sou6", "Sou7", "Sou8", "Ton", "Ton"],
   "役牌·场风": ["Ton", "Ton", "Ton", "Man2", "Man3", "Man4", "Pin3", "Pin4", "Pin5", "Sou6", "Sou7", "Sou8", "Nan", "Nan"],
   "役牌·三元牌": ["Haku", "Haku", "Haku", "Man2", "Man3", "Man4", "Pin3", "Pin4", "Pin5", "Sou6", "Sou7", "Sou8", "Ton", "Ton"],
+  "岭上开花": ["Man9", "Man9", "Man9", "Man9", "Pin2", "Pin3", "Pin4", "Sou4", "Sou5", "Sou6", "Man2", "Man3", "Man4", "Haku", "Haku"],
+  "抢杠": ["Man3", "Man4", "Man5", "Pin4", "Pin5", "Pin6", "Sou2", "Sou3", "Sou4", "Man7", "Man8", "Man9", "Chun", "Chun"],
+  "海底摸月": ["Man1", "Man2", "Man3", "Pin6", "Pin7", "Pin8", "Sou3", "Sou4", "Sou5", "Man4", "Man5", "Man6", "Pei", "Pei"],
+  "河底捞鱼": ["Man7", "Man8", "Man9", "Pin1", "Pin2", "Pin3", "Sou4", "Sou5", "Sou6", "Pin4", "Pin5", "Pin6", "Hatsu", "Hatsu"],
+  "双立直": ["Man2", "Man3", "Man4", "Pin5", "Pin6", "Pin7", "Sou1", "Sou2", "Sou3", "Man7", "Man8", "Man9", "Haku", "Haku"],
   "七对子": ["Man2", "Man2", "Man3", "Man3", "Pin4", "Pin4", "Pin5", "Pin5", "Sou6", "Sou6", "Ton", "Ton", "Haku", "Haku"],
   "对对和": ["Man2", "Man2", "Man2", "Pin5", "Pin5", "Pin5", "Sou7", "Sou7", "Sou7", "Haku", "Haku", "Haku", "Ton", "Ton"],
   "三暗刻": ["Man2", "Man2", "Man2", "Pin5", "Pin5", "Pin5", "Sou7", "Sou7", "Sou7", "Man3", "Man4", "Man5", "Ton", "Ton"],
@@ -473,7 +479,7 @@ const yakuExamples: Record<string, string[]> = {
   "纯全带幺九": ["Man1", "Man2", "Man3", "Man7", "Man8", "Man9", "Pin1", "Pin2", "Pin3", "Sou7", "Sou8", "Sou9", "Pin9", "Pin9"],
   "二杯口": ["Man1", "Man2", "Man3", "Man1", "Man2", "Man3", "Pin7", "Pin8", "Pin9", "Pin7", "Pin8", "Pin9", "Sou5", "Sou5"],
   "清一色": ["Man1", "Man2", "Man3", "Man3", "Man4", "Man5", "Man5", "Man6", "Man7", "Man7", "Man8", "Man9", "Man5", "Man5"],
-  "国士无双": ["Man1", "Man9", "Pin1", "Pin9", "Sou1", "Sou9", "Ton", "Nan", "Shaa", "Pei", "Haku", "Hatsu", "Chun", "Man1"],
+  "国士无双": ["Man1", "Man1", "Man9", "Pin1", "Pin9", "Sou1", "Sou9", "Ton", "Nan", "Shaa", "Pei", "Haku", "Hatsu", "Chun"],
   "四暗刻": ["Man1", "Man1", "Man1", "Man9", "Man9", "Man9", "Pin2", "Pin2", "Pin2", "Sou8", "Sou8", "Sou8", "Ton", "Ton"],
   "大三元": ["Haku", "Haku", "Haku", "Hatsu", "Hatsu", "Hatsu", "Chun", "Chun", "Chun", "Man1", "Man2", "Man3", "Ton", "Ton"],
   "小四喜": ["Ton", "Ton", "Ton", "Nan", "Nan", "Nan", "Shaa", "Shaa", "Shaa", "Pei", "Pei", "Man1", "Man2", "Man3"],
@@ -481,19 +487,59 @@ const yakuExamples: Record<string, string[]> = {
   "字一色": ["Ton", "Ton", "Ton", "Nan", "Nan", "Nan", "Shaa", "Shaa", "Shaa", "Haku", "Haku", "Haku", "Pei", "Pei"],
   "绿一色": ["Sou2", "Sou2", "Sou2", "Sou3", "Sou3", "Sou3", "Sou4", "Sou4", "Sou4", "Sou6", "Sou6", "Sou6", "Sou8", "Sou8"],
   "清老头": ["Man1", "Man1", "Man1", "Man9", "Man9", "Man9", "Pin1", "Pin1", "Pin1", "Pin9", "Pin9", "Pin9", "Sou1", "Sou1"],
-  "九莲宝灯": ["Man1", "Man1", "Man1", "Man2", "Man3", "Man4", "Man5", "Man6", "Man7", "Man8", "Man9", "Man9", "Man9", "Man5"],
+  "九莲宝灯": ["Man1", "Man1", "Man1", "Man1", "Man2", "Man3", "Man4", "Man5", "Man6", "Man7", "Man8", "Man9", "Man9", "Man9"],
   "四杠子": ["Man1", "Man1", "Man1", "Man1", "Pin2", "Pin2", "Pin2", "Pin2", "Sou3", "Sou3", "Sou3", "Sou3", "Haku", "Haku", "Haku", "Haku", "Ton", "Ton"],
+  "天和": ["Man1", "Man2", "Man3", "Man4", "Man5", "Man6", "Pin2", "Pin3", "Pin4", "Sou6", "Sou7", "Sou8", "Chun", "Chun"],
+  "地和": ["Man3", "Man4", "Man5", "Pin6", "Pin7", "Pin8", "Sou2", "Sou3", "Sou4", "Pin2", "Pin2", "Pin2", "Nan", "Nan"],
+  "国士无双十三面": ["Man1", "Man9", "Pin1", "Pin9", "Sou1", "Sou9", "Ton", "Nan", "Shaa", "Pei", "Haku", "Hatsu", "Chun", "Pin9"],
+  "四暗刻单骑": ["Man2", "Man2", "Man2", "Man8", "Man8", "Man8", "Pin3", "Pin3", "Pin3", "Sou7", "Sou7", "Sou7", "Haku", "Haku"],
+  "纯正九莲宝灯": ["Man1", "Man1", "Man1", "Man2", "Man3", "Man4", "Man5", "Man6", "Man7", "Man8", "Man9", "Man9", "Man9", "Man5"],
+  "大四喜（双倍）": ["Nan", "Nan", "Nan", "Shaa", "Shaa", "Shaa", "Pei", "Pei", "Pei", "Ton", "Ton", "Ton", "Chun", "Chun"],
   "流局满贯": ["Man1", "Man9", "Pin1", "Pin9", "Sou1", "Sou9", "Ton", "Nan", "Shaa", "Pei", "Haku", "Hatsu", "Chun"],
   "宝牌": ["Man2", "Man3", "Man4", "Pin4", "Pin5-Dora", "Pin6", "Sou3", "Sou4", "Sou5-Dora", "Sou6", "Sou7", "Sou8", "Man5-Dora", "Man5"],
 };
 
 function yakuExample(name: string) {
-  if (yakuExamples[name]) return yakuExamples[name];
-  if (name === "国士无双十三面") return yakuExamples["国士无双"];
-  if (name === "四暗刻单骑") return yakuExamples["四暗刻"];
-  if (name === "纯正九莲宝灯") return yakuExamples["九莲宝灯"];
-  if (name === "大四喜（双倍）") return yakuExamples["大四喜"];
-  return standardExample;
+  return yakuExamples[name] ?? [];
+}
+
+const yakuWinningTileIndexes: Record<string, number> = {
+  "立直": 11, "一发": 8, "门前清自摸和": 4, "断幺九": 11, "平和": 8, "一杯口": 5,
+  "役牌·自风": 2, "役牌·场风": 2, "役牌·三元牌": 2, "岭上开花": 12, "抢杠": 11,
+  "海底摸月": 8, "河底捞鱼": 5, "双立直": 8, "七对子": 13, "对对和": 13, "三暗刻": 11,
+  "三色同顺": 8, "一气通贯": 8, "混全带幺九": 5, "三色同刻": 13, "三杠子": 14,
+  "小三元": 5, "混老头": 13, "混一色": 8, "纯全带幺九": 11, "二杯口": 11, "清一色": 11,
+  "国士无双": 13, "四暗刻": 11, "大三元": 8, "小四喜": 13, "大四喜": 11, "字一色": 13,
+  "绿一色": 13, "清老头": 13, "九莲宝灯": 6, "四杠子": 17, "天和": 11, "地和": 8,
+  "国士无双十三面": 13, "四暗刻单骑": 13, "纯正九莲宝灯": 13, "大四喜（双倍）": 11,
+  "流局满贯": -1, "宝牌": 11,
+};
+
+const yakuExampleCaptions: Record<string, string> = {
+  "立直": "横置牌为立直后的和了牌",
+  "一发": "横置牌为立直一巡内的和了牌",
+  "门前清自摸和": "横置牌为门清自摸牌",
+  "岭上开花": "横置牌为岭上补摸牌",
+  "抢杠": "横置牌为他家加杠时被抢的牌",
+  "海底摸月": "横置牌为牌山最后一张自摸牌",
+  "河底捞鱼": "横置牌为本局最后一张舍牌",
+  "双立直": "横置牌为双立直后的和了牌",
+  "国士无双": "横置牌补齐缺少的一种幺九牌",
+  "四暗刻": "横置牌为自摸完成暗刻",
+  "九莲宝灯": "横置牌完成非九面听的九莲宝灯",
+  "四杠子": "横置牌组成四杠后的雀头",
+  "天和": "横置牌标示庄家起手和牌的完成张",
+  "地和": "横置牌为闲家第一次自摸牌",
+  "国士无双十三面": "横置牌为十三面听中的一张",
+  "四暗刻单骑": "横置牌组成单骑等待的雀头",
+  "纯正九莲宝灯": "横置牌为纯正九莲九面听中的一张",
+  "大四喜（双倍）": "横置牌完成第四组风牌刻子",
+  "流局满贯": "舍牌示例 · 不含和了牌",
+  "宝牌": "横置牌为和了牌 · 赤牌为宝牌",
+};
+
+function yakuExampleCaption(name: string) {
+  return yakuExampleCaptions[name] ?? "横置牌为和了牌";
 }
 
 const yakuGroupPatterns: Record<string, number[]> = {
@@ -502,7 +548,8 @@ const yakuGroupPatterns: Record<string, number[]> = {
   "国士无双十三面": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
   "小三元": [3, 3, 2, 3, 3],
   "小四喜": [3, 3, 3, 2, 3],
-  "九莲宝灯": [3, 7, 3, 1],
+  "岭上开花": [4, 3, 3, 3, 2],
+  "九莲宝灯": [4, 6, 3, 1],
   "纯正九莲宝灯": [3, 7, 3, 1],
   "三杠子": [4, 4, 4, 3, 2],
   "四杠子": [4, 4, 4, 4, 2],
@@ -513,7 +560,8 @@ function splitYakuExample(name: string, tiles: string[]) {
   const pattern = yakuGroupPatterns[name] ?? [3, 3, 3, 3, 2];
   let cursor = 0;
   return pattern.map((size) => {
-    const group = tiles.slice(cursor, cursor + size);
+    const startIndex = cursor;
+    const group = tiles.slice(cursor, cursor + size).map((tile, index) => ({ tile, index: startIndex + index }));
     cursor += size;
     return group;
   }).filter((group) => group.length > 0);
@@ -1158,10 +1206,14 @@ export default function Home() {
                 <h3>{name}</h3><small>{kana}</small><p>{summary}</p>
                 <div className={`yaku-example-hand ${yakuExample(name).length > 14 ? "dense" : ""}`} aria-label={`${name}牌型图例`}>
                   {splitYakuExample(name, yakuExample(name)).map((group, groupIndex) => <span className="yaku-tile-group" key={`${name}-group-${groupIndex}`}>
-                    {group.map((tile, tileIndex) => <span className="yaku-tile" key={`${name}-${groupIndex}-${tile}-${tileIndex}`}><TileFace name={tile} label={tileLabel(tile)} /></span>)}
+                    {group.map(({ tile, index }) => <span
+                      className={`yaku-tile ${index === yakuWinningTileIndexes[name] ? "winning" : ""}`}
+                      key={`${name}-${index}-${tile}`}
+                      title={index === yakuWinningTileIndexes[name] ? `${tileLabel(tile)} · 和了牌` : tileLabel(tile)}
+                    ><TileFace name={tile} label={index === yakuWinningTileIndexes[name] ? `${tileLabel(tile)}，和了牌` : tileLabel(tile)} /></span>)}
                   </span>)}
                 </div>
-                <em>{name === "流局满贯" ? "舍牌示例" : "和了牌型示例"}</em>
+                <em>{yakuExampleCaption(name)}</em>
               </div>)}
             </div>
           </section>)}

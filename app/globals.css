@@ -927,13 +927,15 @@ button {
 .yaku-directory h3 { margin: 21px 0 1px; font-family: var(--serif); font-size: 20px; font-weight: 500; }
 .yaku-directory small { color: #9a9e98; font-size: 12px; }
 .yaku-directory p { margin: 8px 0 13px; color: #747a74; font-size: 12px; line-height: 1.65; }
-.yaku-example-hand { display: flex; align-items: flex-end; gap: 8px; margin-top: auto; overflow-x: auto; padding: 10px 8px 9px; border: 1px solid var(--line); background: #f7f3e9; scrollbar-width: thin; }
+.yaku-example-hand { --yaku-tile-width: clamp(16px, 1.58vw, 23px); display: flex; align-items: flex-end; gap: 8px; margin-top: auto; overflow-x: auto; padding: 10px 8px 9px; border: 1px solid var(--line); background: #f7f3e9; scrollbar-width: thin; }
 .yaku-tile-group { display: flex; flex: none; align-items: flex-end; gap: 2px; }
 .yaku-tile { display: grid; flex: none; place-items: center; border-radius: 2px; background: #fffdf7; box-shadow: 0 2px 0 #c9c5bb, 0 3px 7px rgba(21,42,35,.11); }
-.yaku-example-hand .tile-face { display: block; width: clamp(16px, 1.58vw, 23px); min-width: 0; height: auto; aspect-ratio: 3 / 4; object-fit: fill; }
+.yaku-example-hand .tile-face { display: block; width: var(--yaku-tile-width); min-width: 0; height: auto; aspect-ratio: 3 / 4; object-fit: fill; }
+.yaku-tile.winning { position: relative; width: calc(var(--yaku-tile-width) + 8px); height: var(--yaku-tile-width); margin: 0 1px 1px 4px; background: transparent; box-shadow: none; }
+.yaku-tile.winning .tile-face { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(90deg); filter: drop-shadow(2px 0 0 #c9c5bb) drop-shadow(3px 0 5px rgba(21,42,35,.13)); }
 .yaku-example-hand.dense { gap: 5px; }
 .yaku-example-hand.dense .yaku-tile-group { gap: 1px; }
-.yaku-example-hand.dense .tile-face { width: clamp(14px, 1.22vw, 18px); }
+.yaku-example-hand.dense { --yaku-tile-width: clamp(14px, 1.22vw, 18px); }
 .yaku-directory em { margin-top: 5px; color: #a0a39e; font-size: 10px; font-style: normal; letter-spacing: .08em; text-align: right; }
 
 .rules-directory { border-top: 1px solid var(--line); }
@@ -1995,7 +1997,8 @@ footer {
   .yaku-reference-intro,.fu-foundation,.fu-special-cases { grid-template-columns: 1fr; }
   .yaku-reference-intro > div,.fu-foundation > div,.fu-special-cases > div { min-height: 0; }
   .fu-special-cases > div { border-right: 0; }
-  .yaku-example-hand .tile-face { width: clamp(17px, 4.2vw, 23px); }
+  .yaku-example-hand { --yaku-tile-width: clamp(17px, 4.2vw, 23px); }
+  .yaku-example-hand.dense { --yaku-tile-width: clamp(14px, 3.6vw, 18px); }
   .resource-panel-head { align-items: flex-start; flex-direction: column; gap: 5px; }
   .rules-directory summary { grid-template-columns: 32px 1fr auto; padding: 9px 12px; }
   .rules-directory details > div { padding: 0 56px 20px; }
