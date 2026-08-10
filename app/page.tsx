@@ -254,6 +254,60 @@ const whatCutQuestions: WhatCutQuestion[] = [
     answer: "Sou5-Dora", questionPage: 31, answerPage: 34,
     explanation: "第八巡的亲家不应放过摸八万直接听牌的机会：立直后有一杯口与赤牌的 7700 点，即使是剩三张的坎张也值得；还保留摸六万转完全一向听的变化，因此书中切赤五索。",
   },
+  {
+    id: 37, round: "东一局", seat: "东家", turn: 6, doraIndicator: "Hatsu", book: "何切301", tags: ["打点", "复合形", "四暗刻"],
+    tiles: ["Pin4", "Pin5", "Pin5", "Pin5", "Pin6", "Sou2", "Sou3", "Sou4", "Sou4", "Sou4", "Sou7", "Sou8", "Sou8", "Pin4"],
+    answer: "Pin5", questionPage: 32, answerPage: 35,
+    explanation: "虽然能看到四暗刻，但不能为此切六筒或七索固定对子。当前已经有亲家满贯级打点，切五筒既保留二杯口方向，也没有明显损失四暗刻变化；切八索的进张只多一枚，却更容易丢失手役。",
+  },
+  {
+    id: 38, round: "东一局", seat: "东家", turn: 7, doraIndicator: "Man9", book: "何切301", tags: ["牌效率", "七对子", "复合形"],
+    tiles: ["Man3", "Man4", "Man5", "Man6", "Pin3", "Pin3", "Pin4", "Pin4", "Pin6", "Pin8", "Pin8", "Sou2", "Sou2", "Man5-Dora"],
+    answer: "Pin8", questionPage: 32, answerPage: 35,
+    explanation: "一边保留面子手，一边维持七对子一向听，失张只有七筒。摸二筒或五筒时可以放弃七对子，拆八筒或二索对子，转向断幺、平和、一杯口，因此书中先切八筒。",
+  },
+  {
+    id: 39, round: "东一局", seat: "东家", turn: 7, doraIndicator: "Man9", book: "何切301", tags: ["牌效率", "听牌形", "即立判断"],
+    tiles: ["Man3", "Man4", "Man6", "Man7", "Pin3", "Pin4", "Pin5", "Pin6", "Pin6", "Pin8", "Pin8", "Sou2", "Sou2", "Man5-Dora"],
+    answer: "Pin6", questionPage: 32, answerPage: 36,
+    explanation: "万子一侧的有效进张很多，比起追求完全一向听变化，直接听牌的概率更高。书中据此反推万子进张后的听牌形，选择切六筒。",
+  },
+  {
+    id: 40, round: "东一局", seat: "西家", turn: 8, doraIndicator: "Sou5", book: "何切301", tags: ["牌效率", "和率", "听牌形"],
+    tiles: ["Man2", "Man3", "Man4", "Man5", "Pin2", "Pin3", "Pin3", "Pin5", "Sou2", "Sou3", "Sou4", "Sou8", "Sou8", "Sou8"],
+    answer: "Pin5", questionPage: 36, answerPage: 39,
+    explanation: "切二筒虽然听牌概率最高，但其中愚形听牌较多，和牌率与期待值不如切五筒。二五万成对时可以形成两面听，即使最差的进张是一筒，也仍是两面加单骑的听牌形。",
+  },
+  {
+    id: 41, round: "东一局", seat: "西家", turn: 8, doraIndicator: "Sou5", book: "何切301", tags: ["牌效率", "中膨形", "固定雀头"],
+    tiles: ["Man3", "Man4", "Man4", "Man5", "Pin2", "Pin3", "Pin3", "Pin5", "Sou2", "Sou3", "Sou4", "Sou8", "Sou8", "Sou8"],
+    answer: "Pin2", questionPage: 36, answerPage: 39,
+    explanation: "中膨形与固定雀头的组合很好。即使切五筒，最终听一四筒的可能性也很低，不如切二筒固定雀头，同时保留摸六筒形成两面听牌的机会。",
+  },
+  {
+    id: 42, round: "东一局", seat: "东家", turn: 7, doraIndicator: "Man3", book: "何切301", tags: ["鸣牌判断", "打点", "牌效率"],
+    tiles: ["Man4", "Man5-Dora", "Man6", "Pin2", "Pin3", "Pin3", "Sou2", "Sou2", "Sou3", "Sou3", "Sou3", "Sou4", "Sou5", "Sou5-Dora"],
+    answer: "Sou5", questionPage: 36, answerPage: 40,
+    explanation: "切三筒和切五索的有效牌枚数相同；切三筒的门清期待值更高，但摸入赤五索后已经确定满贯，应重视鸣牌效率。保留三筒、二三索的碰牌以及四筒、六索的吃牌路线，所以切普通五索。",
+  },
+  {
+    id: 43, round: "东一局", seat: "东家", turn: 6, doraIndicator: "Pin6", book: "何切301", tags: ["宝牌处理", "押引", "四暗刻"],
+    tiles: ["Pin3", "Pin4", "Pin5", "Pin5", "Pin7", "Sou3", "Sou3", "Sou4", "Sou4", "Sou4", "Sou5", "Sou6", "Sou6", "Pin5-Dora"],
+    answer: "Pin7", questionPage: 37, answerPage: 40,
+    explanation: "宝牌七筒看似应当保留，但宝牌指示牌六筒是进张瓶颈，吃进六筒也未必达到满贯；索子门清听牌时最终仍会切掉七筒，而且手牌还有四暗刻变化。书中认为切宝牌七筒最均衡、期待值最高。",
+  },
+  {
+    id: 44, round: "东一局", seat: "东家", turn: 6, doraIndicator: "Pin6", book: "何切301", tags: ["宝牌处理", "听牌形", "一杯口"],
+    tiles: ["Pin3", "Pin4", "Pin5", "Pin5", "Pin7", "Sou2", "Sou2", "Sou4", "Sou4", "Sou4", "Sou5", "Sou6", "Sou6", "Pin5-Dora"],
+    answer: "Pin7", questionPage: 37, answerPage: 40,
+    explanation: "保留宝牌七筒只有摸六筒时能直接听牌，其他进张最后仍要舍弃它。摸六筒与摸五索做成一杯口的概率相同，而六索成为暗刻后的听牌形更好，因此书中仍切宝牌七筒。",
+  },
+  {
+    id: 45, round: "东一局", seat: "东家", turn: 6, doraIndicator: "Sou5", book: "何切301", tags: ["打点", "宝牌利用", "鸣牌判断"],
+    tiles: ["Man5-Dora", "Man5", "Man5", "Man6", "Pin2", "Pin2", "Pin3", "Pin5-Dora", "Pin7", "Sou6", "Sou8", "Sou8", "Sou8", "Pin4"],
+    answer: "Man6", questionPage: 37, answerPage: 41,
+    explanation: "保留万子一侧虽然可能形成三面听，却会在之后舍弃宝牌六索。切六万可以完整利用六索，即使鸣牌也能做成断幺、宝牌三的满贯；书中认为这种确定高打点的路线值得追求。",
+  },
 ];
 
 function whatCutBook(question: WhatCutQuestion) {
@@ -958,7 +1012,7 @@ export default function Home() {
             <div className="quick-number">02</div>
             <div className="quick-icon"><TileFace name="Pei" label="北" /></div>
             <div className="quick-content">
-              <span>书籍题库 · Q001—Q027</span>
+              <span>书籍题库 · Q001—Q{String(whatCutQuestions.length).padStart(3, "0")}</span>
               <h3>直接练习书中的<br />经典何切题</h3>
               <p>按原题牌姿作答，再查看书中推荐切牌与解析。</p>
             </div>
@@ -969,7 +1023,7 @@ export default function Home() {
             <div className="quick-content">
               <span>翻数、符数与点数</span>
               <h3>算点图解与练习</h3>
-              <p>从基本点公式走到庄闲、自摸与荣和。</p>
+              <p>查亲家、子家点数表，并用自动出题练习。</p>
             </div>
             <span className="round-arrow">↗</span>
           </a>
