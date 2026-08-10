@@ -316,7 +316,10 @@ const yakuCards = [
   ["立直", "リーチ", "1翻", "门清", "宣言听牌并支付 1000 点"], ["一发", "イッパツ", "1翻", "门清", "立直后无鸣牌打断的一巡内和牌"],
   ["门前清自摸和", "メンゼンツモ", "1翻", "门清", "门清状态下自摸"], ["断幺九", "タンヤオ", "1翻", "可副露", "全手仅由二至八数牌组成；副露成立须采用食断规则"],
   ["平和", "ピンフ", "1翻", "门清", "全顺子、非役牌雀头、两面听"], ["一杯口", "イーペーコー", "1翻", "门清", "同色同数字的两组顺子"],
-  ["役牌", "ヤクハイ", "1翻", "可副露", "三元牌、场风或自风的刻子"], ["岭上开花", "リンシャン", "1翻", "可副露", "开杠后的岭上牌自摸"],
+  ["役牌·自风", "ヤクハイ・ジカゼ", "1翻", "可副露", "与自己座次相同风牌的刻子或杠子"],
+  ["役牌·场风", "ヤクハイ・バカゼ", "1翻", "可副露", "与当前场风相同风牌的刻子或杠子"],
+  ["役牌·三元牌", "ヤクハイ・サンゲンパイ", "1翻", "可副露", "白、发、中任意一种的刻子或杠子"],
+  ["岭上开花", "リンシャン", "1翻", "可副露", "开杠后补摸岭上牌并自摸和牌"],
   ["抢杠", "チャンカン", "1翻", "可副露", "他家加杠牌正好是自己的和牌"], ["海底摸月", "ハイテイ", "1翻", "可副露", "牌山最后一张自摸"],
   ["河底捞鱼", "ホウテイ", "1翻", "可副露", "最后一张舍牌荣和"], ["双立直", "ダブルリーチ", "2翻", "门清", "第一巡且无人鸣牌时立直"],
   ["七对子", "チートイツ", "2翻", "门清", "七组不同对子"], ["对对和", "トイトイ", "2翻", "可副露", "四组刻子或杠子"],
@@ -326,12 +329,16 @@ const yakuCards = [
   ["小三元", "ショウサンゲン", "2翻", "可副露", "三元牌两刻一对；两组役牌会另外各计一翻"], ["混老头", "ホンロウトウ", "2翻", "可副露", "全手仅由老头牌与字牌组成"],
   ["混一色", "ホンイツ", "3翻 / 2翻", "可副露", "一种数牌加字牌"], ["纯全带幺九", "ジュンチャン", "3翻 / 2翻", "可副露", "每组均含数牌一或九"],
   ["二杯口", "リャンペーコー", "3翻", "门清", "两组一杯口"], ["清一色", "チンイツ", "6翻 / 5翻", "可副露", "全手仅一种数牌"],
-  ["国士无双", "コクシムソウ", "役满", "门清", "十三种幺九牌各一张并成一对"], ["四暗刻", "スーアンコウ", "役满", "门清", "四组暗刻或暗杠"],
+  ["国士无双", "コクシムソウ", "役满", "门清", "十三种幺九牌各一张，并以其中一种组成对子"], ["四暗刻", "スーアンコウ", "役满", "门清", "四组暗刻或暗杠；双碰听荣和通常不能成立"],
   ["大三元", "ダイサンゲン", "役满", "可副露", "白发中各成刻子或杠子"], ["小四喜", "ショウスーシー", "役满", "可副露", "三组风牌刻子加一对风牌"],
   ["大四喜", "ダイスーシー", "役满", "可副露", "四种风牌全部成刻子"], ["字一色", "ツーイーソー", "役满", "可副露", "全手仅由字牌组成"],
   ["绿一色", "リューイーソー", "役满", "可副露", "全手仅由绿色牌组成"], ["清老头", "チンロウトウ", "役满", "可副露", "全手仅由一九数牌组成"],
-  ["九莲宝灯", "チューレン", "役满", "门清", "同色 1112345678999 加任意同色牌"], ["四杠子", "スーカンツ", "役满", "可副露", "一人完成四组杠子"],
-  ["天和", "テンホウ", "役满", "门清", "庄家配牌即和"], ["地和", "チーホウ", "役满", "门清", "闲家第一巡且无人鸣牌前自摸"],
+  ["九莲宝灯", "チューレン", "役满", "门清", "门清同色 1112345678999，再加任意一张同色数牌"], ["四杠子", "スーカンツ", "役满", "可副露", "一人完成四组杠子"],
+  ["天和", "テンホウ", "役满", "门清", "庄家起手十四张牌即已和牌"], ["地和", "チーホウ", "役满", "门清", "闲家第一次自摸即和，且此前无人鸣牌"],
+  ["国士无双十三面", "コクシムソウ13メン", "双倍役满（采用时）", "门清", "十三种幺九牌各一张，听其中任意一种组成对子"],
+  ["四暗刻单骑", "スーアンコウタンキ", "双倍役满（采用时）", "门清", "四组暗刻已经完成，以单骑等待雀头"],
+  ["纯正九莲宝灯", "ジュンセイチューレン", "双倍役满（采用时）", "门清", "1112345678999 的九面听；是否双倍以采用规则为准"],
+  ["大四喜（双倍）", "ダイスーシー", "双倍役满（采用时）", "可副露", "部分规则将大四喜计作双倍役满"],
   ["流局满贯", "ナガシマンガン", "满贯", "特殊", "采用该规则时，荒牌流局且舍牌全为幺九、未被他家鸣取可计满贯"], ["宝牌", "ドラ", "加翻", "非役", "宝牌、赤宝牌和里宝牌只加翻，不提供役"],
 ];
 
@@ -341,7 +348,9 @@ const yakuExamples: Record<string, string[]> = {
   "断幺九": standardExample,
   "平和": ["Man2", "Man3", "Man4", "Pin3", "Pin4", "Pin5", "Sou3", "Sou4", "Sou5", "Sou6", "Sou7", "Sou8", "Pin2", "Pin2"],
   "一杯口": ["Man2", "Man3", "Man4", "Man2", "Man3", "Man4", "Pin3", "Pin4", "Pin5", "Sou6", "Sou7", "Sou8", "Pin5", "Pin5"],
-  "役牌": ["Haku", "Haku", "Haku", "Man2", "Man3", "Man4", "Pin3", "Pin4", "Pin5", "Sou6", "Sou7", "Sou8", "Ton", "Ton"],
+  "役牌·自风": ["Nan", "Nan", "Nan", "Man2", "Man3", "Man4", "Pin3", "Pin4", "Pin5", "Sou6", "Sou7", "Sou8", "Ton", "Ton"],
+  "役牌·场风": ["Ton", "Ton", "Ton", "Man2", "Man3", "Man4", "Pin3", "Pin4", "Pin5", "Sou6", "Sou7", "Sou8", "Nan", "Nan"],
+  "役牌·三元牌": ["Haku", "Haku", "Haku", "Man2", "Man3", "Man4", "Pin3", "Pin4", "Pin5", "Sou6", "Sou7", "Sou8", "Ton", "Ton"],
   "七对子": ["Man2", "Man2", "Man3", "Man3", "Pin4", "Pin4", "Pin5", "Pin5", "Sou6", "Sou6", "Ton", "Ton", "Haku", "Haku"],
   "对对和": ["Man2", "Man2", "Man2", "Pin5", "Pin5", "Pin5", "Sou7", "Sou7", "Sou7", "Haku", "Haku", "Haku", "Ton", "Ton"],
   "三暗刻": ["Man2", "Man2", "Man2", "Pin5", "Pin5", "Pin5", "Sou7", "Sou7", "Sou7", "Man3", "Man4", "Man5", "Ton", "Ton"],
@@ -370,12 +379,23 @@ const yakuExamples: Record<string, string[]> = {
   "宝牌": ["Man2", "Man3", "Man4", "Pin4", "Pin5-Dora", "Pin6", "Sou3", "Sou4", "Sou5-Dora", "Sou6", "Sou7", "Sou8", "Man5-Dora", "Man5"],
 };
 
+function yakuExample(name: string) {
+  if (yakuExamples[name]) return yakuExamples[name];
+  if (name === "国士无双十三面") return yakuExamples["国士无双"];
+  if (name === "四暗刻单骑") return yakuExamples["四暗刻"];
+  if (name === "纯正九莲宝灯") return yakuExamples["九莲宝灯"];
+  if (name === "大四喜（双倍）") return yakuExamples["大四喜"];
+  return standardExample;
+}
+
 const yakuGroupPatterns: Record<string, number[]> = {
   "七对子": [2, 2, 2, 2, 2, 2, 2],
   "国士无双": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+  "国士无双十三面": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
   "小三元": [3, 3, 2, 3, 3],
   "小四喜": [3, 3, 3, 2, 3],
   "九莲宝灯": [3, 7, 3, 1],
+  "纯正九莲宝灯": [3, 7, 3, 1],
   "三杠子": [4, 4, 4, 3, 2],
   "四杠子": [4, 4, 4, 4, 2],
   "流局满贯": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -392,10 +412,11 @@ function splitYakuExample(name: string, tiles: string[]) {
 }
 
 const yakuGroups = [
-  { label: "一翻役", note: "基础役种", includes: (han: string) => han === "1翻" },
-  { label: "二翻役", note: "含食下役", includes: (han: string) => han.startsWith("2翻") },
-  { label: "三翻以上", note: "高打点役种", includes: (han: string) => han.startsWith("3翻") || han.startsWith("6翻") },
-  { label: "役满与特殊", note: "役满、流局满贯与加翻牌", includes: (han: string) => !han.startsWith("1翻") && !han.startsWith("2翻") && !han.startsWith("3翻") && !han.startsWith("6翻") },
+  { label: "一翻役", note: "基础役种 · 先确认门清条件", includes: (han: string) => han === "1翻" },
+  { label: "二翻役", note: "复合役种 · 三种役存在食下", includes: (han: string) => han.startsWith("2翻") },
+  { label: "三翻与六翻役", note: "混一色、纯全带幺九、二杯口与清一色", includes: (han: string) => han.startsWith("3翻") || han.startsWith("6翻") },
+  { label: "役满", note: "通常役满与规则可选的双倍役满", includes: (han: string) => han.includes("役满") },
+  { label: "特殊结算与加翻牌", note: "不是普通役种", includes: (han: string) => han === "满贯" || han === "加翻" },
 ];
 
 function yakuRestriction(name: string, han: string, closed: string) {
@@ -405,6 +426,16 @@ function yakuRestriction(name: string, han: string, closed: string) {
   if (han.includes("/")) return `副露可 · 食下${han.split("/")[1].trim()}`;
   return "副露可 · 不食下";
 }
+
+const fuMeldRows = [
+  ["明刻", "2符", "4符"], ["暗刻", "4符", "8符"], ["明杠", "8符", "16符"], ["暗杠", "16符", "32符"],
+];
+
+const fuDetailGroups = [
+  { title: "和牌方式", items: [["门清荣和", "+10符"], ["自摸", "+2符"], ["副露荣和", "+0符"]] },
+  { title: "雀头", items: [["三元牌", "+2符"], ["场风牌", "+2符"], ["自风牌", "+2符"]] },
+  { title: "听牌形", items: [["单骑", "+2符"], ["坎张", "+2符"], ["边张", "+2符"], ["两面 / 双碰", "+0符"]] },
+];
 
 type ScoreCell = { ron: string; tsumo: string; kiriage?: boolean };
 type ScoreRow = { han: string; cells: ScoreCell[]; mangan?: ScoreCell };
@@ -1005,14 +1036,20 @@ export default function Home() {
 
         {resourceTopic === "yaku" && <article className="resource-panel">
           <div className="resource-panel-head"><span>YAKU / 役种辞典</span><strong>{yakuCards.length} 条 · 按翻数分类 · 每役含牌型图例</strong></div>
+          <div className="yaku-reference-intro">
+            <div><span>MENZEN ONLY</span><strong>门清限定</strong><p>立直、平和、一杯口、七对子、二杯口等必须保持门清。</p></div>
+            <div><span>OPEN HAND</span><strong>副露仍成立</strong><p>断幺九、役牌、对对和与多数役满副露后仍可成立。</p></div>
+            <div><span>KUINARI</span><strong>食下役</strong><p>三色同顺、一气通贯、混全带幺九、纯全带幺九、混一色与清一色副露后少一翻。</p></div>
+            <div><span>RULE VARIANTS</span><strong>规则差异</strong><p>双倍役满、累计役满和流局满贯并非处处采用；古役、地方役不列入通行役种表。</p></div>
+          </div>
           {yakuGroups.map((group) => <section className="yaku-group" key={group.label}>
             <div className="yaku-group-head"><div><span>{group.note}</span><h2>{group.label}</h2></div><strong>{yakuCards.filter(([, , han]) => group.includes(han)).length} 条</strong></div>
             <div className="yaku-directory">
-              {yakuCards.filter(([, , han]) => group.includes(han)).map(([name, kana, han, closed, summary]) => <div className={han === "役满" ? "yakuman" : ""} key={name}>
+              {yakuCards.filter(([, , han]) => group.includes(han)).map(([name, kana, han, closed, summary]) => <div className={han.includes("役满") ? "yakuman" : ""} key={name}>
                 <div className="yaku-card-meta"><span>{yakuRestriction(name, han, closed)}</span><strong>{han}</strong></div>
                 <h3>{name}</h3><small>{kana}</small><p>{summary}</p>
-                <div className={`yaku-example-hand ${(yakuExamples[name] ?? standardExample).length > 14 ? "dense" : ""}`} aria-label={`${name}牌型图例`}>
-                  {splitYakuExample(name, yakuExamples[name] ?? standardExample).map((group, groupIndex) => <span className="yaku-tile-group" key={`${name}-group-${groupIndex}`}>
+                <div className={`yaku-example-hand ${yakuExample(name).length > 14 ? "dense" : ""}`} aria-label={`${name}牌型图例`}>
+                  {splitYakuExample(name, yakuExample(name)).map((group, groupIndex) => <span className="yaku-tile-group" key={`${name}-group-${groupIndex}`}>
                     {group.map((tile, tileIndex) => <span className="yaku-tile" key={`${name}-${groupIndex}-${tile}-${tileIndex}`}><TileFace name={tile} label={tileLabel(tile)} /></span>)}
                   </span>)}
                 </div>
@@ -1057,6 +1094,32 @@ export default function Home() {
               </table></div>
             </section>)}
           </div>
+          <section className="fu-guide">
+            <header className="fu-guide-head"><div><span>FU REFERENCE / 符数速查</span><h2>先从 20 符开始，逐项相加后进位。</h2></div><p>除七对子固定 25 符外，合计符数向上进位到 10 的倍数。下表采用通行规则；连风雀头是否计 2 符或 4 符需确认对局规则。</p></header>
+            <div className="fu-foundation">
+              <div><span>BASE</span><strong>底符 20</strong><small>所有普通和牌从 20 符起算</small></div>
+              <div><span>ROUND UP</span><strong>十位进位</strong><small>例如 32 符按 40 符结算</small></div>
+              <div><span>CHIITOI</span><strong>七对子 25</strong><small>固定 25 符，不再追加其他符</small></div>
+            </div>
+            <div className="fu-reference-grid">
+              <div className="fu-meld-card">
+                <div className="fu-card-title"><span>SETS / 面子</span><strong>刻子与杠子的符</strong></div>
+                <table><thead><tr><th>面子</th><th>中张牌</th><th>幺九牌 / 字牌</th></tr></thead><tbody>
+                  {fuMeldRows.map(([name, simple, terminal]) => <tr key={name}><th>{name}</th><td>{simple}</td><td>{terminal}</td></tr>)}
+                </tbody></table>
+                <p>顺子不计符。双碰荣和时，荣和牌完成的刻子按明刻计算。</p>
+              </div>
+              <div className="fu-detail-list">
+                {fuDetailGroups.map((group) => <section key={group.title}><h3>{group.title}</h3>{group.items.map(([name, fu]) => <div key={name}><span>{name}</span><strong>{fu}</strong></div>)}</section>)}
+              </div>
+            </div>
+            <div className="fu-special-cases">
+              <div><strong>平和自摸</strong><span>固定 20 符</span><p>自摸的 2 符不另加。</p></div>
+              <div><strong>副露平和形荣和</strong><span>固定 30 符</span><p>俗称“食平形”，没有其他加符时按 30 符。</p></div>
+              <div><strong>连风雀头</strong><span>通常 4 符</span><p>场风与自风重合时通常分别加 2 符，少数规则只计 2 符。</p></div>
+              <div><strong>宝牌</strong><span>不计符</span><p>宝牌只增加翻数，而且本身不能提供役。</p></div>
+            </div>
+          </section>
           <aside className="kiriage-note">
             <div><span>OPTIONAL RULE</span><h2>切上满贯如何处理？</h2><p>上方两张表默认不切上，因此黄色格保留 7700 / 11600。若采用切上满贯，只改动以下两种牌值。</p></div>
             <div className="kiriage-change"><strong>子家 · 30符4翻 / 60符3翻</strong><span>7700（自摸 2000 / 3900）</span><b>→ 8000（自摸 2000 / 4000）</b></div>
