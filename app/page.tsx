@@ -255,7 +255,7 @@ const whatCutQuestions: WhatCutQuestion[] = [
     explanation: "第八巡的亲家不应放过摸八万直接听牌的机会：立直后有一杯口与赤牌的 7700 点，即使是剩三张的坎张也值得；还保留摸六万转完全一向听的变化，因此书中切赤五索。",
   },
   {
-    id: 37, round: "东一局", seat: "东家", turn: 6, doraIndicator: "Hatsu", book: "何切301", tags: ["打点", "复合形", "四暗刻"],
+    id: 37, round: "东一局", seat: "东家", turn: 6, doraIndicator: "Sou1", book: "何切301", tags: ["打点", "复合形", "四暗刻"],
     tiles: ["Pin4", "Pin5", "Pin5", "Pin5", "Pin6", "Sou2", "Sou3", "Sou4", "Sou4", "Sou4", "Sou7", "Sou8", "Sou8", "Pin4"],
     answer: "Pin5", questionPage: 32, answerPage: 35,
     explanation: "虽然能看到四暗刻，但不能为此切六筒或七索固定对子。当前已经有亲家满贯级打点，切五筒既保留二杯口方向，也没有明显损失四暗刻变化；切八索的进张只多一枚，却更容易丢失手役。",
@@ -307,6 +307,60 @@ const whatCutQuestions: WhatCutQuestion[] = [
     tiles: ["Man5-Dora", "Man5", "Man5", "Man6", "Pin2", "Pin2", "Pin3", "Pin5-Dora", "Pin7", "Sou6", "Sou8", "Sou8", "Sou8", "Pin4"],
     answer: "Man6", questionPage: 37, answerPage: 41,
     explanation: "保留万子一侧虽然可能形成三面听，却会在之后舍弃宝牌六索。切六万可以完整利用六索，即使鸣牌也能做成断幺、宝牌三的满贯；书中认为这种确定高打点的路线值得追求。",
+  },
+  {
+    id: 46, round: "东一局", seat: "西家", turn: 7, doraIndicator: "Man1", book: "何切301", tags: ["牌效率", "二杯口", "固定雀头"],
+    tiles: ["Man5", "Man5", "Man6", "Man7", "Pin2", "Pin2", "Pin3", "Pin3", "Sou5", "Sou6", "Sou6", "Sou7", "Sou7", "Pin4"],
+    answer: "Man5", questionPage: 38, answerPage: 41,
+    explanation: "固定五万雀头虽然可以追求断幺、平和、二杯口，但与切五万相比有效牌枚数差距太大，尤其摸一筒后形状会明显受损。书中选择切五万，以最大进张数为优先。",
+  },
+  {
+    id: 47, round: "东一局", seat: "西家", turn: 7, doraIndicator: "Sou2", book: "何切301", tags: ["牌效率", "复合形", "断幺"],
+    tiles: ["Man1", "Man3", "Man5-Dora", "Man6", "Man7", "Pin2", "Pin3", "Pin4", "Pin6", "Pin7", "Sou4", "Sou5", "Sou6", "Man6"],
+    answer: "Man1", questionPage: 38, answerPage: 41,
+    explanation: "切六万的进张最多，但会失去雀头，后续处理困难。切一万比切七万留下的两坎形更兼顾打点与广度，之后摸三、四、六万都能形成断幺、平和听牌，因此书中切一万。",
+  },
+  {
+    id: 48, round: "东一局", seat: "西家", turn: 7, doraIndicator: "Sou2", book: "何切301", tags: ["固定雀头", "断幺", "一杯口"],
+    tiles: ["Man5-Dora", "Man6", "Man7", "Pin2", "Pin3", "Pin4", "Pin6", "Pin6", "Pin7", "Sou2", "Sou5", "Sou6", "Sou6", "Man6"],
+    answer: "Pin7", questionPage: 38, answerPage: 42,
+    explanation: "固定雀头后更容易做成断幺或一杯口。虽然常见原则是拆亚两面，但这手牌最强的部分是万子的中膨形；切七筒固定雀头，能最大限度利用该形状的期待值。",
+  },
+  {
+    id: 49, round: "东一局", seat: "西家", turn: 7, doraIndicator: "Sou8", book: "何切301", tags: ["打点", "赤牌利用", "听牌形"],
+    tiles: ["Man5-Dora", "Man6", "Man7", "Man8", "Man9", "Pin3", "Pin4", "Pin6", "Pin6", "Pin6", "Pin7", "Sou2", "Sou3", "Sou4"],
+    answer: "Man9", questionPage: 43, answerPage: 47,
+    explanation: "切七筒的有效牌最多，但最差的六万进张会迫使舍弃赤五万，只剩立直。切九万可以确定断幺并必定用上赤五万，足以弥补有效牌枚数差距；摸五筒时还能形成四面听。",
+  },
+  {
+    id: 50, round: "东一局", seat: "西家", turn: 4, doraIndicator: "Sou3", book: "何切301", tags: ["鸣牌判断", "断幺", "对子处理"],
+    tiles: ["Man4", "Man5", "Man6", "Man6", "Man8", "Pin4", "Pin4", "Pin6", "Sou3", "Sou4", "Sou5", "Sou9", "Sou9", "Man3"],
+    answer: "Sou9", questionPage: 43, answerPage: 47,
+    explanation: "顺着现有搭子直线前进仍然没有役。手里已有三个对子，拆掉九索对子对速度影响不大，却能确定断幺并保留鸣牌机会，所以书中切九索。",
+  },
+  {
+    id: 51, round: "东一局", seat: "西家", turn: 4, doraIndicator: "Sou3", book: "何切301", tags: ["役牌", "三色", "对子处理"],
+    tiles: ["Man4", "Man5", "Man6", "Man6", "Man8", "Pin4", "Pin4", "Pin6", "Sou3", "Sou4", "Sou5", "Ton", "Ton", "Man3"],
+    answer: "Man8", questionPage: 43, answerPage: 47,
+    explanation: "东是役牌，应以碰出或保留对碰立直为前提维持三组对子。切八万后，后续进张仍有 345 或 456 三色的变化。",
+  },
+  {
+    id: 52, round: "东一局", seat: "西家", turn: 7, doraIndicator: "Sou1", book: "何切301", tags: ["牌效率", "听牌形", "三面张"],
+    tiles: ["Man5", "Man7", "Man7", "Pin2", "Pin3", "Pin4", "Pin6", "Pin7", "Sou3", "Sou4", "Sou5", "Sou7", "Sou7", "Man4"],
+    answer: "Sou7", questionPage: 44, answerPage: 48,
+    explanation: "先切一张七索，下一巡若摸到六索，就可以把索子部分扩展成三面张。书中因此先拆七索对子。",
+  },
+  {
+    id: 53, round: "东一局", seat: "西家", turn: 7, doraIndicator: "Sou1", book: "何切301", tags: ["牌效率", "对子处理", "宝牌"],
+    tiles: ["Man5", "Man7", "Man7", "Pin2", "Pin3", "Pin4", "Sou2", "Sou3", "Sou6", "Sou7", "Sou8", "Sou8", "Sou8", "Man4"],
+    answer: "Man7", questionPage: 44, answerPage: 48,
+    explanation: "即时看，拆七万或八索对子都是 16 枚进张；但未完成搭子再成对时会拉开差距。拆八索只增加二索和七万四枚，拆七万则增加宝牌二索及五、八索共七枚，因此应保留连续的索子并切七万。",
+  },
+  {
+    id: 54, round: "东一局", seat: "西家", turn: 7, doraIndicator: "Sou1", book: "何切301", tags: ["宝牌", "摸切", "鸣牌判断"],
+    tiles: ["Man5", "Man7", "Man7", "Pin2", "Pin3", "Pin4", "Pin6", "Pin7", "Sou2", "Sou3", "Sou4", "Sou7", "Sou7", "Sou2"],
+    answer: "Sou2", questionPage: 44, answerPage: 49,
+    explanation: "能够同时使用两张宝牌二索的形状很有限，强行保留后也不容易通过鸣牌做成满贯。书中认为无需勉强，直接摸切二索。",
   },
 ];
 
